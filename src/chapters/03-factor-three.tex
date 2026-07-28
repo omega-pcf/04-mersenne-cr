@@ -1,0 +1,295 @@
+\section{The factor 3: the triple coincidence}
+\label{sec:triple}
+
+\begin{Theorem}[Modular concentration]\label{thm:concentration-main}
+For every prime~$p$, $\;\Mp\bmod 20 \in \{3,7,11\}$, a subset of
+cardinality~$3=M_{2}$ of the eight residue classes
+$\Ztwenty=\{1,3,7,9,11,13,17,19\}$.  Lean:
+\lean{mersenne\_concentration\_general}.
+\end{Theorem}
+
+\begin{proof}
+For $p\geq 5$ prime, $p$ is odd and $p\bmod 4\in\{1,3\}$.  Two
+elementary facts in $\mathbb{Z}/20\mathbb{Z}$: $2^{4}\equiv 16$ and
+$16^{k}\equiv 16$ for all $k\geq 1$.  Writing $p=4\lfloor p/4\rfloor+r$
+with $r\in\{1,3\}$,
+$
+  2^{p} = 16^{\lfloor p/4\rfloor}\cdot 2^{r} \equiv 16\cdot 2^{r}
+  \pmod{20},
+$
+so $2^{p}\bmod 20\in\{12,8\}$ and $\Mp\bmod 20\in\{11,7\}$.  The cases
+$p=2$, $p=3$ give $M_{2}=3$, $M_{3}=7$ directly; combining,
+$\Mp\bmod 20\in\{3,7,11\}$.
+\end{proof}
+
+\begin{Remark}[Relation to prior
+literature]\label{rem:acevedo}
+The concentration of~\Cref{thm:concentration-main} is a corollary of
+the stronger classification of Acevedo
+Agudelo~\cite{acevedo-2020}:
+$\Mp\bmod 360\in\{3,7,31,127,247,271\}$ for every prime~$p$, which
+reduces modulo~$20$ to the present statement. Partial precedents in
+the OEIS comments for sequence A000668 record weaker congruences
+($\Mp\equiv 1\pmod{6}$, $\Mp\equiv 7\pmod{12}$,
+$\Mp\equiv 7\pmod{24}$), none of which alone implies the mod-$20$
+concentration. The role of~\Cref{thm:concentration-main} in the
+present note is as clause~(vi)
+of~\Cref{thm:euler-connector}, conjoined with clauses~(vii) and~(xi).
+\end{Remark}
+
+The restriction of all $\Mp$ to $3$ of the $8$ residue classes coprime
+with~$20$ is not visible from the definition of the Mersenne sequence;
+it is a phenomenon of the modular doubling pattern $2^{p}\bmod 20$
+produced by the proof above.  The numerator and denominator of the
+ratio $3/8=M_{2}/|\Ztwenty|$ that records this concentration
+quantitatively are themselves clauses~(vii) and~(ix)
+of~\Cref{thm:euler-connector}.
+
+\begin{Theorem}[The factor~$3$ is structurally $M_{2}$]\label{thm:three-main}
+The natural number~$3$ admits simultaneously the three identifications
+\[
+  3 \;=\; M_{2}=2^{2}-1 \;=\; \bigl|\{3,7,11\}\bigr|.
+\]
+\end{Theorem}
+
+\begin{proof}
+The chain $3 = M_{2} = 2^{2}-1 = |\{3,7,11\}|$ comprises three
+identifications.  First, $M_{2}=2^{2}-1$ by definition of the Mersenne
+sequence, and $2^{2}-1=3$ by computation.  Second,
+$|\{3,7,11\}|=3$ by counting.  Third, that $\{3,7,11\}$ is exactly
+the set of residue classes containing $\Mp\bmod 20$ for some
+prime~$p$ is~\Cref{thm:concentration-main}.  Lean:
+\lean{three\_eq\_M2\_eq\_admissible\_card} and
+\lean{admissible\_classes\_card\_eq\_M2}.
+\end{proof}
+
+The asymmetry between $2$ and $3$ in \Cref{thm:universal} is only
+apparent: $2$ enters as the base of $2^{p}$ (the substrate), while $3$
+enters as the multiplier.  The triple identification of
+\Cref{thm:three-main} shows that the choice of multiplier is not free.
+Replacing $3$ by any other positive real~$c$ in the identity produces
+$c\,\golden^{p\lambda_{\log}-\log_{\golden}c}=2^{p}$, but no other value
+of~$c$ admits the simultaneous identification with $M_{2}$, with the
+cardinality of the admissible residue classes of~$\Mp\bmod 20$, and with
+the smallest Mersenne prime occurring as the residue
+$M_{2}\equiv 3\pmod{20}$ in the admissible set $\{3,7,11\}$.  The value
+$c=3$ is determined by the arithmetic of Mersenne in~$\Ztwenty$, not by
+the algebra of the identity.
+
+\begin{Remark}[Pentagonal--cyclotomic underpinning]\label{rem:pentagon}
+The golden ratio admits the pentagonal identity
+\begin{equation}\label{eq:pentagon}
+  \golden \;=\; 2\cos(\pi/5) \;=\; \zeta_{10}+\zeta_{10}^{-1},
+  \qquad \zeta_{10} := e^{i\pi/5},
+\end{equation}
+where $\zeta_{10}^{10}=1$.  The first equality
+$\golden=2\cos(\pi/5)$ derives from the Chebyshev relation
+$T_{5}(\cos\theta)=\cos(5\theta)$ at $\theta=\pi/5$, which gives
+$4\cos^{2}(\pi/5)-2\cos(\pi/5)-1=0$ (after factoring out the root
+$\cos(\pi/5)\neq -1$), and selecting the positive root yields
+$\cos(\pi/5)=\golden/2$.  The second equality
+$2\cos(\pi/5)=\zeta_{10}+\zeta_{10}^{-1}$ is the real part of Euler's
+identity~\eqref{eq:euler} at $\theta=\pi/5$:
+$e^{i\pi/5}+e^{-i\pi/5}=2\cos(\pi/5)$.
+
+These two equalities, taken jointly, register four of the twelve
+clauses of~\Cref{thm:euler-connector}.  Clause~(iii)
+$\golden=2\cos(\pi/5)$ is the real-trigonometric embodiment of the
+algebraic object: the same $\golden$ defined by $\golden^{2}=\golden+1$,
+which carries no intrinsic notion of rotation or periodicity, here
+appears inscribed in~$\mathbb{R}$ through cosine.  Clause~(i)
+$\golden_\mathbb{C}=\zeta_{10}+\zeta_{10}^{-1}$ is the
+cyclotomic-complex embodiment: the same algebraic object now appears as
+a concrete point of Euler's structure---the sum of two conjugate
+vertices of the regular decagon $\{\zeta_{10}^{k}\}_{k=0}^{9}$
+in~$S^{1}$.  Clause~(ii) $\zeta_{10}^{10}=1$ places $\zeta_{10}$ not
+as a free point of $S^{1}$ but as a generator of the cyclic group of
+order~$10$; without it $\zeta_{10}$ would admit no Galois structure.
+Equivalently, $\golden$ inhabits the real maximal subfield
+$\mathbb{Q}(\golden)\subset\mathbb{Q}(\zeta_{20})$ of the cyclotomic
+field whose Galois group is
+\[
+  \mathrm{Gal}(\mathbb{Q}(\zeta_{20})/\mathbb{Q}) \;\cong\;
+  \Ztwenty,
+\]
+an abelian group of order $\phi(20)=8$; this is clause~(ix), the
+cardinality of the Galois receptacle within which the Mersenne
+residues of~\Cref{thm:concentration-main} are hosted.  The four
+clauses (i),~(ii),~(iii),~(ix) present the same algebraic
+object~$\golden$ in four canonical inscriptions inside the structure
+of~\eqref{eq:euler}.  The modular concentration of
+\Cref{thm:concentration-main} into~$3$ classes of~$\Ztwenty$, together
+with the identification $3=M_{2}$ of~\Cref{thm:three-main}, are the
+arithmetic shadows of this geometric inscription.  Formal identities:
+\lean{phi\_eq\_two\_cos\_pi\_fifth}, \lean{phi\_eq\_zeta10\_sum},
+\lean{zeta10\_pow\_ten\_eq\_one}.
+\end{Remark}
+
+\begin{Theorem}[Simultaneous identities theorem for
+$\golden$]\label{thm:euler-connector}
+A single $\golden$ satisfies simultaneously the following twelve
+identities, inclusions, and identifications in their respective
+canonical structures:
+\begin{enumerate}[topsep=0pt,itemsep=0.1em,leftmargin=2.3em]
+  \item[\textup{(i)}] \emph{Cyclotomic inscription in $\mathbb{C}$:}
+    $\golden_\mathbb{C} = \zeta_{10}+\zeta_{10}^{-1}$, with
+    $\zeta_{10}:=e^{i\pi/5}$ (\Cref{rem:pentagon}; Lean:
+    \lean{phi\_eq\_zeta10\_sum}).
+  \item[\textup{(ii)}] \emph{Tenth-root closure:} $\zeta_{10}^{10}=1$
+    (Lean: \lean{zeta10\_pow\_ten\_eq\_one}).
+  \item[\textup{(iii)}] \emph{Pentagonal trigonometric identity in
+    $\mathbb{R}$:} $\golden = 2\cos(\pi/5)$ (\Cref{rem:pentagon}; Lean:
+    \lean{phi\_eq\_two\_cos\_pi\_fifth}).
+  \item[\textup{(iv)}] \emph{Logarithmic binary bridge:}
+    $\golden^{\lambda_{\log}} = 2$ (\Cref{lem:binary}; Lean:
+    \lean{mersenne\_bridge\_via\_lambda}).
+  \item[\textup{(v)}] \emph{Universal real-multiplicative identity:}
+    for every $p\in\mathbb{R}$, $3\,\golden^{\sigma(p)} = 2^{p}$
+    (\Cref{thm:universal}; Lean: \lean{golden\_tower\_bridge}).
+  \item[\textup{(vi)}] \emph{Modular concentration:} for every prime
+    $p$, $\Mp\bmod 20\in\{3,7,11\}$ (\Cref{thm:concentration-main};
+    Lean: \lean{mersenne\_concentration\_general}).
+  \item[\textup{(vii)}] \emph{Triple ternary identification:}
+    $3 = M_{2} = |\{3,7,11\}|$ (\Cref{thm:three-main}; Lean:
+    \lean{three\_eq\_M2\_eq\_admissible\_card}).
+  \item[\textup{(viii)}] \emph{Real-complex cross identification:}
+    $\iota(\golden)=\golden_\mathbb{C}$.
+  \item[\textup{(ix)}] \emph{Galois order:}
+    $|\Ztwenty|=8$ (Lean: \lean{ZtwentyStar\_card}).
+  \item[\textup{(x)}] \emph{Galois sub-object inclusion:}
+    $\{3,7,11\}\subseteq\Ztwenty$.
+  \item[\textup{(xi)}] \emph{Quantitative ratio:}
+    \[
+      \frac{|\{3,7,11\}|}{|\Ztwenty|}
+      \;=\; \frac{M_{2}}{8} \;=\; \frac{3}{8},
+    \]
+    equivalently $|\{3,7,11\}|\cdot 8 = M_{2}\cdot|\Ztwenty|$.
+  \item[\textup{(xii)}] \emph{Rotor discretisation:} for every
+    $k\in\mathbb{N}$, $(\zeta_{10}^{k})^{10}=1$.
+\end{enumerate}
+Formal synthesis: \lean{phi\_euler\_mersenne\_connector}.
+\end{Theorem}
+
+Clauses (viii), (x), (xi), (xii) have short proofs but each registers
+a structural knotting that the theorem requires.
+
+\textbf{Clause~(viii)} (real-complex cross identification) is the
+identification that permits speaking of \emph{the same}~$\golden$
+across clause~(iii) (trigonometric in~$\mathbb{R}$) and clause~(i)
+(cyclotomic in~$\mathbb{C}$).  Without it, the statement would not be
+about a single algebraic object but about distinct copies
+of~$\golden$ in disjoint structures.  The proof is the definitional
+behaviour of the canonical embedding $\iota$ on the algebraic
+point~$\golden$.
+
+\textbf{Clause~(x)} ($\{3,7,11\}\subseteq\Ztwenty$) registers that
+the three admissible Mersenne residues of clause~(vi) are not
+arbitrary integers but elements of the Galois group of clause~(ix):
+the arithmetic locus of Mersenne primes is inscribed inside the
+cyclotomic Galois receptacle.  The proof is that $3$, $7$, $11$ are
+each coprime with~$20$.
+
+\textbf{Clause~(xi)} ($|\{3,7,11\}|/|\Ztwenty|=3/8$) is the
+quantitative knotting: the first Mersenne prime~$M_{2}$ is the
+numerator of the fraction of Galois classes that host all Mersenne
+arithmetic.  The proof is the direct numerical consequence of
+clauses~(vii) ($M_{2}=3$) and~(ix) ($|\Ztwenty|=8$); the substance is
+that the simultaneous holding of those two clauses under the
+same~$\golden$ is what produces the ratio $3/8$ as structural and not
+as numerical coincidence.
+
+\textbf{Clause~(xii)} ($(\zeta_{10}^{k})^{10}=1$ for all
+$k\in\mathbb{N}$) registers the canonical discretisation of the
+continuous rotation $\theta\mapsto e^{i\theta}$ of~\eqref{eq:euler}:
+evaluated at $\theta=2\pi k/10$ it produces a cyclic group of
+order~$10$.  Clause~(xii) is the first knotting in the statement
+between continuous and discrete: without it, the decagonal vertices
+$\{\zeta_{10}^{k}\}_{k=0}^{9}$ are a set of ten complex numbers; with
+it, they are a finite cyclic group on which the Galois structure
+of~(ix) acts.  The proof is
+$(\zeta_{10}^{k})^{10}=(\zeta_{10}^{10})^{k}=1^{k}=1$ by clause~(ii).
+
+All four are subsumed in the formal
+synthesis~\lean{phi\_euler\_mersenne\_connector}.
+
+\begin{Remark}[Reading of \Cref{thm:euler-connector}]\label{rem:euler-reading}
+No proper sub-collection of the twelve clauses constitutes the content
+of \Cref{thm:euler-connector}; the content is the simultaneous holding
+of all twelve under a single $\golden$.  The clauses inhabit canonical
+structures of distinct kinds: complex-rotational and cyclotomic
+(i,~ii,~xii), real-trigonometric (iii), logarithmic and
+real-multiplicative (iv,~v), arithmetic-modular over $\mathbb{Z}/20\mathbb{Z}$
+(vi,~vii), cross-domain real-to-complex (viii), Galois-theoretic of the
+cyclotomic decagonal extension $\mathbb{Q}(\zeta_{20})/\mathbb{Q}$
+(ix,~x,~xi).  The continuous rotational symmetry of
+Euler's identity~\eqref{eq:euler}, with period $2\pi$ in
+$S^{1}\subset\mathbb{C}$, discretises canonically into the ten
+vertices of the regular decagon
+$\{\zeta_{10}^{k}\}_{k=0}^{9}$ (clause~xii), of which $\golden$ is the
+sum of two conjugate vertices (clauses i,~iii); the Galois group of
+the larger cyclotomic extension is~$\Ztwenty$ of order~$8$
+(clause~ix); the Mersenne primes $\Mp$ occupy $M_{2}=3$ of those $8$
+classes (clauses vi,~vii,~x,~xi); and the same $\golden$ mediates, via
+the transcendental exponent~$\lambda_{\log}$ (\Cref{rem:transcendence}),
+the binary doubling $\golden^{\lambda_{\log}}=2$ and the universal
+identity $3\golden^{\sigma(p)}=2^{p}$ (clauses iv,~v).  The continuous
+rotor, the discrete arithmetic of Mersenne, the cyclotomic geometry of
+$\mathbb{Q}(\zeta_{20})$, and the real-multiplicative line
+$\mathbb{R}_{>0}$ coincide simultaneously under~$\golden$ across the
+twelve clauses of~\Cref{thm:euler-connector}.  The quantitative ratio
+$M_{2}/|\Ztwenty|=3/8$ of clause~(xi) records that the first Mersenne
+prime is the numerator of the fraction of Galois classes that host
+the Mersenne arithmetic.
+
+The arithmetic of the integers, in this reading, appears as a discrete
+shadow of the rotational symmetry of~\eqref{eq:euler}: the chain
+rotation~$\to$ polygonal discretisation~$\to$ Galois action~$\to$
+residue classification~$\to$ Mersenne concentration formalises a
+geometric connection with the tools of Gelfond--Schneider and
+\texttt{AdjoinRoot}.
+\end{Remark}
+
+\subsection{The identity, characterized}
+\label{ssec:characterization}
+
+Read as an equality, the universal identity of~\Cref{thm:universal} is the
+evaluation of a definition: $\sigma(p):=p\,\lambda_{\log}-\log_{\golden}3$ is
+chosen precisely so that $3\,\golden^{\sigma(p)}=2^{p}$.  What is \emph{not}
+definitional is the statement gathered here: that the constituents of the
+equation---the factor $3$, the base $\golden$, the slope
+$\lambda_{\log}$---are each pinned by a theorem \emph{external} to the
+equation, and that these separately fixed determinations are mutually
+consistent, with the golden coordinate uniquely determined.
+
+\begin{Theorem}[The identity as a consistency theorem]\label{thm:characterization}
+The equation $3\,\golden^{\sigma}=2^{p}$ in the unknown $\sigma\in\mathbb{R}$
+carries four determinations, each fixed independently of it, and they hold
+simultaneously:
+\begin{enumerate}
+\item[\textup{(i)}] \emph{Existence.} $\sigma(p)$ solves it for every real
+  $p$ (\Cref{thm:universal}).
+\item[\textup{(ii)}] \emph{Uniqueness.} $\sigma(p)$ is its only real
+  solution (\Cref{thm:unique}).
+\item[\textup{(iii)}] \emph{Transcendence.} the slope $\lambda_{\log}$ is
+  transcendental over $\mathbb{Q}$ (\Cref{rem:transcendence}).
+\item[\textup{(iv)}] \emph{Forced factor.} $3=M_{2}=|\{3,7,11\}|$, the number
+  of residue classes the Mersenne primes occupy modulo~$20$
+  (\Cref{thm:concentration-main}), independently of the equation.
+\end{enumerate}
+\emph{Lean:} \lean{golden\_identity\_characterization}.
+\end{Theorem}
+
+\begin{Remark}[What the theorem certifies]\label{rem:characterization}
+The central equation~(i) is not proved against itself---that would be
+circular; what is proved is that it exists, is unique, and coincides with
+the external determinations~(iii)--(iv).  The uniqueness~(ii) certifies that
+the golden coordinate $\sigma(p)$ is well defined; the evidential weight
+lies in~(iii) and~(iv), where the slope and the factor are pinned by
+theorems that never mention the equation.  In this reading the identity is
+neither an axiom nor a bare definition, but the single point at which
+independently established facts about $\golden$ agree.  Formally, $\sigma$
+is the unique function with $3\,\golden^{\sigma(p)}=2^{p}$ for all~$p$
+(\lean{golden\_identity\_is\_consistent\_overdetermined}).
+\end{Remark}
+
+

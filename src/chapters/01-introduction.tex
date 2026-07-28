@@ -1,0 +1,360 @@
+\section{Introduction}
+
+\subsection{Classification under equivalence: a millennial question}
+\label{ssec:classification}
+
+The question of which discrete objects fit canonically inside which
+continuum, and how the continuum organises them by its symmetry, is
+older than its modern formalisation.  Vitruvius (\emph{De
+Architectura}, c.~30~BC) inscribes the human body simultaneously
+within a square and a circle sharing a common centre: the body itself
+plays the role of \emph{modulus}, a system of an origin, a radius, an
+angle, and a magnitude, mediating between the square as discrete
+arithmetic substrate (four elements, four cardinal directions, the
+binary doubling $1\mapsto 2\mapsto 4$) and the circle as continuous
+rotational symmetry.  Cesare Cesariano's 1521 commentary on Vitruvius
+records the same module geometrically through a sequence of nested
+regular polygons sharing axis (the origin) and base vertex (the
+radius at angle zero), from triangle to dodecagon: each polygon
+discretises the circle at the angle $2\pi/n$, all fitting inside the
+same continuous rotational ambient.  The polygonal sequence is a
+geometric record of a structural question: given an origin, a radius,
+and a magnitude, which angular discretisations admit canonical
+inscription inside the circle's rotational symmetry, and in what form.
+
+Arguably the evolution of the same ancient structural question is
+taken up in two foundational modern treatises.  Euler's
+\emph{Introductio in analysin infinitorum} (1748)---characterised by
+Boyer at the 1950 ICM as ``the foremost textbook of modern
+times''~\cite{boyer-1951}---establishes the function as the central
+object of analysis and gives a systematic analytic treatment of the
+exponential and trigonometric identities, including
+$e^{i\theta}=\cos\theta+i\sin\theta$---an analytic rotor of origin~$0$,
+radius~$1$, angle~$\theta$, and unit magnitude---whose inverse form
+$i\theta=\log(\cos\theta+i\sin\theta)$ had been known to Cotes
+in~1714.  Gauss's \emph{Disquisitiones Arithmeticae} (1801, drafted
+from~1796) gives the systematic arithmetic counterpart, consolidating
+the work of Fermat, Euler, Lagrange, and Legendre into a unified
+framework---including in particular the arithmetic of the cyclotomic
+roots $\zeta_{n}=e^{2\pi i/n}$, the angles $2\pi/n$ of the regular
+$n$-gon treated as algebraic integers---that, in Kline's phrasing,
+``began the modern theory of numbers''~\cite{kline-1972} and set the
+directions of subsequent work in the subject.
+
+\subsection{Euler 1748: the analytic-geometric substrate}
+\label{ssec:euler-substrate}
+
+The identity
+\begin{equation}\label{eq:euler}
+  e^{i\theta} = \cos\theta + i\sin\theta
+\end{equation}
+defines the one-dimensional complex rotor: cosine and sine are the
+Cartesian projections of $e^{i\theta}$ onto the real and imaginary
+axes.  The
+unit circle $S^{1}\subset\mathbb{C}$ is the locus of $e^{i\theta}$, and
+$2\pi$ is the length of one revolution.  Within $S^{1}$, the
+$n$-th roots of unity $\zeta_{n} = e^{2\pi i/n}$ are the vertices of
+the regular $n$-gon: the polygonal discretisation of the circle
+\emph{is} the theory of roots of unity.  Cesariano's nested polygons
+are the geometric trace of what \eqref{eq:euler} encodes analytically.
+
+The identity $e^{i\pi}+1=0$ is the evaluation of \eqref{eq:euler} at
+$\theta=\pi$: an exact identity in $\mathbb{C}$ in which several
+independently defined objects---the analytic exponential, the
+algebraic unit~$i$, the geometric constant~$\pi$, and the arithmetic
+units $1$ and~$0$---coincide simultaneously, in a way not implied by
+their definitions taken individually.  The content of~\eqref{eq:euler}
+is this simultaneous coincidence of independent identities at a
+single object.
+
+Subsequent mathematical work over the analytic-geometric substrate
+of~\eqref{eq:euler} has produced further simultaneous identities and
+related results of varying form (reciprocity laws, congruences,
+equivalences, motivic realisations).  Immediately after Euler, Gauss (\emph{Disquisitiones
+Arithmeticae}, 1801) established structural identities connecting the
+roots of unity defined by~\eqref{eq:euler} to arithmetic data modulo
+primes, opening the systematic arithmetic exploitation of the
+substrate.  Over the two centuries that separate Gauss from the
+present, this line has multiplied through successive
+nineteenth- and twentieth-century developments; an exhaustive
+account is beyond the scope of this note.  Several examples
+illustrate the range.  In quantum mechanics, the Feynman path
+integral expresses the propagation amplitude as a sum
+$\int e^{iS[\gamma]/\hbar}\mathcal{D}\gamma$ in which the Eulerian
+exponential of the action governs the analytic structure of the
+theory.  In harmonic analysis on locally compact abelian groups
+(Pontryagin), the characters
+$\chi_\xi(x)=e^{2\pi i\langle x,\xi\rangle}$ realise the duality
+between a group and its dual; the parallel theory of unitary
+representations of compact Lie groups proceeds through characters
+valued in the unit circle.  The Hilbert--Pólya conjecture proposes
+that the nontrivial zeros of $\zeta(s)$ are the eigenvalues of a
+self-adjoint operator $H$, whose associated unitary group
+$\{e^{itH}\}_{t\in\mathbb{R}}$ would realise the spectrum as a
+one-parameter rotation; the Selberg trace formula relates the
+spectrum of the Laplacian on a hyperbolic surface to its closed
+geodesics through analogous exponential sums.  In arithmetic
+geometry, the Weil cohomologies place the roots of unity
+$\zeta_n=e^{2\pi i/n}$ at the centre of the Frobenius action on
+étale cohomology, and Grothendieck's theory of motives organises
+periods $\int_\gamma\omega$---including the elementary
+$\oint dz/z=2\pi i$---as fundamental invariants.  More recently,
+identifications of unification across arithmetic, tropical
+geometry, and motivic theory have been pursued over the
+$\mathbb{F}_{1}$ substrate
+(Connes--Consani, 2014--2021~\cite{connes-consani-site}).
+
+Across these developments, arithmetic content otherwise undecidable in
+the sense of Gödel~\cite{godel-1931} becomes accessible through the
+analytic-geometric substrate of~\eqref{eq:euler}:
+Tarski~\cite{tarski-1948} showed that elementary geometry over the
+real-closed field admits a decision procedure, by contrast with
+elementary arithmetic.  The field-with-one-element programme initiated
+by Tits~\cite{tits-1957} and developed by Manin~\cite{manin-1995} among
+others pursues a geometry over a hypothetical ``field with one
+element'', under which $\mathbb{Z}$ would behave as a curve and roots of
+unity supply the arithmetic with $\mathbb{F}_{1}$-structure, so as to
+carry methods native to geometry over finite fields into the study
+of~$\mathbb{Z}$.
+
+This aim descends from Weil's ``Rosetta Stone''.  In a 1940 letter to his
+sister Simone~\cite{weil-1940}, Weil set out an analogy among three
+domains---number fields, function fields over a finite field, and Riemann
+surfaces---read as three columns of a single text.  In the middle column he
+was able to prove the Riemann hypothesis in its form for curves over finite
+fields~\cite{weil-1948}; the ambition of the field-with-one-element
+programme is to endow $\mathbb{Z}$ with enough geometry that this proof, or
+an analogue of it, may be transported to the number-field column and settle
+the classical Riemann hypothesis.  The Rosetta Stone is itself an instance
+of the classification under equivalence of~\Cref{ssec:classification}: one
+arithmetic content read across representations that are not identical but
+structurally the same, the decisive work lying in the translation---the
+equivalences---between them.
+
+The present note operates from a particular angle on this substrate.
+In some sense closer to the modulus of \Cref{ssec:classification} than
+to those modern
+extensions, it uses the golden ratio $\golden=(1+\sqrt{5})/2$
+together with the rotor of Euler's identity to articulate identities
+between the analytic and the arithmetic through the geometric
+structure of~$\golden$, exploring the relations that $\golden$
+admits between $e^{i\theta}$, $\mathbb{R}$, and $\mathbb{C}$.
+
+In what follows the golden ratio $\golden$ enters the argument as a
+structural operator between discrete polygonal geometry---specifically
+the pentagon and decagon---and the continuous rotational symmetry of
+the unit circle.  The relations exploited here are inspired by the
+proportional compass of classical artistic practice, their use of
+ratios based on the human body and the much later invention of the
+\emph{sectio aurea} tool: not as an artisan's empirical
+approximation, but as an exact coupling between geometric magnitudes
+and algebraic roots.  Grisales Herrera~\cite{grisales} establishes
+one face of this coupling between $\golden$ and the integers via the
+eight reduced residue classes of $\Ztwenty$; a parallel
+angular-rotation framework for primes is developed by Acevedo
+Agudelo~\cite{acevedo-2021}.  The present note records, in the
+analytic formulation of Euler's identity~\eqref{eq:euler}, the
+broader configuration of which these facts are part.
+
+For the golden ratio, the starting point is geometric: among the
+vertices $\{\zeta_{10}^{k}\}_{k=0}^{9}$ of the regular decagon
+defined by~\eqref{eq:euler} at $n=10$, the sum of two conjugate
+vertices equals~$\golden$,
+\[
+  \golden \;=\; \zeta_{10}+\zeta_{10}^{-1}, \qquad \zeta_{10}=e^{i\pi/5}
+  \qquad\text{(clause (i) of \Cref{thm:coincidence-intro})}.
+\]
+This inscription places $\golden$ inside the structure
+of~\eqref{eq:euler} as a canonical point.  Three further inscriptions
+follow from this one and constitute the content of the present note.
+First, the real part of the same vertex sum gives the trigonometric
+identity $\golden = 2\cos(\pi/5)$ in~$\mathbb{R}$ (clause~(iii)).
+Second, the multiplicative line $\mathbb{R}_{>0}$ admits a
+transcendental period $\lambda_{\log}=\log_{\golden}2$ that plays the
+structural role of the $2\pi$ of~\eqref{eq:euler} and closes a turn
+between the algebraic objects~$\golden$ and~$2$,
+\[
+  \golden^{\lambda_{\log}} \;=\; 2 \qquad\text{(clause (iv))},
+\]
+a real-multiplicative companion to~\eqref{eq:euler}.  Third, the
+cyclotomic field $\mathbb{Q}(\zeta_{20})$ where $\golden$ resides has
+Galois group $\Ztwenty$ of order~$8$ (clause~(ix)), and the Mersenne
+primes $\Mp$ distribute over the structural fraction
+\[
+  M_{2}/|\Ztwenty| \;=\; 3/8 \qquad\text{(clause (xi))}
+\]
+of those eight Galois classes.  These five inscriptions, together
+with seven further identities, inclusions, and identifications in the
+same canonical structures (clauses (ii), (v), (vi), (vii), (viii),
+(x), (xii) of \Cref{thm:coincidence-intro}), are collected in the
+single formal statement~\Cref{thm:coincidence-intro} below and
+verified in Lean~4.  The relevance of $\golden$ at this point in the
+argument is that the inscription $\golden=\zeta_{10}+\zeta_{10}^{-1}$
+in~\eqref{eq:euler} propagates---trigonometrically into~$\mathbb{R}$,
+multiplicatively into~$\mathbb{R}_{>0}$, and arithmetically into the
+Galois group of the cyclotomic extension---producing twelve coincident
+identities under a single algebraic object.
+
+\subsection{A simultaneous identities theorem for
+\texorpdfstring{$\golden$}{phi}}\label{ssec:coincidence-intro}
+
+By a \emph{simultaneous identities theorem} we mean a statement
+asserting that a mathematical object satisfies simultaneously a
+finite collection of identities provable in distinct canonical
+structures, with the simultaneous validity of the collection as the
+content of the statement.  The corresponding statement
+for~$\golden$ is the following \Cref{thm:coincidence-intro}.  Its
+twelve clauses are proved in \Cref{sec:universal}
+and~\Cref{sec:triple} (clauses (i)--(iii),~(ix)
+in~\Cref{rem:pentagon}, clause~(iv) in~\Cref{lem:binary}, clause~(v)
+in~\Cref{thm:universal}, clause~(vi)
+in~\Cref{thm:concentration-main}, clause~(vii)
+in~\Cref{thm:three-main}); the four remaining clauses (viii), (x),
+(xi), (xii) have short proofs but each registers a structural
+knotting articulated after the statement.
+
+The individual proofs of the clauses are short---several require only
+definitional manipulation or elementary modular computation.  The
+substance of the statement does not reside in the difficulty of the
+separate proofs but in the simultaneity of their validity under a
+single~$\golden$, and in the absence of a prior reference recording
+them jointly.  The situation is analogous to that of Euler's identity
+$e^{i\pi}+1=0$, whose modern proof is the evaluation of a series but
+whose enunciation revealed a knotting of analysis, algebra, geometry,
+and arithmetic not visible in the prior literature.  The formal
+verification in Lean~4 secures the simultaneity as a single theorem,
+eliminating the possibility that the clauses hold separately but not
+jointly.  Throughout, $\iota:\mathbb{R}\hookrightarrow\mathbb{C}$
+denotes the canonical embedding and $\golden_\mathbb{C}:=\iota(\golden)$
+its image in~$\mathbb{C}$ under this embedding.
+
+\begin{Theorem}[Simultaneous identities for $\golden$ (formal version:
+\Cref{thm:euler-connector})]\label{thm:coincidence-intro}
+A single $\golden$ satisfies simultaneously the following twelve
+identities, inclusions, and identifications, organised by the
+canonical structure they inhabit:
+
+\smallskip
+\noindent\emph{In the complex rotor of Euler's identity
+$\{e^{i\theta}\}\subset\mathbb{C}$:}
+\begin{enumerate}[topsep=0.2em,itemsep=0.1em,leftmargin=2.3em]
+  \item[\textup{(i)}] \emph{Cyclotomic inscription:}
+    $\golden_\mathbb{C} = \zeta_{10}+\zeta_{10}^{-1}$, with
+    $\zeta_{10}:=e^{i\pi/5}$.
+  \item[\textup{(ii)}] \emph{Tenth-root closure:} $\zeta_{10}^{10}=1$.
+  \item[\textup{(xii)}] \emph{Rotor discretisation:} for every
+    $k\in\mathbb{N}$, $(\zeta_{10}^{k})^{10}=1$.
+\end{enumerate}
+
+\smallskip
+\noindent\emph{In the real trigonometric line, with cross-identification
+to the complex inscription:}
+\begin{enumerate}[topsep=0.2em,itemsep=0.1em,leftmargin=2.3em]
+  \item[\textup{(iii)}] \emph{Pentagonal trigonometric identity:}
+    $\golden = 2\cos(\pi/5)$.
+  \item[\textup{(viii)}] \emph{Real-complex identification:}
+    $\iota(\golden) = \golden_\mathbb{C}$.
+\end{enumerate}
+
+\smallskip
+\noindent\emph{In the real-multiplicative line $\mathbb{R}_{>0}$:}
+\begin{enumerate}[topsep=0.2em,itemsep=0.1em,leftmargin=2.3em]
+  \item[\textup{(iv)}] \emph{Logarithmic binary bridge:}
+    $\golden^{\lambda_{\log}}=2$, where
+    $\lambda_{\log}:=\log_{\golden}2$.
+  \item[\textup{(v)}] \emph{Universal real-multiplicative identity:}
+    $\forall p\in\mathbb{R},\;3\,\golden^{\sigma(p)}=2^{p}$, where
+    $\sigma(p):=p\,\lambda_{\log}-\log_{\golden}3$.
+\end{enumerate}
+
+\smallskip
+\noindent\emph{In the arithmetic of Mersenne modulo 20:}
+\begin{enumerate}[topsep=0.2em,itemsep=0.1em,leftmargin=2.3em]
+  \item[\textup{(vi)}] \emph{Modular concentration:} for every prime
+    $p$, $\Mp\bmod 20\in\{3,7,11\}$.
+  \item[\textup{(vii)}] \emph{Triple ternary identification:}
+    $3 = M_{2} = |\{3,7,11\}|$.
+\end{enumerate}
+
+\smallskip
+\noindent\emph{In the Galois group of the cyclotomic extension
+$\mathbb{Q}(\zeta_{20})/\mathbb{Q}$, with quantitative ratio to the
+arithmetic locus:}
+\begin{enumerate}[topsep=0.2em,itemsep=0.1em,leftmargin=2.3em]
+  \item[\textup{(ix)}] \emph{Galois order:}
+    $|\Ztwenty|=8$.
+  \item[\textup{(x)}] \emph{Galois sub-object inclusion:}
+    $\{3,7,11\}\subseteq\Ztwenty$.
+  \item[\textup{(xi)}] \emph{Quantitative ratio:}
+    $|\{3,7,11\}|/|\Ztwenty|=M_{2}/8=3/8$, equivalently
+    $|\{3,7,11\}|\cdot 8 = M_{2}\cdot|\Ztwenty|$.
+\end{enumerate}
+\end{Theorem}
+
+No proper sub-collection of the twelve clauses constitutes the content;
+the content is the simultaneous holding of all twelve under a single
+$\golden$ and in relation to Euler's identity~\eqref{eq:euler}, where
+the constants $\zeta_{10}=e^{i\pi/5}$, $\lambda_{\log}=\log_{\golden}2$,
+and $\sigma(p)=p\,\lambda_{\log}-\log_{\golden}3$ are formally introduced
+in~\Cref{sec:universal} (\Cref{def:sigma}) and~\Cref{rem:pentagon}.
+The five groupings above record the five canonical structures in
+which $\golden$ is independently inscribed: the complex rotor with
+its tenth-root discretisation, the real trigonometric line, the
+real-multiplicative line, the arithmetic of Mersenne modulo~20, and
+the Galois group of the cyclotomic decagonal extension.  The
+cross-identifications (clauses (viii) and (xi)) record that the
+inscriptions are inscriptions of \emph{the same}~$\golden$ across
+distinct substrates and that the arithmetic locus sits as a
+quantitatively specific sub-object of the Galois group.  \Cref{ssec:characterization} makes this precise as a
+consistency theorem: the factor~$3$, the base~$\golden$, and the slope
+$\lambda_{\log}$ are each pinned by a theorem external to the central
+identity, and the identity is the unique point at which they agree.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{cd_correspondance.pdf}
+  \caption{The twelve simultaneous identities of~\Cref{thm:coincidence-intro}
+  (clauses (i)--(xii)), together with the reciprocal turn
+  $\golden^{-\lambda_{\log}}=\tfrac12$ of~\Cref{sec:spectral}, as a single
+  commutative diagram.  Every directed path commutes to the universal
+  identity $3\,\golden^{\sigma(p)}=2^{p}$ (green) and to the reciprocal turn
+  $\tfrac12=\golden^{-\lambda_{\log}}$ (red, left); the factor $3=M_{2}$ and
+  the half each appear as a convergence of several identifications under the
+  single algebraic object~$\golden$.}
+  \label{fig:coincidence-diagram}
+\end{figure}
+
+Clauses (vi), (vii), (x), (xi), taken in isolation, fall in the
+genealogy of arithmetic identities over
+$\mathbb{Q}(\sqrt{5})$ companion to Lucas's 1878 Fibonacci
+congruence and to Grisales Herrera's classification of the eight
+residue classes of $\Ztwenty$ into split and inert types
+in~$\mathbb{Q}(\sqrt{5})$~\cite{grisales}.  They enter
+\Cref{thm:coincidence-intro} as four of the twelve simultaneous clauses
+of the simultaneous identities theorem, not as the global content of the
+theorem.  The splitting type of each prime $\Mp$ in $\mathbb{Q}(\sqrt5)$ is
+developed in~\Cref{sec:fibonacci} via Lucas's congruence, where it is
+shown to be governed by the exponent $p\bmod4$ and to single out the
+inert primes as those satisfying the Lucas--Lehmer divisibility
+$\Mp\mid F_{\Mp+1}$.
+
+Beyond these twelve simultaneous clauses, the same multiplicative period
+$\lambda_{\log}$, read in reverse, closes a reciprocal turn
+$\golden^{-\lambda_{\log}}=\tfrac12$.  This value is not a thirteenth
+clause but a point already inscribed in the identity---the reciprocal of
+clause~(iv), the $p=-1$ node of the universal identity~(v), and the
+multiplicative-line image of the rotor's conjugate root (clause~(i))---%
+developed in~\Cref{sec:spectral}, where it is also identified as the
+value at which the companion operator paper anchors its Hilbert--P\'olya
+operator.
+
+All statements of this note are formally verified in
+\texttt{golden\_mersenne.lean}, a self-contained Lean~4
+file built against Mathlib4 (toolchain~\texttt{v4.28.0})~\cite{mathlib};
+no \texttt{sorry} occurs in any proof.  Two external inputs enter as
+axioms: the Gelfond--Schneider theorem (not yet available in Mathlib
+mainline), which underlies the transcendence of $\lambda_{\log}$, and the
+44 Lucas--Lehmer~\cite{lehmer} primalities $M_{p}\;\text{prime}$ for
+$61\leq p\leq 136\,279\,841$ (GIMPS~\cite{gimps}).  The relation
+$\golden^{2}=\golden+1$ is a theorem, not an axiom.
+

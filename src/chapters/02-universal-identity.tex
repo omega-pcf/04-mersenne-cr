@@ -1,0 +1,230 @@
+\section{Statement and proof of the universal identity}
+\label{sec:universal}
+
+Throughout this section and the next, $\golden^{x}$ for real~$x$
+denotes the real exponential $\exp(x\log\golden)$, the standard
+extension of integer exponentiation to~$\mathbb{R}$ via the natural
+logarithm of the positive real $\golden>0$.
+
+The architectural pattern of~\eqref{eq:euler}---a transcendental
+period mediating between algebraic objects---admits a second
+realisation on the multiplicative line~$\mathbb{R}_{>0}$, where the
+binary base~$2^{p}$ takes the place of the rotor and the golden base
+$\golden^{\sigma}$ replaces the angular coordinate.  The mediator is
+the constant
+\[
+  \lambda_{\log} \;:=\; \log 2/\log\golden
+                  \;=\; \log_{\golden} 2 \;\approx\; 1.4404,
+\]
+transcendental over $\mathbb{Q}$ by Gelfond--Schneider
+(\Cref{rem:transcendence} below), playing the structural role
+of~$2\pi$.  It is the elementary period along which $\golden^{x}$
+scales from~$1$ up to the next integer base~$2$:
+\begin{equation}\label{eq:golden-turn}
+  \golden^{\lambda_{\log}} \;=\; 2,
+\end{equation}
+the \emph{golden turn} (clause~(iv) of~\Cref{thm:coincidence-intro}).
+The multiplicative line~$\mathbb{R}_{>0}$ admits a second canonical
+scaling, $\golden^{\log_{\golden} 3} = 3$, and the composition of the
+two turns is the central identity of this section:
+
+\begin{Definition}[Golden index]\label{def:sigma}
+$\sigma\colon\mathbb{R}\to\mathbb{R},\;\sigma(p):=p\,\lambda_{\log}-\log_{\golden}3.$
+\end{Definition}
+
+\begin{Theorem}[Universal identity]\label{thm:universal}
+For every $p\in\mathbb{R}$, $\quad 3\,\golden^{\sigma(p)} \;=\; 2^{p}$.
+\end{Theorem}
+
+\noindent This is clause~(v) of~\Cref{thm:coincidence-intro}.  The
+multiplier~$3$ is not free: \Cref{thm:three-main} below
+(clause~(vii)) shows that it coincides with the first Mersenne prime $M_{2}=2^{2}-1$ and with the cardinality of the admissible residue set
+of~\Cref{thm:concentration-main}, and no other positive real admits
+this simultaneous identification.  The proof of~\Cref{thm:universal}
+is established below in three steps:
+
+\begin{Lemma}[Binary turn]\label{lem:binary}
+$\golden^{\lambda_{\log}} = 2$.
+\end{Lemma}
+
+\begin{proof}
+$\golden^{\lambda_{\log}}=\exp(\lambda_{\log}\log\golden)=\exp(\log 2)=2$.
+Lean: \lean{mersenne\_bridge\_via\_lambda}.
+\end{proof}
+
+\begin{Lemma}[Ternary turn]\label{lem:ternary}
+$\golden^{\log_{\golden} 3} = 3$.
+\end{Lemma}
+
+\begin{proof}
+Identical with $3$ in place of~$2$.  Lean: \lean{phi\_pow\_log3}.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{thm:universal}]
+By definition $\sigma(p)=p\lambda_{\log}-\log_{\golden}3$, hence
+\begin{align*}
+  3\,\golden^{\sigma(p)}
+  &= 3\,\golden^{p\lambda_{\log}}\,\golden^{-\log_{\golden}3}
+  &&\text{(real-exponent subtraction)}\\
+  &= 3\,\bigl(\golden^{\lambda_{\log}}\bigr)^{p}\,
+       \bigl(\golden^{\log_{\golden}3}\bigr)^{-1}
+  &&\text{($\golden^{ab}=(\golden^{a})^{b}$ for $\golden>0$)}\\
+  &= 3\cdot 2^{p}\cdot 3^{-1}
+  &&\text{(\Cref{lem:binary,lem:ternary})}\\
+  &= 2^{p}. \qedhere
+\end{align*}
+Lean: \lean{golden\_tower\_bridge}.
+\end{proof}
+
+\begin{Theorem}[Uniqueness of the index]\label{thm:unique}
+For each $p\in\mathbb{R}$, $\sigma(p)$ is the only real~$\sigma$ such that
+$3\golden^{\sigma}=2^{p}$.
+\end{Theorem}
+
+\begin{proof}
+If $3\golden^{\sigma}=2^{p}$ and $3\golden^{\sigma(p)}=2^{p}$ then
+$\golden^{\sigma-\sigma(p)}=1$, hence
+$(\sigma-\sigma(p))\log\golden=0$, and since $\log\golden>0$ (as
+$\golden>1$), $\sigma=\sigma(p)$.  Lean:
+\lean{sigma\_mersenne\_unique}.
+\end{proof}
+
+\begin{Theorem}[Direct golden ratio between Mersenne]\label{thm:ratio-main}
+For every pair $(p,q)\in\mathbb{R}^{2}$,
+\[
+  \frac{2^{q}}{2^{p}} \;=\; \golden^{(q-p)\lambda_{\log}}.
+\]
+Specialised to the GIMPS list, for every pair
+$(p_{i},p_{j})\in\{p_{1},\ldots,p_{52}\}^{2}$,
+\[
+  \frac{M_{p_{j}}+1}{M_{p_{i}}+1} \;=\; \golden^{(p_{j}-p_{i})\lambda_{\log}}.
+\]
+\end{Theorem}
+
+\begin{proof}
+By \Cref{lem:binary} and the identity $2^{q}/2^{p}=2^{q-p}$,
+\[
+  \frac{2^{q}}{2^{p}}
+  = 2^{q-p}
+  = \bigl(\golden^{\lambda_{\log}}\bigr)^{q-p}
+  = \golden^{(q-p)\lambda_{\log}}.
+\]
+Specialising to GIMPS pairs is immediate.  Lean:
+\lean{mersenne\_ratio\_golden} and
+\lean{mersenne\_ratio\_at\_known\_pairs}.
+\end{proof}
+
+The substance of \Cref{thm:ratio-main} is that the entire orbit
+$\{2^{p_{i}}\}_{i=1}^{52}$ fits into a single integer lattice
+$\golden^{\mathbb{Z}\lambda_{\log}}$ of the golden base, indexed by the
+gaps $p_{j}-p_{i}\in\mathbb{Z}$.  No analogous statement holds for
+arbitrary $\{r_{i}\}\subset\mathbb{R}_{>0}$ in place of $\{p_{i}\}$.
+
+\begin{Remark}[The golden lattice in binary]\label{rem:binary}
+The ratios of~\Cref{thm:ratio-main} have a transparent binary reading.  In
+base~$2$, the Mersenne number $\Mp=2^{p}-1$ is a string of $p$ ones
+(\lean{mersenne\_digits\_ones}), while $2^{p}=\Mp+1$ is a single bit---a $1$
+followed by $p$ zeros (\lean{two\_pow\_digits\_single\_bit})---the increment
+being the carry cascade that turns $\underbrace{1\cdots1}_{p}$ into
+$1\underbrace{0\cdots0}_{p}$ (\lean{mersenne\_succ\_eq\_two\_pow}).  The
+golden lattice $\{2^{p}\}$ is therefore exactly the set of single-bit
+integers, indexed by bit position, and the multiplicative step
+$\golden^{\lambda_{\log}}=2$ is the binary left-shift
+(\lean{golden\_step\_is\_bit\_shift}).  The golden ratio
+$2^{p_{j}}/2^{p_{i}}=\golden^{(p_{j}-p_{i})\lambda_{\log}}$ of
+\Cref{thm:ratio-main} is then the shift of the single bit from position
+$p_{i}$ to position $p_{j}$.
+\end{Remark}
+
+\begin{Corollary}[52-instance specialisation]\label{cor:51}
+For each $p\in\{p_{1},\ldots,p_{52}\}$, the unique real~$\sigma$ with
+$3\golden^{\sigma}=2^{p}$ is $\sigma=\sigma(p_{i})$; moreover the indices
+satisfy $\sigma(p_{1})<\cdots<\sigma(p_{52})$.  Lean:
+\lean{mersenne\_phi\_correspondence\_52} and
+\lean{sigma\_strictly\_increasing}.
+\end{Corollary}
+
+\begin{Remark}[Transcendence of $\lambda_{\log}$]
+\label{rem:transcendence}
+By Gelfond--Schneider (Gelfond, 1934~\cite{gelfond}; Schneider,
+1935~\cite{schneider}), since $\golden$ is algebraic of degree~$2$ over
+$\mathbb{Q}$ and $\golden^{\lambda_{\log}}=2$ is algebraic of degree~$1$,
+the exponent $\lambda_{\log}$ is transcendental over~$\mathbb{Q}$.  The
+identity~\eqref{eq:golden-turn} thus realises an exact algebraic relation
+between two algebraic numbers mediated by a transcendental exponent.  This transcendence is formally derived in
+Lean~4 (\lean{lambda\_log\_transcendental}), with the Gelfond--Schneider
+theorem itself---recently formalised by Karatarakis and Wiedijk~\cite{karatarakis-wiedijk}---taken as the single external
+input.
+\end{Remark}
+
+\begin{Corollary}[Inverse formula]\label{cor:inverse}
+Equivalently, $\sigma(p)=\log_{\golden}(2^{p}/3)$ for every $p\in\mathbb{R}$.
+Lean: \lean{sigma\_mersenne\_eq\_logb}.
+\end{Corollary}
+
+\begin{Remark}[The index as a golden logarithm]\label{rem:index-logarithm}
+The inverse form exhibits the golden index $\sigma(p)$ as a logarithm in
+base $\golden$ of an algebraic number.  This is the source of its
+transcendence: for every integer $p$, $\golden$ is algebraic of
+degree~$2$ and $2^{p}/3$ is rational, so by the same Gelfond--Schneider
+argument as for $\lambda_{\log}$ (\Cref{rem:transcendence}),
+$\sigma(p)=\log_{\golden}(2^{p}/3)$ is transcendental.  The period
+$\lambda_{\log}=\log_{\golden}2$ of \Cref{rem:transcendence} is the
+particular golden logarithm against which the whole family $\sigma(p)$ is
+measured.
+\end{Remark}
+
+\begin{Remark}[Two transcendence theorems, same architectural role]
+\label{rem:two-transcendences}
+The two periods $2\pi$ of~\eqref{eq:euler} and $\lambda_{\log}$
+of~\eqref{eq:golden-turn} are both transcendental but for distinct
+reasons: $\pi$ by Lindemann (1882, via the algebraicity
+of~$e^{i\pi}=-1$), $\lambda_{\log}$ by Gelfond--Schneider (1934, via
+the algebraicity of $\golden^{\lambda_{\log}}=2$).  Two distinct
+transcendence theorems play the same structural role in two
+realisations of the same architecture: a transcendental period
+mediates between algebraic objects in each realisation.
+\end{Remark}
+
+\begin{Corollary}[Transcendental injectivity of the golden index]
+\label{cor:linear-independence}
+For every nonzero integer $p$, $\sigma(p)$ is transcendental
+over~$\mathbb{Q}$.  In particular, the 52 values
+$\{\sigma(p_{1}),\ldots,\sigma(p_{52})\}\subset\mathbb{R}$ are 52 pairwise
+distinct transcendental numbers, occupying 52 distinct points of the
+affine $\mathbb{Z}$-lattice $\mathbb{Z}\lambda_{\log}-\log_{\golden}3\subset\mathbb{R}$.
+\end{Corollary}
+
+\begin{proof}
+By \Cref{cor:inverse}, $\sigma(p)=\log_{\golden}(2^{p}/3)$.  For nonzero
+integer~$p$, $2^{p}/3$ is a nonzero rational, and $\golden$ is algebraic of
+degree~$2$ with $\golden\notin\{0,1\}$.  By Gelfond--Schneider,
+$\golden^{s}$ is transcendental for every algebraic irrational~$s$; since
+$\golden^{\sigma(p)}=2^{p}/3$ is rational, $\sigma(p)$ cannot be algebraic
+irrational, so it is either rational or transcendental.  It is not
+rational: if $\sigma(p)=m/n$ with $m\neq 0$, then
+$\golden^{m}=(2^{p}/3)^{n}\in\mathbb{Q}$, but
+$\golden^{m}=(L_{m}+F_{m}\sqrt5)/2$ with $F_{m}\neq 0$ for $m\neq 0$, so
+$\golden^{m}\notin\mathbb{Q}$; and $m=0$ would give $2^{p}=3$, impossible
+for integer~$p$.  Hence $\sigma(p)$ is transcendental.
+
+Pairwise distinctness of $\sigma(p_{1}),\ldots,\sigma(p_{52})$ follows
+from the strict monotonicity of~\Cref{cor:51} (a consequence of
+$\lambda_{\log}>0$).
+\end{proof}
+
+This is the quantitative-arithmetic content of the lattice embedding:
+each of the 52 golden coordinates is itself a transcendental, not just
+the lattice as a whole, and no algebraic choice of $\lambda$ could
+produce such a configuration.  The Mersenne sublattice
+$\golden^{\mathbb{Z}\lambda_{\log}-\log_{\golden}3}\subset\mathbb{R}_{>0}$
+is genuinely a lattice of $\mathbb{Z}$-rank equal to the number of
+distinct Mersenne exponents, with all 52 points transcendental.
+
+\begin{Remark}[Numerical versus algebraic]
+A numerical version stating $|3\golden^{\sigma(p)}-2^{p}|<10^{-14}$ over
+the 52 known exponents is verifiable in double-precision arithmetic.
+\Cref{thm:universal} is strictly stronger: it is exact, holds for all
+real~$p$, and is independent of floating-point resolution.
+\end{Remark}
+

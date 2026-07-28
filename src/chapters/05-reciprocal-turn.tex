@@ -1,0 +1,70 @@
+\section{\texorpdfstring{The reciprocal turn $\golden^{-\lambda_{\log}}=\tfrac12$}{The reciprocal turn}}
+\label{sec:spectral}
+
+The transcendental period $\lambda_{\log}=\log_{\golden}2$ has two
+directions.  Forward it closes the binary bridge
+$\golden^{\lambda_{\log}}=2$ of clause~(iv) (\Cref{lem:binary}); read
+backward it closes the reciprocal turn
+$\golden^{-\lambda_{\log}}=\tfrac12$.  This value is not a thirteenth
+clause but a point already inscribed in the identity, legible at three
+of its nodes: it is the reciprocal of clause~(iv), the $p=-1$ node of
+the universal identity~(v) (\Cref{thm:universal}), and the
+multiplicative-line image of the conjugate root of the rotor
+(clause~(i)).  We establish the three, then note where the value leads.
+
+\begin{Lemma}[Reciprocal face of the binary bridge]\label{lem:inverse-turn}
+$\golden^{-\lambda_{\log}}=\tfrac12$.
+\end{Lemma}
+
+\begin{proof}
+By clause~(iv) (\Cref{lem:binary}), $\golden^{\lambda_{\log}}=2$; hence
+$\golden^{-\lambda_{\log}}=2^{-1}=\tfrac12$.  In Lean this is the inverse
+of \lean{mersenne\_bridge\_via\_lambda}.
+\end{proof}
+
+\begin{Corollary}[The reciprocal turn is the universal identity at $p=-1$]\label{cor:reciprocal-node}
+The reciprocal turn $\golden^{-\lambda_{\log}}=\tfrac12$ is the value of
+the universal identity~(v) (\Cref{thm:universal}) at $p=-1$.
+\end{Corollary}
+
+\begin{proof}
+The universal identity reads $3\,\golden^{\sigma(p)}=2^{p}$ with
+$\sigma(p)=p\,\lambda_{\log}-\log_{\golden}3$.  At $p=-1$ the binary side
+is $2^{-1}=\tfrac12$, and the golden side reduces as
+\[
+  3\,\golden^{\sigma(-1)}
+    =3\,\golden^{-\lambda_{\log}}\,\golden^{-\log_{\golden}3}
+    =3\,\golden^{-\lambda_{\log}}\cdot\tfrac13
+    =\golden^{-\lambda_{\log}},
+\]
+so~(v) at $p=-1$ reads $\golden^{-\lambda_{\log}}=\tfrac12$.
+\end{proof}
+
+The factor $3=M_{2}$ (clause~(vii)) that divides out here is the same
+multiplier the identity carries at every~$p$---the cancellation
+$3\,\golden^{-\log_{\golden}3}=1$ is the mechanism of~(v), not a
+coincidence of $p=-1$; what is proper to $p=-1$ is only that the binary
+side reads $\tfrac12$.  The reciprocal turn therefore sits inside the
+central identity~(v), the identity that carries the ternary factor
+$3=M_{2}$.
+
+\begin{Remark}[Inversion image of the rotor]\label{rem:inversion-image}
+Clause~(i) inscribes $\golden$ as a root and its inverse,
+$\golden=\zeta_{10}+\zeta_{10}^{-1}$.  Clause~(iv) carries the same
+pattern---a value and its inverse---to the multiplicative line: the pair
+$(\zeta_{10},\zeta_{10}^{-1})$ on the unit circle corresponds to
+$(\golden^{\lambda_{\log}},\golden^{-\lambda_{\log}})=(2,\tfrac12)$
+on~$\mathbb{R}_{>0}$.  The rotor is closed under inversion
+($e^{i\theta}\leftrightarrow e^{-i\theta}$); the reciprocal turn
+$\tfrac12$ is, on~$\mathbb{R}_{>0}$, the analogue of the conjugate root
+$\zeta_{10}^{-1}$, completing the inversion symmetry of the
+multiplicative companion so that it mirrors the rotor it accompanies.
+\end{Remark}
+
+These three inscriptions are internal: each holds by the machinery of
+the present identity, with no operator invoked.  This same value
+$\tfrac12$ is where the companion operator paper anchors a self-adjoint
+operator in the Hilbert--P\'olya programme (\Cref{ssec:euler-substrate});
+that operator and its relation to the zeros of~$\zeta$ are developed
+there.
+

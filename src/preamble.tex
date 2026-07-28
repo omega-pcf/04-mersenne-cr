@@ -1,0 +1,57 @@
+%% ============================================================================
+%% Proceedings of the AMS (PROC) version
+%% Number-theoretic emphasis; DOUBLE ANONYMOUS (no author identity)
+%% ============================================================================
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb}
+\usepackage{mathrsfs}
+\usepackage[hidelinks,breaklinks=true]{hyperref}
+\usepackage[capitalize]{cleveref}
+\usepackage[style=numeric,backend=biber]{biblatex}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{float}
+
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Remark}[Theorem]{Remark}
+
+\crefname{Lemma}{Lemma}{Lemmas}
+\Crefname{Lemma}{Lemma}{Lemmas}
+\crefname{Theorem}{Theorem}{Theorems}
+\Crefname{Theorem}{Theorem}{Theorems}
+\crefname{Corollary}{Corollary}{Corollaries}
+\Crefname{Corollary}{Corollary}{Corollaries}
+\crefname{Definition}{Definition}{Definitions}
+\Crefname{Definition}{Definition}{Definitions}
+\crefname{Remark}{Remark}{Remarks}
+\Crefname{Remark}{Remark}{Remarks}
+
+\newcommand{\golden}{\varphi}
+\newcommand{\Mp}{M_{p}}
+\newcommand{\Ztwenty}{(\mathbb{Z}/20\mathbb{Z})^{\times}}
+\newcommand{\lean}[1]{\texttt{#1}}
+
+\sloppy
+\emergencystretch=3em
+
+\title[Simultaneous identities of the golden ratio]
+      {Simultaneous identities of the golden ratio and Euler's identity,\\
+       formally verified in Lean~4 over the known\\
+       Mersenne prime exponents}
+
+%% Double-anonymous submission: author identity omitted for review.
+
+\subjclass[2020]{Primary 11A41; Secondary 11B39, 11R18, 68V20}
+
+\keywords{Golden ratio, Mersenne primes, cyclotomic fields, modular
+concentration, Gelfond--Schneider theorem, formal verification, Lean 4}
+
+\date{\today}
+

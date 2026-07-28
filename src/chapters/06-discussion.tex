@@ -1,0 +1,123 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection*{Identity and classification under equivalence}
+The organising principle of modern and contemporary mathematics is
+classification up to structural sameness: objects are known not in
+themselves but through the isomorphisms that relate them.  This has a long
+prehistory in the rhetorical structure of Vitruvius's \emph{De
+Architectura}, whose opening dichotomy \emph{quod significatur et quod
+significat}---the signified and the signifier, the \emph{res} and the
+\emph{verba}---makes the work knowable through the proportional relations
+its \emph{modulus} mediates: by number, proportion, and anatomy, in the
+pre-Cartesian mode of interpretation Foucault
+describes~\cite{santos-vitruvio,foucault-1966}.  The modulus is one unit
+from which the proportions of the whole are read---identity generating
+equivalence.
+
+Modern mathematics inherits precisely this tension.  Two objects may be
+\emph{equal}, literally the same, or merely \emph{isomorphic}, the same up
+to a structure-preserving relabelling; classification proceeds almost always
+by the second.  The present note is unusual in sitting at the meeting of the
+two.  Its centre is a genuine identity---a single $\golden$, not a class of
+isomorphic objects, satisfies twelve clauses at once---yet the clauses are
+organised by equivalence: the residue classes of the Galois group
+$\Ztwenty$, the split and inert types in $\mathbb{Q}(\sqrt5)$.  The same
+$\golden$ is read through the equivalences that classify the structures it
+inhabits.  The arc below moves between the two registers---identity where
+the equation holds by construction, equivalence where the classification
+does the work---answering the millennial question of
+\Cref{ssec:classification} in the specific case of~$\golden$.
+
+The note can be read as a single arc, from a tautology to a spectral
+endpoint, each step naming where it is established.
+
+\subsection*{The simultaneous setting}
+The frame of the note is that a single $\golden$ is inscribed at once in
+five canonical structures---the complex rotor of Euler's identity, the real
+trigonometric line, the real multiplicative line, the arithmetic of Mersenne
+modulo~$20$, and the Galois group of $\mathbb{Q}(\zeta_{20})/\mathbb{Q}$%
+---the twelve simultaneous clauses of \Cref{thm:coincidence-intro}.  This is
+the golden-ratio counterpart of Euler's identity: where $e^{i\pi}+1=0$ knots
+analysis, algebra, and geometry at one point, here the same $\golden$ knots
+those structures through the pentagon $\golden=2\cos(\pi/5)$ and its
+cyclotomic inscription $\golden=\zeta_{10}+\zeta_{10}^{-1}$.  The central
+identity below is $\golden$'s inscription on the multiplicative line; the
+arc that follows traces its depth.
+
+\subsection*{The tautological identity}
+Read as an equality, the central identity $3\,\golden^{\sigma(p)}=2^{p}$ is
+tautological: the golden index
+$\sigma(p):=p\,\lambda_{\log}-\log_{\golden}3$ (\Cref{def:sigma}) is defined
+precisely so that it holds, for every real~$p$, and its proof
+(\Cref{thm:universal}) is the evaluation of that definition.  Nothing about
+the truth of the equation is at stake; it holds by construction.  Yet the
+slope it carries, $\lambda_{\log}=\log_{\golden}2$, is transcendental over
+$\mathbb{Q}$ (Gelfond--Schneider, \Cref{rem:transcendence})---the exact
+counterpart of the period $2\pi$ in Euler's identity, an algebraic relation
+between algebraic numbers carried by a transcendental exponent.
+
+\subsection*{Its non-tautological content}
+What is not tautological is what the constituents of the equation turn out
+to be.  The multiplier~$3$ is not a free constant: it equals
+$M_{2}=|\{3,7,11\}|$, the number of residue classes the Mersenne primes
+occupy modulo~$20$ (\Cref{thm:concentration-main},
+\Cref{thm:three-main})---a fact about the arithmetic of $2^{p}-1$ that owes
+nothing to the equation.  Here the identity first carries content beyond
+its definition.
+
+\subsection*{Its proof from outside}
+That the three constituents---the factor~$3$, the base~$\golden$, the slope
+$\lambda_{\log}$---are each pinned by a theorem \emph{external} to the
+identity, and are mutually consistent with the golden coordinate uniquely
+determined, is made precise in \Cref{thm:characterization}: the identity is
+a consistency theorem for independently fixed determinations, certified
+without circularity, not a discovered equality.  This is the sense in which
+it is proved from outside itself.
+
+\subsection*{Its expansion into the Mersenne primes}
+Read forward, into the primes it produces, the identity reaches the 52
+Mersenne exponents.  On the multiplicative line their binary powers
+$2^{p}=\Mp+1$ fit a single integer sublattice of the golden base, every pair
+standing in an exact golden ratio (\Cref{thm:ratio-main})---in the binary
+guise, the shift of the single carried bit from one position to another
+(\Cref{rem:binary})---with 52 distinct transcendental indices $\sigma(p_{i})$
+(\Cref{cor:linear-independence}).
+
+In the field $\mathbb{Q}(\sqrt5)$ the reach is finer, and it resolves each
+Mersenne prime into presentations of one invariant.  The exponent residue
+$p\bmod4$ fixes at once its class in $\Ztwenty$, its splitting type
+(\Cref{cor:split-from-p}), and its Fibonacci sign $F_{\Mp}\equiv\pm1$
+(\Cref{thm:fib-main}):
+\[
+  p\equiv1\mapsto(11,\ \mathrm{split},\ +1),\quad
+  p\equiv3\mapsto(7,\ \mathrm{inert},\ -1),\quad
+  p=2\mapsto(3,\ \mathrm{inert},\ -1),
+\]
+the triple recording the class modulo~$20$, the type in $\mathbb{Q}(\sqrt5)$,
+and the sign of $F_{\Mp}$; and the inert primes are exactly those with
+$\Mp\mid F_{\Mp+1}$ (\Cref{prop:rank-inert}).  Over the 52 known primes the
+joint presentation takes exactly three values, one per admissible residue
+(\Cref{cor:joint}); given $p\bmod4$, no further information separates the
+class, the type, and the sign.  The development is \Cref{sec:fibonacci}.
+
+\subsection*{The spectral meeting point}
+Read backward, the same period $\lambda_{\log}$ carries $\golden$ down to
+one half, $\golden^{-\lambda_{\log}}=\tfrac12$ (\Cref{sec:spectral}).  This
+is the value at which the companion operator paper anchors its
+Hilbert--P\'olya operator---the point at which the golden arithmetic
+developed here meets the spectral programme.
+
+\medskip
+Throughout, the note works on the axis of representation and equivalence
+rather than literal equality.  What a comparison of expressions registers as
+distinct---$\Mp$ against $2^{p}$, an index defined against one proved---the
+relating equivalences return to a single object in several guises.  This is
+quantitative, not figurative: given the exponent residue $p\bmod4$, the
+residue class, the splitting type, and the Fibonacci sign carry no
+information beyond one another, so that over the 52 known Mersenne primes
+their joint presentation takes exactly three values, one per admissible
+residue.  The content lies not in any single presentation but in the exact
+maps between them; where a literal reading sees distinct objects that fail to
+coincide, the equivalence measures no difference at all.
+

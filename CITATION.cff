@@ -1,0 +1,269 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: Simultaneous identities of the golden ratio and Euler's identity,
+  formally verified in Lean 4 over the known Mersenne prime exponents
+type: software
+version: 0.1.0
+date-released: 2026-07-28
+authors:
+  - family-names: González García
+    given-names: Jorge Armando
+    orcid: https://orcid.org/0009-0000-2845-5486
+    affiliation: TTAMAYO PUNTO COM, S.A.P.I. de C.V., Research & Development
+      Division, Naucalpan de Juárez, State of Mexico, Mexico
+  - family-names: González García
+    given-names: Víctor Manuel
+    orcid: https://orcid.org/0009-0009-0935-2954
+    affiliation: TTAMAYO PUNTO COM, S.A.P.I. de C.V., Research & Development
+      Division, Naucalpan de Juárez, State of Mexico, Mexico
+  - family-names: Dressler Pérez
+    given-names: Itzel Marion
+    affiliation: Independent Researcher
+  - family-names: García Ordóñez
+    given-names: Luz María
+    affiliation: TTAMAYO PUNTO COM, S.A.P.I. de C.V., Research & Development
+      Division, Naucalpan de Juárez, State of Mexico, Mexico
+repository-code: https://github.com/omega-pcf/04-mersenne-cr
+license: CC-BY-4.0
+keywords:
+  - Golden ratio
+  - Mersenne primes
+  - Euler's identity
+  - Cyclotomic fields
+  - Gelfond–Schneider theorem
+  - Formal verification
+  - Lean 4
+  - Mathlib4
+  - Fibonacci numbers
+  - Modular arithmetic
+identifiers:
+  - type: other
+    value: "MSC2020: 11A41 (Primary), 11B39, 11R18, 68V20 (Secondary)"
+    description: Mathematical Subject Classification
+abstract: "We present a sustained study of a single object followed across
+  representations, where the content lives in the equivalences between them, not
+  in any representation in isolation. We prove and formally verify in Lean 4
+  that the golden ratio φ=(1+√5)/2 satisfies simultaneously twelve identities,
+  inclusions, and identifications across five canonical structures: the complex
+  rotor of Euler's identity, the real trigonometric and real-multiplicative
+  lines, the arithmetic of Mersenne numbers modulo 20, and the Galois group
+  (Z/20Z)× of Q(ζ₂₀)/Q. The central clause is the identity 3φ^{σ(p)}=2^p, with
+  σ(p)=pλ−log_φ 3 and λ=log_φ 2 transcendental by Gelfond–Schneider. Specialised
+  to the 52 known Mersenne prime exponents (GIMPS, 1952–2024), it holds exactly
+  for each, and every pair of Mersenne numbers, in their binary form 2^p=M_p+1,
+  stands in an exact golden ratio. The factor 3 coincides with M_2, with the
+  number of admissible residue classes of M_p mod 20, and with the numerator of
+  M_2/|(Z/20Z)×|=3/8. The verification is conducted against Mathlib4 with 0
+  sorry, taking as external axioms only the Gelfond–Schneider theorem and the 44
+  large GIMPS primalities."
+references:
+  - authors:
+      - family-names: Acevedo Agudelo
+        given-names: Y. A.
+    doi: 10.33571/rpolitec.v16n32a10
+    identifiers:
+      - type: doi
+        value: 10.33571/rpolitec.v16n32a10
+    title: A complete classification of the Mersenne's primes and its implications
+      for computing
+    date-published: 2020-01-01
+    year: 2020
+    issue: "32"
+    journal: Revista Politécnica
+    start: "111"
+    type: article
+    volume: "16"
+  - authors:
+      - family-names: Acevedo Agudelo
+        given-names: Y. A.
+    title: "Prime numbers: an alternative study using ova-angular rotations"
+    date-published: 2021-01-01
+    year: 2021
+    notes: arXiv:2104.04522
+    type: historical-work
+  - authors:
+      - family-names: Connes
+        given-names: A.
+      - family-names: Consani
+        given-names: C.
+    title: The arithmetic site
+    date-published: 2014-01-01
+    year: 2014
+    issue: "12"
+    journal: Comptes Rendus Mathématique
+    notes: 'Also contains: "The scaling site", Comptes Rendus Mathématique 354
+      (2016), no. 1, 1--6.'
+    start: "971"
+    type: article
+    volume: "352"
+  - authors:
+      - family-names: Dirichlet
+        given-names: P. G. L.
+    title: Beweis des Satzes, dass jede unbegrenzte arithmetische Progression…
+    date-published: 1837-01-01
+    year: 1837
+    journal: Abhandlungen der Königlich Preussischen Akademie der Wissenschaften zu
+      Berlin
+    start: "45"
+    type: article
+  - authors:
+      - family-names: Gelfond
+        given-names: A. O.
+    title: Sur le septième problème de Hilbert
+    date-published: 1934-01-01
+    year: 1934
+    journal: Bulletin de l'Académie des Sciences de l'URSS
+    start: "623"
+    type: article
+    volume: "7"
+  - authors:
+      - family-names: Woltman
+        given-names: G.
+      - family-names: Kurowski
+        given-names: S.
+    identifiers:
+      - type: url
+        value: https://www.mersenne.org/primes/
+    title: The Great Internet Mersenne Prime Search (GIMPS)
+    url: https://www.mersenne.org/primes/
+    notes: G. Woltman, S. Kurowski et al.
+    type: website
+  - authors:
+      - family-names: Gödel
+        given-names: K.
+    title: Über formal unentscheidbare Sätze der Principia Mathematica und
+      verwandter Systeme I
+    date-published: 1931-01-01
+    year: 1931
+    journal: Monatshefte für Mathematik und Physik
+    start: "173"
+    type: article
+    volume: "38"
+  - authors:
+      - family-names: Grisales Herrera
+        given-names: J.
+    title: Golden Prime Symmetry
+    date-published: 2023-11-01
+    year: 2023
+    notes: B.Sc. thesis
+    institution:
+      name: Universidad del Tolima
+    type: thesis
+  - authors:
+      - family-names: Kline
+        given-names: M.
+    title: Mathematical Thought from Ancient to Modern Times
+    date-published: 1972-01-01
+    year: 1972
+    publisher:
+      name: Oxford University Press
+    type: book
+  - authors:
+      - family-names: Lehmer
+        given-names: D. H.
+    title: An extended theory of Lucas' functions
+    date-published: 1930-01-01
+    year: 1930
+    issue: "3"
+    journal: Annals of Mathematics (2)
+    start: "419"
+    type: article
+    volume: "31"
+  - authors:
+      - family-names: Karatarakis
+        given-names: M.
+      - family-names: Wiedijk
+        given-names: F.
+    title: A formalization of the Gelfond–Schneider theorem
+    date-published: 2026-01-01
+    year: 2026
+    notes: arXiv:2603.24823
+    type: historical-work
+  - authors:
+      - family-names: Manin
+        given-names: Y. I.
+    title: Lectures on zeta functions and motives (according to Deninger and Kurokawa
+    date-published: 1995-01-01
+    year: 1995
+    journal: Astérisque
+    start: "121"
+    type: article
+    volume: "228"
+  - authors:
+      - family-names: The Mathlib Community
+    title: The Lean Mathematical Library
+    journal: Proceedings of CPP 2020
+    start: "367"
+    type: article
+  - authors:
+      - family-names: Schneider
+        given-names: T.
+    title: Transzendenzuntersuchungen periodischer Funktionen. I
+    date-published: 1935-01-01
+    year: 1935
+    journal: Journal für die reine und angewandte Mathematik
+    start: "65"
+    type: article
+    volume: "172"
+  - authors:
+      - family-names: Tarski
+        given-names: A.
+    title: A decision method for elementary algebra and geometry
+    date-published: 1948-01-01
+    year: 1948
+    notes: RAND Corporation Report R-109. Second edition, University of California
+      Press, Berkeley, 1951.
+    publisher:
+      name: RAND Corporation
+    type: book
+  - authors:
+      - family-names: Tits
+        given-names: J.
+    title: Sur les analogues algébriques des groupes semi-simples complexes
+    date-published: 1957-01-01
+    year: 1957
+    journal: Colloque d'algèbre supérieure, Centre Belge de Recherches Mathématiques
+    publisher:
+      name: Établissement Ceuterick
+    start: "261"
+    type: article
+  - authors:
+      - family-names: dos Santos
+        given-names: G. C.
+    title: Arquitetura vitruviana e retórica antiga
+    date-published: 2020-01-01
+    year: 2020
+    journal: Archai
+    start: e02804
+    type: article
+    volume: "28"
+  - authors:
+      - family-names: Foucault
+        given-names: M.
+    title: Les mots et les choses
+    date-published: 1966-01-01
+    year: 1966
+    publisher:
+      name: Gallimard
+    type: book
+  - authors:
+      - family-names: Weil
+        given-names: A.
+    title: A 1940 letter to Simone Weil
+    date-published: 1979-01-01
+    year: 1979
+    journal: Collected Papers
+    publisher:
+      name: Springer
+    start: "244"
+    type: article
+    volume: I
+  - authors:
+      - family-names: Weil
+        given-names: A.
+    title: Sur les courbes algébriques et les variétés qui s'en déduisent
+    date-published: 1948-01-01
+    year: 1948
+    publisher:
+      name: Hermann
+    type: book

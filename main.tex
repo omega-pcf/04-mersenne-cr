@@ -1,0 +1,25 @@
+%% ========================================================================
+%% Mersenne CR — main.tex
+%% Assembled from sub-files; build via pnpm run build
+%% ========================================================================
+\input{src/preamble}
+
+\addbibresource{src/bibliography.bib}
+
+\begin{document}
+
+\input{src/document-body}   % \begin{document} .. \maketitle
+
+\input{src/chapters/01-introduction}
+\input{src/chapters/02-universal-identity}
+\input{src/chapters/03-factor-three}
+\input{src/chapters/04-fibonacci-splitting}
+\input{src/chapters/05-reciprocal-turn}
+\input{src/chapters/06-discussion}
+\input{src/chapters/07-formal-verification}
+\input{src/chapters/08-closing-remark}
+\input{src/chapters/09-ai-statement}
+
+\printbibliography
+
+\end{document}

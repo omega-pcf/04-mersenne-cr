@@ -1,0 +1,68 @@
+{
+  "name": "@omega-pcf/04-mersenne-cr",
+  "version": "0.1.0",
+  "description": "Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents",
+  "metadata": {
+    "abstract": "We present a sustained study of a single object followed across representations, where the content lives in the equivalences between them, not in any representation in isolation. We prove and formally verify in Lean 4 that the golden ratio φ=(1+√5)/2 satisfies simultaneously twelve identities, inclusions, and identifications across five canonical structures: the complex rotor of Euler's identity, the real trigonometric and real-multiplicative lines, the arithmetic of Mersenne numbers modulo 20, and the Galois group (Z/20Z)× of Q(ζ₂₀)/Q. The central clause is the identity 3φ^{σ(p)}=2^p, with σ(p)=pλ−log_φ 3 and λ=log_φ 2 transcendental by Gelfond–Schneider. Specialised to the 52 known Mersenne prime exponents (GIMPS, 1952–2024), it holds exactly for each, and every pair of Mersenne numbers, in their binary form 2^p=M_p+1, stands in an exact golden ratio. The factor 3 coincides with M_2, with the number of admissible residue classes of M_p mod 20, and with the numerator of M_2/|(Z/20Z)×|=3/8. The verification is conducted against Mathlib4 with 0 sorry, taking as external axioms only the Gelfond–Schneider theorem and the 44 large GIMPS primalities.",
+    "zenodo_description": "We present a sustained study of a single object followed across representations, where the content lives in the equivalences between them. We prove and formally verify in Lean 4 that the golden ratio φ=(1+√5)/2 satisfies simultaneously twelve identities across five canonical structures. The central clause is 3φ^{σ(p)}=2^p, specialisable to the 52 known Mersenne prime exponents. The verification is conducted against Mathlib4 with 0 sorry."
+  },
+  "type": "module",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "verify:lean": "cd lean && lake build",
+    "verify": "pnpm run verify:lean",
+    "validate": "pnpm run verify",
+    "build": "pnpm exec tsx scripts/build.ts",
+    "build:full": "pnpm run build",
+    "release": "dotenv -e .env -- release-it",
+    "release:dry-run": "pnpm run build:full && dotenv -e .env -- release-it --dry-run --no-git.requireCleanWorkingDir"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "private": true,
+  "devDependencies": {
+    "@citation-js/core": "^0.7.21",
+    "@citation-js/plugin-bibtex": "^0.7.21",
+    "@citation-js/plugin-cff": "^0.6.2",
+    "@citation-js/plugin-csl": "^0.7.22",
+    "@citation-js/plugin-zenodo": "^0.6.2",
+    "@citestyle/bibtex": "^1.0.0",
+    "@citestyle/core": "^1.0.0",
+    "@citestyle/types": "^1.0.0",
+    "@iarna/toml": "^2.2.5",
+    "@release-it/bumper": "^7.0.0",
+    "@release-it/conventional-changelog": "^10.0.6",
+    "@types/escape-latex": "^0.1.36",
+    "@types/node": "^20.0.0",
+    "ajv": "^8.18.0",
+    "ajv-draft-04": "^1.0.0",
+    "ajv-formats": "^3.0.1",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "conventional-commits-parser": "^6.4.0",
+    "dotenv-cli": "^11.0.0",
+    "escape-latex": "^1.2.0",
+    "json-schema-to-typescript": "^15.0.4",
+    "release-it": "^19.2.4",
+    "striptags": "^3.2.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "unicode2latex": "^7.0.30",
+    "yaml": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omega-pcf/04-mersenne-cr.git"
+  },
+  "keywords": [
+    "Golden ratio",
+    "Mersenne primes",
+    "Euler's identity",
+    "Cyclotomic fields",
+    "Gelfond–Schneider theorem",
+    "Formal verification",
+    "Lean 4",
+    "Mathlib4",
+    "Fibonacci numbers",
+    "Modular arithmetic"
+  ],
+  "license": "CC-BY-4.0"
+}

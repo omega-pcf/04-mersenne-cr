@@ -1,0 +1,134 @@
+\section{Formal verification in Lean 4}
+
+The entire argument is formalised in a single self-contained file,
+\texttt{golden\_mersenne.lean} (1599~lines, importing
+only Mathlib, and including the Fibonacci splitting of~\Cref{sec:fibonacci}
+and its consequences), built against Mathlib4 (Lean toolchain~\texttt{v4.28.0}, commit
+\texttt{8f9d9cff6bd728b17a24e163c9402775d9e6a365}).  Gelfond--Schneider
+is not present at this revision and enters as the explicit axiom
+recorded below.  \Cref{tab:lean,tab:lean-b} list every Lean identifier
+with its verification status, grouped by role.
+
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{1.0cm}p{3.6cm}p{5.0cm}p{1.5cm}@{}}
+\toprule
+Clause & Statement & Lean identifier & Status \\
+\midrule
+
+\multicolumn{4}{@{}l}{\emph{Clauses of \Cref{thm:coincidence-intro}}} \\
+\midrule
+(i)   & $\golden = \zeta_{10}+\zeta_{10}^{-1}$ &
+  \lean{phi\_eq\_zeta10\_sum} & $0$ \texttt{sorry} \\
+(ii)  & $\zeta_{10}^{10}=1$ &
+  \lean{zeta10\_pow\_ten\_eq\_one} & $0$ \texttt{sorry} \\
+(iii) & $\golden = 2\cos(\pi/5)$ &
+  \lean{phi\_eq\_two\_cos\_pi\_fifth} & $0$ \texttt{sorry} \\
+(iv)  & $\golden^{\lambda_{\log}}=2$ &
+  \lean{mersenne\_bridge\_via\_lambda} & $0$ \texttt{sorry} \\
+(v)   & $3\golden^{\sigma(p)}=2^{p}$ ($\forall p\in\mathbb{R}$) &
+  \lean{golden\_tower\_bridge} & $0$ \texttt{sorry} \\
+(vi)  & $\Mp\bmod 20\in\{3,7,11\}$ ($\forall p$ prime) &
+  \lean{mersenne\_concentration\_general} & $0$ \texttt{sorry} \\
+(vii) & $3 = M_{2} = |\{3,7,11\}|$ &
+  \lean{three\_eq\_M2\_eq\_admissible\_card} & $0$ \texttt{sorry} \\
+(ix)  & $|\Ztwenty|=8$ &
+  \lean{ZtwentyStar\_card} & $0$ \texttt{sorry} \\
+(viii), (x), (xi), (xii) & structural knottings articulated after~\Cref{thm:euler-connector} &
+  \lean{phi\_euler\_mersenne\_connector} & $0$ \texttt{sorry} \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Auxiliary results (\Cref{sec:universal})}} \\
+\midrule
+--- & $\golden^{2}=\golden+1$ (defining relation) &
+  \lean{phi\_sq} & $0$ \texttt{sorry} \\
+--- & $\golden^{\log_{\golden} 3} = 3$ (\Cref{lem:ternary}) &
+  \lean{phi\_pow\_log3} & $0$ \texttt{sorry} \\
+--- & Uniqueness of $\sigma(p)$ (\Cref{thm:unique}) &
+  \lean{sigma\_mersenne\_unique} & $0$ \texttt{sorry} \\
+--- & $2^{q}/2^{p} = \golden^{(q-p)\lambda_{\log}}$ (\Cref{thm:ratio-main}) &
+  \lean{mersenne\_ratio\_golden} & $0$ \texttt{sorry} \\
+--- & 52-instance identity (\Cref{cor:51}) &
+  \lean{mersenne\_phi\_correspondence\_52} & $0$ \texttt{sorry} \\
+--- & Strict order of indices (\Cref{cor:51}) &
+  \lean{sigma\_strictly\_increasing} & $0$ \texttt{sorry} \\
+--- & Irrationality of $\lambda_{\log}$ &
+  \lean{lambda\_log\_irrational} & $0$ \texttt{sorry} \\
+--- & Transcendence of $\lambda_{\log}$ (\Cref{rem:transcendence}) &
+  \lean{lambda\_log\_transcendental} & $0$ \texttt{sorry} \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Euler rotor (\Cref{eq:euler})}} \\
+  \midrule
+  --- & $e^{i\pi}=-1$ (rotor) &
+    \lean{euler\_rotor} & $0$ \texttt{sorry} \\
+\bottomrule
+\end{tabular}
+\caption{Lean~4 identifiers and verification status (part~I): clauses of
+the simultaneous identities theorem, auxiliary results, and the Euler
+rotor.}\label{tab:lean}
+\end{table}
+
+\begin{table}[p]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{1.0cm}p{3.6cm}p{5.0cm}p{1.5cm}@{}}
+\toprule
+Clause & Statement & Lean identifier & Status \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Fibonacci splitting (\Cref{sec:fibonacci})}} \\
+\midrule
+--- & Binet identity in $\mathbb{Z}[\golden]$ &
+  \lean{fib\_pow\_aux} & $0$ \texttt{sorry} \\
+--- & Base cases $p\in\{2,3,5\}$ &
+  \lean{mersenne\_fibonacci\_tabulated} & \texttt{native\allowbreak\_decide} \\
+--- & Split/inert partition mod $5$ &
+  \lean{chi5\_values} & $0$ \texttt{sorry} \\
+--- & Lucas congruence $F_{q}\equiv(q/5)$ (\Cref{thm:fib-main}) &
+  \lean{fibonacci\_splitting\_general} & $0$ \texttt{sorry} \\
+--- & Split case (\Cref{lem:fib-split}) &
+  \lean{fib\_split\_case} & $0$ \texttt{sorry} \\
+--- & Inert case (\Cref{lem:fib-inert}) &
+  \lean{fib\_inert\_case} & $0$ \texttt{sorry} \\
+--- & Mersenne splitting type (\Cref{thm:residue-split}) &
+  \lean{mersenne\_fibonacci\_type} & $0$ \texttt{sorry} \\
+--- & Type from $p\bmod 4$ (\Cref{cor:split-from-p}) &
+  \lean{mersenne\_mod5\_from\_p\_mod4} & $0$ \texttt{sorry} \\
+--- & Rank characterises inert (\Cref{prop:rank-inert}) &
+  \lean{mersenne\_rank\_iff\_inert} & $0$ \texttt{sorry} \\
+--- & Joint presentation from $p\bmod 4$ (\Cref{cor:joint}) &
+  \lean{mersenne\_presentation\allowbreak\_from\allowbreak\_p\_mod4} & $0$ \texttt{sorry} \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Identity characterization (\Cref{ssec:characterization})}} \\
+\midrule
+--- & Consistency \& uniqueness (\Cref{thm:characterization}) &
+  \lean{golden\_identity\allowbreak\_characterization} & $0$ \texttt{sorry} \\
+--- & Overdetermined consistency (\Cref{rem:characterization}) &
+  \lean{golden\_identity\allowbreak\_is\allowbreak\_consistent\allowbreak\_overdetermined} & $0$ \texttt{sorry} \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{External inputs (axioms)}} \\
+\midrule
+--- & Primality of $\Mp$, $p\leq 31$ &
+  \lean{mersenne\_prime\_\{2..31\}} (8 thms) &
+  \texttt{native\allowbreak\_decide} \\
+--- & Primality of $\Mp$, $p\geq 61$ & 44 GIMPS \texttt{axiom}s &
+  external \\
+--- & Gelfond--Schneider (Hilbert's 7th) &
+  \lean{transcendental\allowbreak\_cpow\allowbreak\_of\allowbreak\_isAlgebraic\allowbreak\_of\allowbreak\_irrational} & external \\
+\bottomrule
+\end{tabular}
+\caption{Lean~4 identifiers and verification status (part~II): the
+Fibonacci splitting, the identity characterization, and the external
+inputs.}\label{tab:lean-b}
+\end{table}
+
+The external assumption set reduces to two items: (i)~the
+Gelfond--Schneider theorem, declared as
+\lean{transcendental\_cpow\_of\_isAlgebraic\_of\_irrational}, from which
+the transcendence of $\lambda_{\log}$ over~$\mathbb{Q}$ is \emph{derived}
+(\lean{lambda\_log\_transcendental}, \Cref{rem:transcendence}); and
+(ii)~44 \texttt{axiom} declarations
+$M_{61},\ldots,M_{82\,589\,933}\;\text{prime}$ (Lucas--Lehmer, GIMPS).
+The golden relation $\golden^{2}=\golden+1$ and the irrationality of
+$\lambda_{\log}$ are proved, not assumed. Gelfond--Schneider was
+recently formalised in Lean~4~\cite{karatarakis-wiedijk} and is
+being integrated into Mathlib; upon its landing the first axiom is
+discharged. No \texttt{sorry} appears in any proof.
+

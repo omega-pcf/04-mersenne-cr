@@ -1,0 +1,280 @@
+\section{Fibonacci splitting of the Mersenne primes}
+\label{sec:fibonacci}
+
+The modular concentration of~\Cref{thm:concentration-main} records
+\emph{where} the Mersenne primes fall in $\Ztwenty$: their residues lie
+in $\{3,7,11\}$.  We now show \emph{how} they fall---how each prime
+$\Mp$ splits in the field $\mathbb{Q}(\sqrt5)$ of the golden ratio.  The
+answer is governed by a single classical congruence (Lucas, 1878) and,
+composed with the concentration, refines the three admissible classes
+into a split class and two inert classes.  This is the arithmetic
+content behind the identification $3=M_{2}=|\{3,7,11\}|$ of
+clause~(vii): the multiplier~$3$ is the number of classes the Mersenne
+primes occupy, and the golden field determines the splitting type in
+each.
+
+\subsection{Fibonacci prerequisites}
+\label{ssec:fib-prereq}
+
+The Fibonacci sequence is $F_{0}=0$, $F_{1}=1$, $F_{n+2}=F_{n+1}+F_{n}$.
+In any commutative ring containing an element~$\alpha$ with
+$\alpha^{2}=\alpha+1$, induction on~$n$ gives the Binet-type identity
+\begin{equation}\label{eq:binet}
+  \alpha^{\,n+1} = F_{n+1}\,\alpha + F_{n}.
+\end{equation}
+The Galois conjugate of~$\golden$ over~$\mathbb{Q}$ is
+$\overline{\golden}=1-\golden=-1/\golden$, with trace
+$\golden+\overline{\golden}=1$ and norm
+$\golden\,\overline{\golden}=-1$; both roots of $X^{2}-X-1$.  The
+discriminant of $\mathbb{Q}(\sqrt5)/\mathbb{Q}$ is
+$(\golden-\overline{\golden})^{2}=5$, so~$5$ is the unique ramified
+prime.  For an odd prime $q\neq5$, the splitting of~$q$ in
+$\mathbb{Q}(\sqrt5)$ is governed by the Legendre symbol $(q/5)$:
+$(q/5)=+1$ (split) iff $q\bmod 20\in\{1,9,11,19\}$, and $(q/5)=-1$
+(inert) iff $q\bmod 20\in\{3,7,13,17\}$.  Among the admissible Mersenne
+classes~$\{3,7,11\}$, exactly one---the class~$11$---is split.
+Lean: \lean{fib\_pow\_aux}, \lean{chi5\_values}.
+
+\subsection{The Fibonacci splitting congruence}
+\label{ssec:fib-congruence}
+
+\begin{Theorem}[Fibonacci splitting; Lucas 1878]\label{thm:fib-main}
+For every prime $q\neq2,5$,
+\[
+  F_{q}\;\equiv\;(q/5)\pmod{q},
+\]
+with value $+1$ in the split case and $-1$ in the inert case.
+\emph{Lean:} \lean{fibonacci\_splitting\_general}.
+\end{Theorem}
+
+\begin{Lemma}[Split case]\label{lem:fib-split}
+Let $q\neq2,5$ be prime with $(q/5)=+1$.  Then $X^{2}-X-1$ has a root
+$\alpha\in\mathbb{F}_{q}$, and $F_{q}\equiv 1\pmod{q}$.
+\emph{Lean:} \lean{fib\_split\_case}.
+\end{Lemma}
+
+\begin{proof}
+Since $(q/5)=+1$, there is $\beta\in\mathbb{F}_{q}$ with $\beta^{2}=5$;
+put $\alpha:=(1+\beta)/2$ (defined as $q\neq2$).  Then
+$\alpha^{2}=(6+2\beta)/4=\alpha+1$.  By Fermat, $\alpha^{q}=\alpha$, and
+by~\eqref{eq:binet}, $\alpha^{q}=F_{q}\alpha+F_{q-1}$; the same holds for
+the conjugate root $\overline{\alpha}=1-\alpha$.  Subtracting the two
+relations gives $F_{q}(\alpha-\overline{\alpha})\equiv
+\alpha-\overline{\alpha}$; since
+$(\alpha-\overline{\alpha})^{2}=5\not\equiv0$ (as $q\neq5$) the factor is
+invertible, so $F_{q}\equiv1\pmod{q}$.
+\end{proof}
+
+\paragraph{Worked example ($q=11$, split).}
+Since $11\equiv1\pmod5$, $(11/5)=+1$; in $\mathbb{F}_{11}$ the roots of
+$X^{2}=X+1$ are $\alpha=8$, $\overline{\alpha}=4$ (as
+$8^{2}=64\equiv9=8+1$).  And $F_{11}=89=11\cdot8+1$, so
+$F_{11}\equiv1\pmod{11}$.
+
+\begin{Lemma}[Inert case]\label{lem:fib-inert}
+Let $q\neq2,5$ be prime with $(q/5)=-1$.  Then $X^{2}-X-1$ is
+irreducible over~$\mathbb{F}_{q}$, the Frobenius $x\mapsto x^{q}$ of
+$\mathbb{F}_{q^{2}}=\mathbb{F}_{q}[X]/(X^{2}-X-1)$ exchanges the two
+roots $\alpha,\overline{\alpha}=1-\alpha$, and $F_{q}\equiv-1\pmod{q}$.
+\emph{Lean:} \lean{fib\_inert\_case}.
+\end{Lemma}
+
+\begin{proof}
+By quadratic reciprocity, $(5/q)=(q/5)=-1$, so~$5$ is a non-residue
+and $X^{2}-X-1$ has no root in~$\mathbb{F}_{q}$; being quadratic it is
+irreducible, and the quotient
+$\mathbb{F}_{q^{2}}=\mathbb{F}_{q}[X]/(X^{2}-X-1)$ is a field of
+order~$q^{2}$ with basis $\{1,\alpha\}$, where $\alpha$ is the image
+of~$X$.  The Frobenius $\mathrm{Frob}_{q}\colon x\mapsto x^{q}$ is an
+$\mathbb{F}_{q}$-automorphism (additivity is the freshman's dream in
+characteristic~$q$; fixity of~$\mathbb{F}_{q}$ is Fermat), it permutes
+the roots of $X^{2}-X-1$, and it is not the identity (else all of
+$\mathbb{F}_{q^{2}}$ would lie in~$\mathbb{F}_{q}$); hence
+$\alpha^{q}=\overline{\alpha}=1-\alpha$.  By~\eqref{eq:binet},
+$\alpha^{q}=F_{q}\alpha+F_{q-1}$, so $(F_{q}+1)\alpha+(F_{q-1}-1)=0$ in
+$\mathbb{F}_{q^{2}}$; as $\{1,\alpha\}$ is a basis, both coefficients
+vanish, giving $F_{q}\equiv-1\pmod{q}$.
+\end{proof}
+
+\begin{Remark}[Lucas--Lehmer companion]\label{rem:fib-companion}
+The inert case also yields $F_{q-1}\equiv1$, whence
+$F_{q+1}=F_{q}+F_{q-1}\equiv0\pmod{q}$: the classical Fermat--Lucas
+condition $q\mid F_{q+1}$ for inert primes, which underlies the index of
+appearance in the Lucas--Lehmer primality test.
+\end{Remark}
+
+\paragraph{Worked example ($q=7$, inert).}
+Since $7\equiv2\pmod5$ is a non-residue, $(7/5)=-1$ and $X^{2}-X-1$ is
+irreducible over~$\mathbb{F}_{7}$.  Here $F_{7}=13\equiv-1\pmod{7}$, and
+$F_{8}=21\equiv0\pmod7$, consistent with~\Cref{rem:fib-companion}.
+
+\subsection{Splitting type of the Mersenne primes}
+\label{ssec:fib-mersenne}
+
+\begin{Theorem}[Residue class determines splitting type]\label{thm:residue-split}
+Let~$p$ be a prime with $\Mp$ also prime, $\Mp\neq2,5$.  Then
+$\Mp\bmod20\in\{3,7,11\}$, and
+\[
+  \Mp\equiv11\Rightarrow F_{\Mp}\equiv+1\ (\text{split}),
+  \qquad
+  \Mp\bmod20\in\{3,7\}\Rightarrow F_{\Mp}\equiv-1\ (\text{inert}),
+\]
+all congruences modulo~$\Mp$.
+\emph{Lean:} \lean{mersenne\_fibonacci\_type}.
+\end{Theorem}
+
+\begin{proof}
+Since $\Mp=2^{p}-1$ is odd and $2^{p}-1=5$ has no solution, the hypothesis $\Mp\neq2,5$ is automatic for every Mersenne prime.  The concentration is~\Cref{thm:concentration-main} at~$p$.
+By~\Cref{thm:fib-main}, $F_{\Mp}\equiv(\Mp/5)\pmod{\Mp}$; and
+$(\Mp/5)$ is read from $\Mp\bmod5$: $11\equiv1$ gives $+1$, while
+$3\equiv3$ and $7\equiv2$ are non-residues, giving $-1$.
+\end{proof}
+
+\begin{table}[ht]\centering\footnotesize
+\begin{tabular}{@{}cccccc@{}}
+\toprule
+$p$ & $\Mp$ & $\Mp\bmod20$ & $(\Mp/5)$ & $F_{\Mp}\bmod\Mp$ & type \\
+\midrule
+$3$  & $7$          & $7$  & $-1$ & $-1$ & inert \\
+$5$  & $31$         & $11$ & $+1$ & $+1$ & split \\
+$7$  & $127$        & $7$  & $-1$ & $-1$ & inert \\
+$13$ & $8191$       & $11$ & $+1$ & $+1$ & split \\
+$17$ & $131071$     & $11$ & $+1$ & $+1$ & split \\
+$19$ & $524287$     & $7$  & $-1$ & $-1$ & inert \\
+$31$ & $2147483647$ & $7$  & $-1$ & $-1$ & inert \\
+\bottomrule
+\end{tabular}
+\caption{Fibonacci splitting type of $\Mp$ for the first seven Mersenne
+primes with $p\geq3$.}\label{tab:mersenne-fib}
+\end{table}
+
+Specialised to each of the 52 known Mersenne exponents, this classifies
+every known Mersenne prime by its splitting type; the distribution
+is~\Cref{tab:splitting}.
+
+\begin{table}[ht]\centering\footnotesize
+\begin{tabular}{@{}cccc@{}}
+\toprule
+$\Mp\bmod20$ & Type in $\mathbb{Q}(\sqrt5)$ & $F_{\Mp}\bmod\Mp$ & Count \\
+\midrule
+$3$  & inert & $-1$ & $1$  \\
+$7$  & inert & $-1$ & $19$ \\
+$11$ & split & $+1$ & $32$ \\
+\midrule
+\multicolumn{3}{@{}r}{\textbf{total}} & \textbf{52} \\
+\bottomrule
+\end{tabular}
+\caption{Splitting type in $\mathbb{Q}(\sqrt5)$ of each of the 52 known
+Mersenne primes, by residue class $\Mp\bmod20$.  Verified in Lean by
+\texttt{native\_decide} for $p\leq31$ and derived from
+\lean{mersenne\_concentration\_general} otherwise.}\label{tab:splitting}
+\end{table}
+
+\begin{sloppypar}\small
+\noindent\emph{Explicit lists.}  The single exponent in class~$3$ is
+$p=2$ (inert).  The 19 exponents with $\Mp\equiv7\pmod{20}$ (inert) are
+$3$, $7$, $19$, $31$, $107$, $127$, $607$, $1279$, $2203$, $4423$, $86\,243$, $110\,503$, $216\,091$, $756\,839$, $1\,257\,787$, $20\,996\,011$, $24\,036\,583$, $25\,964\,951$, $37\,156\,667$.
+The 32 exponents with $\Mp\equiv11\pmod{20}$ (split) are
+$5$, $13$, $17$, $61$, $89$, $521$, $2281$, $3217$, $4253$, $9689$, $9941$, $11\,213$, $19\,937$, $21\,701$, $23\,209$, $44\,497$, $132\,049$, $859\,433$, $1\,398\,269$, $2\,976\,221$, $3\,021\,377$, $6\,972\,593$, $13\,466\,917$, $30\,402\,457$, $32\,582\,657$, $42\,643\,801$, $43\,112\,609$, $57\,885\,161$, $74\,207\,281$, $77\,232\,917$, $82\,589\,933$, $136\,279\,841$.
+\end{sloppypar}
+
+\begin{Remark}[Classification under equivalence]\label{rem:classification}
+Together, \Cref{thm:concentration-main} and~\Cref{thm:residue-split}
+realise a classification of the Mersenne primes within the
+pentagonal--cyclotomic geometry of~$\golden$: the multiplier
+$3=M_{2}=|\{3,7,11\}|$ counts the admissible classes, and the golden
+field partitions them into one split class ($11$) and two inert classes
+($3,7$).  The observed split/inert split---$32$ against $20$ over the
+current 52---is empirical; under conjectural equidistribution one would
+expect a ratio nearer $1:2$, and the deviation over a sample of size~$52$
+is not conclusive.
+\end{Remark}
+
+
+\subsection{The splitting type from the exponent}
+\label{ssec:fib-exponent}
+
+The residue $\Mp\bmod20$ of~\Cref{thm:residue-split} is itself fixed by the
+exponent modulo~$4$, which reduces the whole classification to the
+arithmetic of~$p$ alone.
+
+\begin{Corollary}[Splitting type from $p\bmod4$]\label{cor:split-from-p}
+Let $\Mp$ be a Mersenne prime.  Its splitting type in $\mathbb{Q}(\sqrt5)$
+is determined by $p\bmod4$:
+\[
+  p\equiv1\!\!\pmod4\ \Rightarrow\ \text{split},
+  \qquad
+  p\equiv3\!\!\pmod4\ \text{or}\ p=2\ \Rightarrow\ \text{inert}.
+\]
+  \emph{Lean:} \lean{mersenne\_mod5\_from\_p\_mod4}.
+\end{Corollary}
+
+\begin{proof}
+The residues $2^{p}\bmod5$ have period~$4$, equal to $2,4,3,1$ for
+$p\equiv1,2,3,0\pmod4$.  Hence $\Mp=2^{p}-1$ modulo~$5$ depends only on
+$p\bmod4$, taking the values $1,3,2$ for $p\equiv1,2,3\pmod4$, so
+$(\Mp/5)=+1,-1,-1$ respectively.  By~\Cref{thm:residue-split} this sign is
+the splitting type.  (The case $p\equiv0\pmod4$ gives $5\mid\Mp$ and is
+excluded, since $\Mp$ is a prime $\neq5$.)
+\end{proof}
+
+Thus, among the admissible classes, the split class~$11$ is exactly
+$p\equiv1\pmod4$ and the inert classes $3,7$ are $p=2$ and $p\equiv3\pmod4$.
+The finer modulus~$8$ does not separate the type any further: $p\bmod4$ is
+the exact controlling residue of the exponent.
+
+\begin{Corollary}[Fibonacci rank characterises the inert primes]\label{prop:rank-inert}
+For a Mersenne prime $\Mp\neq5$,
+\[
+  \Mp\mid F_{\Mp+1}
+  \;\iff\;
+  \Mp\ \text{is inert in }\mathbb{Q}(\sqrt5)
+  \;\iff\;
+  p\equiv3\!\!\pmod4\ \text{or}\ p=2.
+\]
+  \emph{Lean:} \lean{mersenne\_rank\_iff\_inert}.
+\end{Corollary}
+
+\begin{proof}
+If $\Mp$ is inert then $\Mp\mid F_{\Mp+1}$ by~\Cref{rem:fib-companion}.  If
+$\Mp$ is split, the roots $\alpha,\overline{\alpha}$ of $X^{2}-X-1$ lie in
+$\mathbb{F}_{\Mp}^{\times}$, so $\alpha^{\Mp-1}=\overline{\alpha}^{\Mp-1}=1$
+by Fermat, giving
+$F_{\Mp-1}=(\alpha^{\Mp-1}-\overline{\alpha}^{\Mp-1})/(\alpha-\overline{\alpha})\equiv0$;
+with $F_{\Mp}\equiv1$ (\Cref{lem:fib-split}) this yields
+$F_{\Mp+1}=F_{\Mp}+F_{\Mp-1}\equiv1\not\equiv0\pmod{\Mp}$.  The second
+equivalence is~\Cref{cor:split-from-p}.
+\end{proof}
+
+The divisibility $\Mp\mid F_{\Mp+1}$---that is, the rank of apparition of
+$\Mp$ in the Fibonacci sequence dividing $\Mp+1$---therefore singles out
+\emph{exactly} the inert half of the Mersenne primes, the same
+rank-of-apparition structure that underlies the Lucas--Lehmer test.
+
+\begin{Corollary}[The joint presentation from the exponent]\label{cor:joint}
+For a Mersenne prime $\Mp$, the exponent residue $p\bmod4$ fixes the
+triple (residue class modulo~$20$, splitting type in $\mathbb{Q}(\sqrt5)$,
+Fibonacci sign $F_{\Mp}\bmod\Mp$) at once:
+\[
+  \begin{aligned}
+    p\equiv1\!\!\pmod4 &\mapsto(11,\ \mathrm{split},\ +1),\\
+    p\equiv3\!\!\pmod4 &\mapsto(7,\ \mathrm{inert},\ -1),\\
+    p=2 &\mapsto(3,\ \mathrm{inert},\ -1).
+  \end{aligned}
+\]
+Over the 52 known Mersenne primes the triple takes exactly these three
+values, one per admissible residue; given $p\bmod4$, no further datum
+distinguishes the class, the type, and the sign.
+\begin{proof}
+The class follows from the modular concentration
+(\Cref{thm:concentration-main}) together with $\Mp\bmod5$, which
+$p\bmod4$ fixes (\Cref{cor:split-from-p}); the type from the same
+residue; and the Fibonacci sign from quadratic reciprocity, since
+$X^{2}-X-1$ has a root modulo $\Mp$ exactly when $5$ is a square there,
+i.e.\ when $\Mp\equiv\pm1\pmod5$, whence \Cref{lem:fib-split} or
+\Cref{lem:fib-inert} applies.
+\end{proof}
+\emph{Lean:} \lean{mersenne\_presentation\_from\_p\_mod4}.
+\end{Corollary}
+
+
