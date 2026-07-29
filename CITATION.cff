@@ -36,10 +36,7 @@ keywords:
   - Mathlib4
   - Fibonacci numbers
   - Modular arithmetic
-doi: 10.5281/zenodo.21681395
 identifiers:
-  - type: doi
-    value: 10.5281/zenodo.21681395
   - type: other
     value: "MSC2020: 11A41 (Primary), 11B39, 11R18, 68V20 (Secondary)"
     description: Mathematical Subject Classification
@@ -306,6 +303,6 @@ references:
       formally verified in Lean 4 over the known Mersenne prime exponents
     date-published: 2026-01-01
     year: 2026
-    notes: Companion paper (2026).
-    doi: 10.5281/zenodo.21681395
+    notes: Companion paper (2026); DOI pending.
     type: article
+doi: 10.5281/zenodo.21681395

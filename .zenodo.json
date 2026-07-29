@@ -36,9 +36,11 @@
     "Modular arithmetic"
   ],
   "upload_type": "publication",
+  "publication_type": "preprint",
   "access_right": "open",
   "license": "CC-BY-4.0",
   "language": "eng",
+  "doi": "10.5281/zenodo.21681395",
   "references": [
     "Acevedo Agudelo, Y. A. (2020). A complete classification of the Mersenne's primes and its implications for computing. Revista Politécnica. 16(32), 111. https://doi.org/10.33571/rpolitec.v16n32a10",
     "Acevedo Agudelo, Y. A. (2021). Prime numbers: an alternative study using ova-angular rotations.",
@@ -64,11 +66,6 @@
     "Woltman, G.; Kurowski, S. (). The Great Internet Mersenne Prime Search (GIMPS). https://www.mersenne.org/primes/"
   ],
   "related_identifiers": [
-    {
-      "identifier": "10.5281/zenodo.21681395",
-      "relation": "isDescribedBy",
-      "resource_type": "publication-article"
-    },
     {
       "identifier": "https://github.com/omega-pcf/04-mersenne-cr",
       "relation": "isSupplementTo",
@@ -104,6 +101,5 @@
       "relation": "cites",
       "resource_type": "publication-article"
     }
-  ],
-  "publication_type": "preprint"
+  ]
 }
