@@ -3,7 +3,7 @@ message: If you use this software, please cite it using these metadata.
 title: Simultaneous identities of the golden ratio and Euler's identity,
   formally verified in Lean 4 over the known Mersenne prime exponents
 type: software
-version: 0.3.9
+version: 0.3.10
 date-released: 2026-07-29
 authors:
   - family-names: González García
@@ -294,15 +294,4 @@ references:
     publisher:
       name: Hermann
     type: book
-  - authors:
-      - family-names: González García
-        given-names: Jorge Armando
-      - family-names: González García
-        given-names: Víctor Manuel
-    title: Simultaneous identities of the golden ratio and Euler's identity,
-      formally verified in Lean 4 over the known Mersenne prime exponents
-    date-published: 2026-01-01
-    year: 2026
-    notes: Companion paper (2026); DOI pending.
-    type: article
 doi: 10.5281/zenodo.21681395

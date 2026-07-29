@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.10](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.9...v0.3.10) (2026-07-29)
+
+### Bug Fixes
+
+* **citation:** add doi to package.json, propagate via pipeline ([294a540](https://github.com/omega-pcf/04-mersenne-cr/commit/294a540073d26952f3f8d489b32f08366535f4c1))
+* **citation:** remove self-citation Corr entry from citation.csl.json ([4c29cca](https://github.com/omega-pcf/04-mersenne-cr/commit/4c29cca121699259f044420df6de5629b3751e2c))
+* **citation:** set Zenodo upload_type to publication/preprint, add DOI 10.5281/zenodo.21681395 ([031bc4d](https://github.com/omega-pcf/04-mersenne-cr/commit/031bc4d2fda172987d90f7def18c4cb3ff0fce46))
+
 ## [0.3.9](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.8...v0.3.9) (2026-07-29)
 
 ### Bug Fixes
