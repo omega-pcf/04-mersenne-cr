@@ -19,11 +19,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p /tmp/zenodo-upload
-          # Download ALL release assets (PDF, checksums, etc.)
           gh release download "${{ github.event.release.tag_name }}" \
             --repo "${{ github.repository }}" \
             --dir /tmp/zenodo-upload || true
-          # Download source zipball
           gh release download "${{ github.event.release.tag_name }}" \
             --repo "${{ github.repository }}" \
             --archive zip \
@@ -37,27 +35,48 @@ jobs:
         run: |
           set -euxo pipefail
           Z="https://zenodo.org/api"
+
+          api() {
+            curl -s -H "Authorization: Bearer ${ZENODO_TOKEN}" "$@"
+          }
+
+          # ── Get or create deposition ──
+          if [ -n "${ZENODO_DEPOSITION_ID:-}" ]; then
+            # Verify it exists and is published
+            HTTP=$(curl -so /dev/null -w '%{http_code}' \
+              -H "Authorization: Bearer ${ZENODO_TOKEN}" \
+              "${Z}/deposit/depositions/${ZENODO_DEPOSITION_ID}")
+            if [ "$HTTP" != "200" ]; then
+              echo "Deposition ${ZENODO_DEPOSITION_ID} not found (HTTP ${HTTP}), creating new..."
+              unset ZENODO_DEPOSITION_ID
+            fi
+          fi
+
+          if [ -z "${ZENODO_DEPOSITION_ID:-}" ]; then
+            echo "=== Creating new deposition ==="
+            RES=$(api -X POST "${Z}/deposit/depositions" \
+              -d '{}')
+            ZENODO_DEPOSITION_ID=$(echo "$RES" | jq -r '.id')
+            echo "Created deposition: ${ZENODO_DEPOSITION_ID}"
+            echo "Set ZENODO_DEPOSITION_ID=${ZENODO_DEPOSITION_ID} in GitHub secrets"
+          fi
+
           DEPO_ID="${ZENODO_DEPOSITION_ID}"
-
-          api() { curl -sf -H "Authorization: Bearer ${ZENODO_TOKEN}" "$@"; }
-
-          # ── Check state ──
           STATE=$(api "${Z}/deposit/depositions/${DEPO_ID}" | jq -r '.state')
           echo "State: ${STATE}"
 
-          # ── If draft, publish first ──
+          # ── Handle draft (first time) ──
           if [ "${STATE}" = "unsubmitted" ]; then
-            echo "=== Publishing initial version ==="
-            BUCKET=$(api "${Z}/deposit/depositions/${DEPO_ID}" | jq -r '.links.bucket')
+            echo "=== Publishing first version ==="
             TITLE=$(jq -r '.title // "untitled"' .zenodo.json)
             CREATORS=$(jq -c '.creators // [{"name":"placeholder"}]' .zenodo.json)
 
             echo "placeholder" > /tmp/zenodo-upload/placeholder.txt
-            curl -sf -X POST \
+            curl -s -X POST \
               -H "Authorization: Bearer ${ZENODO_TOKEN}" \
               -F "name=placeholder.txt" \
               -F "file=@/tmp/zenodo-upload/placeholder.txt" \
-              "${Z}/deposit/depositions/${DEPO_ID}/files"
+              "${Z}/deposit/depositions/${DEPO_ID}/files" | jq -r '.filename'
 
             api -X PUT -d "{
               \"metadata\": {
@@ -70,7 +89,8 @@ jobs:
             }" "${Z}/deposit/depositions/${DEPO_ID}" > /dev/null
 
             api -X POST "${Z}/deposit/depositions/${DEPO_ID}/actions/publish" > /dev/null
-            echo "✅ Published initial version"
+            echo "✅ Published first version"
+            STATE="done"
           fi
 
           # ── Create new version ──
@@ -89,11 +109,11 @@ jobs:
           echo "=== Uploading files ==="
           find /tmp/zenodo-upload -maxdepth 1 -type f -not -name "placeholder.txt" | while read -r F; do
             echo "  $(basename "$F")"
-            curl -sf -X POST \
+            curl -s -X POST \
               -H "Authorization: Bearer ${ZENODO_TOKEN}" \
               -F "name=$(basename "$F")" \
               -F "file=@${F}" \
-              "${Z}/deposit/depositions/${NEW_ID}/files"
+              "${Z}/deposit/depositions/${NEW_ID}/files" | jq -r '.filename // .message'
           done
 
           # ── Set metadata ──
@@ -108,3 +128,5 @@ jobs:
           DOI_URL=$(api "${Z}/deposit/depositions/${NEW_ID}" | jq -r '.doi_url')
           echo ""
           echo "✅ Published: ${DOI_URL}"
+          echo ""
+          echo "💡 Save this for next run: ZENODO_DEPOSITION_ID=${DEPO_ID}"
