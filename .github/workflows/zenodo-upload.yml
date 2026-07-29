@@ -73,6 +73,10 @@ jobs:
             echo "✅ Published initial version"
           fi
 
+          # ── Edit before newversion (required for state transition) ──
+          echo "=== Editing deposition ==="
+          api -X POST "${Z}/deposit/depositions/${DEPO_ID}/actions/edit" > /dev/null
+
           # ── Create new version ──
           echo "=== Creating new version ==="
           RES=$(api -X POST "${Z}/deposit/depositions/${DEPO_ID}/actions/newversion")
@@ -81,8 +85,15 @@ jobs:
 
           # ── Delete inherited files ──
           echo "=== Clearing inherited files ==="
-          api "${Z}/deposit/depositions/${NEW_ID}/files" | jq -r '.[].id' | while read -r FID; do
-            api -X DELETE "${Z}/deposit/depositions/${NEW_ID}/files/${FID}" > /dev/null 2>&1 || true
+          INHERITED=$(curl -s -H "Authorization: Bearer ${ZENODO_TOKEN}" \
+            "${Z}/deposit/depositions/${NEW_ID}/files")
+          echo "Files to delete: $(echo "$INHERITED" | jq 'length')"
+          echo "$INHERITED" | jq -r '.[].id' | while read -r FID; do
+            echo "  Deleting ${FID}"
+            curl -s -X DELETE \
+              -H "Authorization: Bearer ${ZENODO_TOKEN}" \
+              "${Z}/deposit/depositions/${NEW_ID}/files/${FID}" \
+              -w "HTTP %{http_code}\n"
           done
 
           # ── Upload all files via POST multipart ──
