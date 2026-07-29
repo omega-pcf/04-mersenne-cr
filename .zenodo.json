@@ -35,7 +35,7 @@
     "Fibonacci numbers",
     "Modular arithmetic"
   ],
-  "upload_type": "software",
+  "upload_type": "publication",
   "access_right": "open",
   "license": "CC-BY-4.0",
   "language": "eng",
@@ -64,6 +64,11 @@
     "Woltman, G.; Kurowski, S. (). The Great Internet Mersenne Prime Search (GIMPS). https://www.mersenne.org/primes/"
   ],
   "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.21681395",
+      "relation": "isDescribedBy",
+      "resource_type": "publication-article"
+    },
     {
       "identifier": "https://github.com/omega-pcf/04-mersenne-cr",
       "relation": "isSupplementTo",
@@ -99,5 +104,6 @@
       "relation": "cites",
       "resource_type": "publication-article"
     }
-  ]
+  ],
+  "publication_type": "preprint"
 }

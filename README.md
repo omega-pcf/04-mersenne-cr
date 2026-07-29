@@ -1,6 +1,6 @@
 # Simultaneous Identities of the Golden Ratio and Euler's Identity, Formally Verified in Lean 4 over the Known Mersenne Prime Exponents
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.TODO.svg)](https://doi.org/10.5281/zenodo.TODO)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21681395.svg)](https://doi.org/10.5281/zenodo.21681395)
 [![Project Page](https://img.shields.io/badge/Project%20Page-omega--pcf.com-blue)](https://omega-pcf.com/mersenne-cr)
 
 ## Authors
@@ -20,7 +20,7 @@ We present a sustained study of a single object followed across representations,
 
 ## Citation
 
-González García, J. A., González García, V. M., Dressler Pérez, I. M., & García Ordóñez, L. M. (2026). *Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents*. Preprint. DOI: [10.5281/zenodo.TODO](https://doi.org/10.5281/zenodo.TODO).
+González García, J. A., González García, V. M., Dressler Pérez, I. M., & García Ordóñez, L. M. (2026). *Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents*. Preprint. DOI: [10.5281/zenodo.21681395](https://doi.org/10.5281/zenodo.21681395).
 
 ```bibtex
 @article{Gonzalez2026MersenneCR,
@@ -28,8 +28,8 @@ González García, J. A., González García, V. M., Dressler Pérez, I. M., & Ga
   title   = {Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents},
   journal = {Preprint},
   year    = {2026},
-  doi     = {TODO},
-  url     = {https://doi.org/10.5281/zenodo.TODO}
+  doi     = {10.5281/zenodo.21681395},
+  url     = {https://doi.org/10.5281/zenodo.21681395}
 }
 ```
 
