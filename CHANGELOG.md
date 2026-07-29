@@ -1,0 +1,30 @@
+# Changelog
+
+## 0.2.0 (2026-07-29)
+
+### Features
+
+* **figures:** add commutative diagram and build pipeline ([e57d05d](https://github.com/omega-pcf/04-mersenne-cr/commit/e57d05d60fca7ac643d4605fd826cc096e6150aa))
+* initial commit — Mersenne CR note and golden Lean proof ([6ac9a95](https://github.com/omega-pcf/04-mersenne-cr/commit/6ac9a954887326a25da78e1ef20d999978a65446))
+* **lean:** initialize Lean 4 project with Mathlib v4.29.0 ([6cfaa44](https://github.com/omega-pcf/04-mersenne-cr/commit/6cfaa4438d85611c011a64dbe4e9608f4b037893))
+* scaffold build infrastructure and segment manuscript ([b1296e9](https://github.com/omega-pcf/04-mersenne-cr/commit/b1296e9917b360e09fe5112d953295d73ed8ba7d))
+
+### Bug Fixes
+
+* **citation:** repair CSL→Zenodo pipeline bugs ([337f4e8](https://github.com/omega-pcf/04-mersenne-cr/commit/337f4e84a27a7779ba152335ae9ca10e7884a0bf))
+* **citations:** add confirmed DOIs via Hound MCP ([2f71909](https://github.com/omega-pcf/04-mersenne-cr/commit/2f719096c23bd21fcfbbcaf32418d1573723c59c))
+* **citations:** add Corr entry and correct metadata ([4c51bc0](https://github.com/omega-pcf/04-mersenne-cr/commit/4c51bc0cb864cd193c311f3080f14be5c1f15ed9))
+* **citations:** remove stale verification artifact ([4027208](https://github.com/omega-pcf/04-mersenne-cr/commit/4027208cd14ce48cddcab702f6a45e23c45f9eeb))
+* **figures:** update commutative diagram layout and spacing ([2d80209](https://github.com/omega-pcf/04-mersenne-cr/commit/2d802097039981478b391ba9d44ae2e463825636))
+* **lean:** resolve all linter warnings ([d8fe80d](https://github.com/omega-pcf/04-mersenne-cr/commit/d8fe80ddaadc2930322a11c06a72125eb8c8324b))
+
+### Styles
+
+* standardize LaTeX preamble to match 01/02 target state ([4a8c732](https://github.com/omega-pcf/04-mersenne-cr/commit/4a8c732d61f255fb6a04fb112abd9207486939cb))
+* use muted red for linkcolor across all repos ([49dd4ca](https://github.com/omega-pcf/04-mersenne-cr/commit/49dd4ca03834db8e53c3ae3f39a0e246c2afb0d3))
+
+### Chores
+
+* exclude lean/.lake from git, update build artifacts ([7cc07e7](https://github.com/omega-pcf/04-mersenne-cr/commit/7cc07e7a09ce5f622501fac6f238b1097c83f3b2))
+* **lean:** remove journal name from file header ([3657f03](https://github.com/omega-pcf/04-mersenne-cr/commit/3657f03a3768ae8ca1ddc277c40205f376c9a5f3))
+* remove deprecated files ([ce08989](https://github.com/omega-pcf/04-mersenne-cr/commit/ce089893e64feee4f4052c494c1c7009f6ca5250))
