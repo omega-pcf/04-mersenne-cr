@@ -1,421 +1,467 @@
 [
-  {
-    "id": "boyer-1951",
-    "type": "article",
-    "author": [
-      {
-        "given": "C. B.",
-        "family": "Boyer"
-      }
-    ],
-    "title": "The foremost textbook of modern times",
-    "issued": {
-      "date-parts": [
-        [1951]
-      ]
+    {
+        "id": "boyer-1951",
+        "type": "article",
+        "author": [
+            {
+                "given": "C. B.",
+                "family": "Boyer"
+            }
+        ],
+        "title": "The foremost textbook of modern times",
+        "issued": {
+            "date-parts": [
+                [
+                    1951
+                ]
+            ]
+        },
+        "container-title": "American Mathematical Monthly",
+        "volume": "58",
+        "issue": "4",
+        "page": "223--226",
+        "DOI": "10.1080/00029890.1951.11999664"
     },
-    "container-title": "American Mathematical Monthly",
-    "volume": "58",
-    "issue": "4",
-    "page": "223--226"
-  },
-  {
-    "id": "acevedo-2020",
-    "type": "article",
-    "author": [
-      {
-        "given": "Y. A.",
-        "family": "Acevedo Agudelo"
-      }
-    ],
-    "title": "A complete classification of the Mersenne's primes and its implications for computing",
-    "issued": {
-      "date-parts": [
-        [2020]
-      ]
+    {
+        "id": "acevedo-2020",
+        "type": "article",
+        "author": [
+            {
+                "given": "Y. A.",
+                "family": "Acevedo Agudelo"
+            }
+        ],
+        "title": "A complete classification of the Mersenne's primes and its implications for computing",
+        "issued": {
+            "date-parts": [
+                [
+                    2020
+                ]
+            ]
+        },
+        "container-title": "Revista Politécnica",
+        "volume": "16",
+        "issue": "32",
+        "page": "111--119",
+        "DOI": "10.33571/rpolitec.v16n32a10"
     },
-    "container-title": "Revista Politécnica",
-    "volume": "16",
-    "issue": "32",
-    "page": "111--119",
-    "DOI": "10.33571/rpolitec.v16n32a10"
-  },
-  {
-    "id": "acevedo-2021",
-    "type": "manuscript",
-    "author": [
-      {
-        "given": "Y. A.",
-        "family": "Acevedo Agudelo"
-      }
-    ],
-    "title": "Prime numbers: an alternative study using ova-angular rotations",
-    "issued": {
-      "date-parts": [
-        [2021]
-      ]
+    {
+        "id": "acevedo-2021",
+        "type": "manuscript",
+        "author": [
+            {
+                "given": "Y. A.",
+                "family": "Acevedo Agudelo"
+            }
+        ],
+        "title": "Prime numbers: an alternative study using ova-angular rotations",
+        "issued": {
+            "date-parts": [
+                [
+                    2021
+                ]
+            ]
+        },
+        "note": "arXiv:2104.04522"
     },
-    "note": "arXiv:2104.04522"
-  },
-  {
-    "id": "connes-consani-site",
-    "type": "article",
-    "author": [
-      {
-        "given": "A.",
-        "family": "Connes"
-      },
-      {
-        "given": "C.",
-        "family": "Consani"
-      }
-    ],
-    "title": "The arithmetic site",
-    "issued": {
-      "date-parts": [
-        [2014]
-      ]
+    {
+        "id": "connes-consani-site",
+        "type": "article",
+        "author": [
+            {
+                "given": "A.",
+                "family": "Connes"
+            },
+            {
+                "given": "C.",
+                "family": "Consani"
+            }
+        ],
+        "title": "The arithmetic site",
+        "issued": {
+            "date-parts": [
+                [
+                    2014
+                ]
+            ]
+        },
+        "container-title": "Comptes Rendus Mathématique",
+        "volume": "352",
+        "issue": "12",
+        "page": "971--975",
+        "note": "Also contains: \"The scaling site\", Comptes Rendus Mathématique 354 (2016), no. 1, 1--6.",
+        "DOI": "10.1016/j.crma.2014.07.009"
     },
-    "container-title": "Comptes Rendus Mathématique",
-    "volume": "352",
-    "issue": "12",
-    "page": "971--975",
-    "note": "Also contains: \"The scaling site\", Comptes Rendus Mathématique 354 (2016), no. 1, 1--6."
-  },
-  {
-    "id": "dirichlet",
-    "type": "article",
-    "author": [
-      {
-        "given": "P. G. L.",
-        "family": "Dirichlet"
-      }
-    ],
-    "title": "Beweis des Satzes, dass jede unbegrenzte arithmetische Progression…",
-    "issued": {
-      "date-parts": [
-        [1837]
-      ]
+    {
+        "id": "dirichlet",
+        "type": "article",
+        "author": [
+            {
+                "given": "P. G. L.",
+                "family": "Dirichlet"
+            }
+        ],
+        "title": "Beweis des Satzes, dass jede unbegrenzte arithmetische Progression…",
+        "issued": {
+            "date-parts": [
+                [
+                    1837
+                ]
+            ]
+        },
+        "container-title": "Abhandlungen der Königlich Preussischen Akademie der Wissenschaften zu Berlin",
+        "page": "45--81"
     },
-    "container-title": "Abhandlungen der Königlich Preussischen Akademie der Wissenschaften zu Berlin",
-    "page": "45--81"
-  },
-  {
-    "id": "gelfond",
-    "type": "article",
-    "author": [
-      {
-        "given": "A. O.",
-        "family": "Gelfond"
-      }
-    ],
-    "title": "Sur le septième problème de Hilbert",
-    "issued": {
-      "date-parts": [
-        [1934]
-      ]
+    {
+        "id": "gelfond",
+        "type": "article",
+        "author": [
+            {
+                "given": "A. O.",
+                "family": "Gelfond"
+            }
+        ],
+        "title": "Sur le septième problème de Hilbert",
+        "issued": {
+            "date-parts": [
+                [
+                    1934
+                ]
+            ]
+        },
+        "container-title": "Bulletin de l'Académie des Sciences de l'URSS",
+        "volume": "7",
+        "page": "623--634"
     },
-    "container-title": "Bulletin de l'Académie des Sciences de l'URSS",
-    "volume": "7",
-    "page": "623--634"
-  },
-  {
-    "id": "gimps",
-    "type": "webpage",
-    "author": [
-      {
-        "given": "G.",
-        "family": "Woltman"
-      },
-      {
-        "given": "S.",
-        "family": "Kurowski"
-      }
-    ],
-    "title": "The Great Internet Mersenne Prime Search (GIMPS)",
-    "URL": "https://www.mersenne.org/primes/",
-    "note": "G. Woltman, S. Kurowski et al."
-  },
-  {
-    "id": "godel-1931",
-    "type": "article",
-    "author": [
-      {
-        "given": "K.",
-        "family": "Gödel"
-      }
-    ],
-    "title": "Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I",
-    "issued": {
-      "date-parts": [
-        [1931]
-      ]
+    {
+        "id": "gimps",
+        "type": "webpage",
+        "author": [
+            {
+                "given": "G.",
+                "family": "Woltman"
+            },
+            {
+                "given": "S.",
+                "family": "Kurowski"
+            }
+        ],
+        "title": "The Great Internet Mersenne Prime Search (GIMPS)",
+        "URL": "https://www.mersenne.org/primes/",
+        "note": "G. Woltman, S. Kurowski et al."
     },
-    "container-title": "Monatshefte für Mathematik und Physik",
-    "volume": "38",
-    "page": "173--198"
-  },
-  {
-    "id": "grisales",
-    "type": "thesis",
-    "author": [
-      {
-        "given": "J.",
-        "family": "Grisales Herrera"
-      }
-    ],
-    "title": "Golden Prime Symmetry",
-    "issued": {
-      "date-parts": [
-        [2023, 11]
-      ]
+    {
+        "id": "godel-1931",
+        "type": "article",
+        "author": [
+            {
+                "given": "K.",
+                "family": "Gödel"
+            }
+        ],
+        "title": "Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I",
+        "issued": {
+            "date-parts": [
+                [
+                    1931
+                ]
+            ]
+        },
+        "container-title": "Monatshefte für Mathematik und Physik",
+        "volume": "38",
+        "page": "173--198"
     },
-    "publisher": "Universidad del Tolima",
-    "publisher-place": "Ibagué (Colombia)",
-    "note": "B.Sc. thesis"
-  },
-  {
-    "id": "kline-1972",
-    "type": "book",
-    "author": [
-      {
-        "given": "M.",
-        "family": "Kline"
-      }
-    ],
-    "title": "Mathematical Thought from Ancient to Modern Times",
-    "issued": {
-      "date-parts": [
-        [1972]
-      ]
+    {
+        "id": "grisales",
+        "type": "thesis",
+        "author": [
+            {
+                "given": "J.",
+                "family": "Grisales Herrera"
+            }
+        ],
+        "title": "Golden Prime Symmetry",
+        "issued": {
+            "date-parts": [
+                [
+                    2023,
+                    11
+                ]
+            ]
+        },
+        "publisher": "Universidad del Tolima",
+        "publisher-place": "Ibagué (Colombia)",
+        "note": "B.Sc. thesis"
     },
-    "publisher": "Oxford University Press",
-    "publisher-place": "New York"
-  },
-  {
-    "id": "lehmer",
-    "type": "article",
-    "author": [
-      {
-        "given": "D. H.",
-        "family": "Lehmer"
-      }
-    ],
-    "title": "An extended theory of Lucas' functions",
-    "issued": {
-      "date-parts": [
-        [1930]
-      ]
+    {
+        "id": "kline-1972",
+        "type": "book",
+        "author": [
+            {
+                "given": "M.",
+                "family": "Kline"
+            }
+        ],
+        "title": "Mathematical Thought from Ancient to Modern Times",
+        "issued": {
+            "date-parts": [
+                [
+                    1972
+                ]
+            ]
+        },
+        "publisher": "Oxford University Press",
+        "publisher-place": "New York"
     },
-    "container-title": "Annals of Mathematics (2)",
-    "volume": "31",
-    "issue": "3",
-    "page": "419--448"
-  },
-  {
-    "id": "karatarakis-wiedijk",
-    "type": "manuscript",
-    "author": [
-      {
-        "given": "M.",
-        "family": "Karatarakis"
-      },
-      {
-        "given": "F.",
-        "family": "Wiedijk"
-      }
-    ],
-    "title": "A formalization of the Gelfond–Schneider theorem",
-    "issued": {
-      "date-parts": [
-        [2026]
-      ]
+    {
+        "id": "lehmer",
+        "type": "article",
+        "author": [
+            {
+                "given": "D. H.",
+                "family": "Lehmer"
+            }
+        ],
+        "title": "An extended theory of Lucas' functions",
+        "issued": {
+            "date-parts": [
+                [
+                    1930
+                ]
+            ]
+        },
+        "container-title": "Annals of Mathematics (2)",
+        "volume": "31",
+        "issue": "3",
+        "page": "419--448",
+        "DOI": "10.2307/1968235"
     },
-    "note": "arXiv:2603.24823"
-  },
-  {
-    "id": "manin-1995",
-    "type": "article",
-    "author": [
-      {
-        "given": "Y. I.",
-        "family": "Manin"
-      }
-    ],
-    "title": "Lectures on zeta functions and motives (according to Deninger and Kurokawa)",
-    "issued": {
-      "date-parts": [
-        [1995]
-      ]
+    {
+        "id": "karatarakis-wiedijk",
+        "type": "manuscript",
+        "author": [
+            {
+                "given": "M.",
+                "family": "Karatarakis"
+            },
+            {
+                "given": "F.",
+                "family": "Wiedijk"
+            }
+        ],
+        "title": "A formalization of the Gelfond–Schneider theorem",
+        "issued": {
+            "date-parts": [
+                [
+                    2026
+                ]
+            ]
+        },
+        "note": "arXiv:2603.24823"
     },
-    "container-title": "Astérisque",
-    "volume": "228",
-    "page": "121--163"
-  },
-  {
-    "id": "mathlib",
-    "type": "article",
-    "author": [
-      {
-        "family": "The Mathlib Community"
-      }
-    ],
-    "title": "The Lean Mathematical Library",
-    "container-title": "Proceedings of CPP 2020",
-    "page": "367--381"
-  },
-  {
-    "id": "schneider",
-    "type": "article",
-    "author": [
-      {
-        "given": "T.",
-        "family": "Schneider"
-      }
-    ],
-    "title": "Transzendenzuntersuchungen periodischer Funktionen. I",
-    "issued": {
-      "date-parts": [
-        [1935]
-      ]
+    {
+        "id": "manin-1995",
+        "type": "article",
+        "author": [
+            {
+                "given": "Y. I.",
+                "family": "Manin"
+            }
+        ],
+        "title": "Lectures on zeta functions and motives (according to Deninger and Kurokawa)",
+        "issued": {
+            "date-parts": [
+                [
+                    1995
+                ]
+            ]
+        },
+        "container-title": "Astérisque",
+        "volume": "228",
+        "page": "121--163"
     },
-    "container-title": "Journal für die reine und angewandte Mathematik",
-    "volume": "172",
-    "page": "65--69"
-  },
-  {
-    "id": "tarski-1948",
-    "type": "book",
-    "author": [
-      {
-        "given": "A.",
-        "family": "Tarski"
-      }
-    ],
-    "title": "A decision method for elementary algebra and geometry",
-    "issued": {
-      "date-parts": [
-        [1948]
-      ]
+    {
+        "id": "mathlib",
+        "type": "article",
+        "author": [
+            {
+                "family": "The Mathlib Community"
+            }
+        ],
+        "title": "The Lean Mathematical Library",
+        "container-title": "Proceedings of CPP 2020",
+        "page": "367--381"
     },
-    "publisher": "RAND Corporation",
-    "publisher-place": "Santa Monica",
-    "note": "RAND Corporation Report R-109. Second edition, University of California Press, Berkeley, 1951."
-  },
-  {
-    "id": "tits-1957",
-    "type": "article",
-    "author": [
-      {
-        "given": "J.",
-        "family": "Tits"
-      }
-    ],
-    "title": "Sur les analogues algébriques des groupes semi-simples complexes",
-    "issued": {
-      "date-parts": [
-        [1957]
-      ]
+    {
+        "id": "schneider",
+        "type": "article",
+        "author": [
+            {
+                "given": "T.",
+                "family": "Schneider"
+            }
+        ],
+        "title": "Transzendenzuntersuchungen periodischer Funktionen. I",
+        "issued": {
+            "date-parts": [
+                [
+                    1935
+                ]
+            ]
+        },
+        "container-title": "Journal für die reine und angewandte Mathematik",
+        "volume": "172",
+        "page": "65--69",
+        "DOI": "10.1515/crll.1935.172.70"
     },
-    "container-title": "Colloque d'algèbre supérieure, Centre Belge de Recherches Mathématiques",
-    "publisher": "Établissement Ceuterick",
-    "publisher-place": "Louvain",
-    "page": "261--289"
-  },
-  {
-    "id": "santos-vitruvio",
-    "type": "article",
-    "author": [
-      {
-        "given": "G. C.",
-        "family": "dos Santos"
-      }
-    ],
-    "title": "Arquitetura vitruviana e retórica antiga",
-    "issued": {
-      "date-parts": [
-        [2019]
-      ]
+    {
+        "id": "tarski-1948",
+        "type": "book",
+        "author": [
+            {
+                "given": "A.",
+                "family": "Tarski"
+            }
+        ],
+        "title": "A decision method for elementary algebra and geometry",
+        "issued": {
+            "date-parts": [
+                [
+                    1948
+                ]
+            ]
+        },
+        "publisher": "RAND Corporation",
+        "publisher-place": "Santa Monica",
+        "note": "RAND Corporation Report R-109. Second edition, University of California Press, Berkeley, 1951."
     },
-    "container-title": "Archai",
-    "volume": "28",
-    "page": "e02804"
-  },
-  {
-    "id": "foucault-1966",
-    "type": "book",
-    "author": [
-      {
-        "given": "M.",
-        "family": "Foucault"
-      }
-    ],
-    "title": "Les mots et les choses",
-    "issued": {
-      "date-parts": [
-        [1966]
-      ]
+    {
+        "id": "tits-1957",
+        "type": "article",
+        "author": [
+            {
+                "given": "J.",
+                "family": "Tits"
+            }
+        ],
+        "title": "Sur les analogues algébriques des groupes semi-simples complexes",
+        "issued": {
+            "date-parts": [
+                [
+                    1957
+                ]
+            ]
+        },
+        "container-title": "Colloque d'algèbre supérieure, Centre Belge de Recherches Mathématiques",
+        "publisher": "Établissement Ceuterick",
+        "publisher-place": "Louvain",
+        "page": "261--289"
     },
-    "publisher": "Gallimard",
-    "publisher-place": "Paris"
-  },
-  {
-    "id": "weil-1940",
-    "type": "article",
-    "author": [
-      {
-        "given": "A.",
-        "family": "Weil"
-      }
-    ],
-    "title": "A 1940 letter to Simone Weil",
-    "issued": {
-      "date-parts": [
-        [1979]
-      ]
+    {
+        "id": "santos-vitruvio",
+        "type": "article",
+        "author": [
+            {
+                "given": "G. C.",
+                "family": "dos Santos"
+            }
+        ],
+        "title": "Arquitetura vitruviana e retórica antiga",
+        "issued": {
+            "date-parts": [
+                [
+                    2019
+                ]
+            ]
+        },
+        "container-title": "Archai",
+        "volume": "28",
+        "page": "e02804",
+        "DOI": "10.14195/1984-249X_28_4"
     },
-    "container-title": "Collected Papers",
-    "volume": "I",
-    "publisher": "Springer",
-    "page": "244--255"
-  },
-  {
-    "id": "weil-1948",
-    "type": "book",
-    "author": [
-      {
-        "given": "A.",
-        "family": "Weil"
-      }
-    ],
-    "title": "Sur les courbes algébriques et les variétés qui s'en déduisent",
-    "issued": {
-      "date-parts": [
-        [1948]
-      ]
+    {
+        "id": "foucault-1966",
+        "type": "book",
+        "author": [
+            {
+                "given": "M.",
+                "family": "Foucault"
+            }
+        ],
+        "title": "Les mots et les choses",
+        "issued": {
+            "date-parts": [
+                [
+                    1966
+                ]
+            ]
+        },
+        "publisher": "Gallimard",
+        "publisher-place": "Paris"
     },
-    "publisher": "Hermann",
-    "publisher-place": "Paris"
-  },
-  {
-    "id": "Corr",
-    "type": "article",
-    "title": "Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents",
-    "author": [
-      {
-        "given": "Jorge Armando",
-        "family": "González García"
-      },
-      {
-        "given": "Víctor Manuel",
-        "family": "González García"
-      }
-    ],
-    "issued": {
-      "date-parts": [
-        [2026]
-      ]
+    {
+        "id": "weil-1940",
+        "type": "article",
+        "author": [
+            {
+                "given": "A.",
+                "family": "Weil"
+            }
+        ],
+        "title": "A 1940 letter to Simone Weil",
+        "issued": {
+            "date-parts": [
+                [
+                    1979
+                ]
+            ]
+        },
+        "container-title": "Collected Papers",
+        "volume": "I",
+        "publisher": "Springer",
+        "page": "244--255"
     },
-    "note": "Companion paper (2026); DOI pending."
-  }
+    {
+        "id": "weil-1948",
+        "type": "book",
+        "author": [
+            {
+                "given": "A.",
+                "family": "Weil"
+            }
+        ],
+        "title": "Sur les courbes algébriques et les variétés qui s'en déduisent",
+        "issued": {
+            "date-parts": [
+                [
+                    1948
+                ]
+            ]
+        },
+        "publisher": "Hermann",
+        "publisher-place": "Paris"
+    },
+    {
+        "id": "Corr",
+        "type": "article",
+        "title": "Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents",
+        "author": [
+            {
+                "given": "Jorge Armando",
+                "family": "González García"
+            },
+            {
+                "given": "Víctor Manuel",
+                "family": "González García"
+            }
+        ],
+        "issued": {
+            "date-parts": [
+                [
+                    2026
+                ]
+            ]
+        },
+        "note": "Companion paper (2026); DOI pending."
+    }
 ]
