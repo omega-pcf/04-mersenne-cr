@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.2.1...v0.2.2) (2026-07-29)
+
+### Bug Fixes
+
+* **citation:** remove invalid publication_type from .zenodo.json ([94c0258](https://github.com/omega-pcf/04-mersenne-cr/commit/94c0258ab784dab4b0254094360dea4dcf02107e))
+* **citation:** replace invalid 'manuscript' type with 'article' in CSL ([1a732c5](https://github.com/omega-pcf/04-mersenne-cr/commit/1a732c5860ac41e4ead894baafc110699edcb1d0))
+* **citation:** revert ORCID to URL format (schema requires it) ([a48edeb](https://github.com/omega-pcf/04-mersenne-cr/commit/a48edebc74dda21c6174dbd7bd74b3ae5e1bb182))
+
 ## [0.2.1](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.2.0...v0.2.1) (2026-07-29)
 
 ### Bug Fixes
