@@ -14,35 +14,19 @@ jobs:
       - name: Checkout repo (for .zenodo.json)
         uses: actions/checkout@v4
 
-      - name: Download source zip
+      - name: Download release assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p /tmp/release-assets
           gh release download "${{ github.event.release.tag_name }}" \
             --repo "${{ github.repository }}" \
-            --pattern "*.zip" \
-            --dir /tmp/release-assets || true
-
-      - name: Download release assets
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+            --pattern "*.zip" --dir /tmp/release-assets || true
           gh release download "${{ github.event.release.tag_name }}" \
             --repo "${{ github.repository }}" \
-            --pattern "document-*.pdf" \
-            --pattern "checksums.txt" \
+            --pattern "document-*.pdf" --pattern "checksums.txt" \
             --dir /tmp/release-assets || true
-
-      - name: Debug — show files and secrets presence
-        run: |
-          echo "=== Release tag: ${{ github.event.release.tag_name }}"
-          echo "=== Files to upload:"
-          ls -la /tmp/release-assets/ 2>&1 || echo "(empty)"
-          echo "=== .zenodo.json present: $([ -f .zenodo.json ] && echo YES || echo NO)"
-          echo "=== ZENODO_TOKEN set: $([ -n '${{ secrets.ZENODO_TOKEN }}' ] && echo YES || echo NO)"
-          echo "=== ZENODO_DEPOSITION_ID set: $([ -n '${{ secrets.ZENODO_DEPOSITION_ID }}' ] && echo YES || echo NO)"
-          echo "=== ZENODO_DEPOSITION_ID value: ${{ secrets.ZENODO_DEPOSITION_ID }}"
+          echo "=== Files ===" && ls -la /tmp/release-assets/
 
       - name: Upload to Zenodo
         env:
@@ -50,90 +34,105 @@ jobs:
           ZENODO_DEPOSITION_ID: ${{ secrets.ZENODO_DEPOSITION_ID }}
         run: |
           set -euxo pipefail
-          ZENODO_URL="https://zenodo.org"
+          Z="https://zenodo.org/api"
 
-          echo "=== Creating new deposition version ==="
-          echo "POST ${ZENODO_URL}/api/deposit/depositions/${ZENODO_DEPOSITION_ID}/actions/newversion"
-          RESPONSE=$(curl -v -X POST \
+          api() {
+            curl -sf -H "Authorization: Bearer ${ZENODO_TOKEN}" "$@"
+          }
+
+          DEPO_ID="${ZENODO_DEPOSITION_ID}"
+
+          # ── Check if deposition exists and is published ──
+          HTTP=$(curl -so /dev/null -w '%{http_code}' \
             -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            "${ZENODO_URL}/api/deposit/depositions/${ZENODO_DEPOSITION_ID}/actions/newversion" 2>&1)
-          echo "$RESPONSE"
-          NEW_DEPOSITION=$(echo "$RESPONSE" | jq -r '.links.latest_draft')
+            "${Z}/deposit/depositions/${DEPO_ID}")
+          echo "Deposition ${DEPO_ID} → HTTP ${HTTP}"
 
-          if [ "$NEW_DEPOSITION" = "null" ] || [ -z "$NEW_DEPOSITION" ]; then
-            echo "❌ Failed to create new version. Response above."
-            exit 1
+          if [ "$HTTP" = "404" ]; then
+            echo "=== Creating first deposition ==="
+            RES=$(api -X POST "${Z}/deposit/depositions" \
+              -d '{"metadata":{"title":"initial"}}')
+            DEPO_ID=$(echo "$RES" | jq -r '.id')
+            echo "Created: ${DEPO_ID}"
           fi
 
-          DRAFT_ID=$(echo "$NEW_DEPOSITION" | grep -oP '\d+$')
-          echo "Draft: $DRAFT_ID"
+          STATE=$(api "${Z}/deposit/depositions/${DEPO_ID}" | jq -r '.state')
+          echo "State: ${STATE}"
 
-          echo "=== Getting bucket URL ==="
-          BUCKET_URL=$(curl -sf \
-            -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}" \
-            | jq -r '.links.bucket')
-          echo "Bucket: $BUCKET_URL"
+          # ── If draft (unsubmitted), publish it as v1 first ──
+          if [ "$STATE" = "unsubmitted" ]; then
+            echo "=== Publishing initial version ==="
+            BUCKET=$(api "${Z}/deposit/depositions/${DEPO_ID}" | jq -r '.links.bucket')
 
+            # Must upload at least one file to publish
+            ZIP=$(find /tmp/release-assets -name "*.zip" | head -1)
+            if [ -n "$ZIP" ]; then
+              api -X PUT -H "Content-Type: application/octet-stream" \
+                --data-binary "@${ZIP}" \
+                "${BUCKET}/$(basename "${ZIP}")" > /dev/null
+            else
+              echo "initial" | api -X PUT -H "Content-Type: application/octet-stream" \
+                --data-binary @- "${BUCKET}/placeholder.txt" > /dev/null
+            fi
+
+            # Set metadata
+            TITLE=$(jq -r '.title // "untitled"' .zenodo.json)
+            CREATORS=$(jq -c '.creators // [{"name":"placeholder"}]' .zenodo.json)
+            api -X PUT -d "{
+              \"metadata\": {
+                \"title\": \"${TITLE}\",
+                \"upload_type\": \"software\",
+                \"publication_date\": \"$(date -u +%Y-%m-%d)\",
+                \"description\": \"Initial deposition\",
+                \"creators\": ${CREATORS}
+              }
+            }" "${Z}/deposit/depositions/${DEPO_ID}" > /dev/null
+
+            api -X POST "${Z}/deposit/depositions/${DEPO_ID}/actions/publish" > /dev/null
+            echo "✅ Initial version published"
+            STATE="done"
+          fi
+
+          # ── Create new version ──
+          echo "=== Creating new version ==="
+          RES=$(api -X POST "${Z}/deposit/depositions/${DEPO_ID}/actions/newversion")
+          NEW_ID=$(echo "$RES" | jq -r '.id')
+          NEW_LINK=$(echo "$RES" | jq -r '.links.latest_draft')
+          echo "New deposit: ${NEW_ID}, draft: ${NEW_LINK}"
+
+          # ── Delete inherited files ──
           echo "=== Clearing inherited files ==="
-          EXISTING_FILES=$(curl -sf \
-            -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}" \
-            | jq -r '.files[].id')
-
-          for FILE_ID in $EXISTING_FILES; do
-            echo "  Deleting $FILE_ID"
-            curl -sf -X DELETE \
-              -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-              "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}/files/${FILE_ID}"
+          api "${Z}/deposit/depositions/${NEW_ID}/files" | jq -r '.[].id' | while read -r FID; do
+            api -X DELETE "${Z}/deposit/depositions/${NEW_ID}/files/${FID}" > /dev/null 2>&1 || true
           done
 
-          echo "=== Uploading source zip ==="
-          SOURCE_ZIP=$(find /tmp/release-assets -name "*.zip" | head -1)
-          if [ -n "$SOURCE_ZIP" ]; then
-            echo "  Uploading $(basename "$SOURCE_ZIP")..."
-            curl -sf -X PUT \
-              -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-              -H "Content-Type: application/octet-stream" \
-              --data-binary "@${SOURCE_ZIP}" \
-              "${BUCKET_URL}/$(basename "$SOURCE_ZIP")"
-          else
-            echo "  ⚠ No source zip found"
+          # ── Upload source zip ──
+          echo "=== Uploading files ==="
+          ZIP=$(find /tmp/release-assets -name "*.zip" | head -1)
+          if [ -n "$ZIP" ]; then
+            echo "  $(basename "$ZIP")"
+            api -X PUT -H "Content-Type: application/octet-stream" \
+              --data-binary "@${ZIP}" \
+              "${Z}/deposit/depositions/${NEW_ID}/files/$(basename "$ZIP")" > /dev/null
           fi
 
-          echo "=== Uploading release assets ==="
-          find /tmp/release-assets -maxdepth 1 -type f | while read -r FILE; do
-            FILENAME=$(basename "$FILE")
-            echo "  Uploading $FILENAME..."
-            curl -sf -X PUT \
-              -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-              -H "Content-Type: application/octet-stream" \
-              --data-binary "@${FILE}" \
-              "${BUCKET_URL}/${FILENAME}"
+          # ── Upload PDF + checksums ──
+          find /tmp/release-assets -maxdepth 1 -type f -not -name "*.zip" | while read -r F; do
+            echo "  $(basename "$F")"
+            api -X PUT -H "Content-Type: application/octet-stream" \
+              --data-binary "@${F}" \
+              "${Z}/deposit/depositions/${NEW_ID}/files/$(basename "$F")" > /dev/null
           done
 
-          echo "=== Setting metadata from .zenodo.json ==="
-          METADATA=$(jq -n --slurpfile zenodo .zenodo.json '{
-            metadata: $zenodo[0]
-          }')
+          # ── Set metadata from .zenodo.json ──
+          echo "=== Setting metadata ==="
+          METADATA=$(jq -n --slurpfile z .zenodo.json '{metadata: $z[0]}')
+          api -X PUT -d "${METADATA}" "${Z}/deposit/depositions/${NEW_ID}" > /dev/null
 
-          echo "$METADATA" | jq '.metadata | keys' 2>/dev/null || echo "$METADATA" | head -5
-
-          curl -sf -X PUT \
-            -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -d "${METADATA}" \
-            "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}"
-
+          # ── Publish ──
           echo "=== Publishing ==="
-          curl -sf -X POST \
-            -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}/actions/publish"
+          api -X POST "${Z}/deposit/depositions/${NEW_ID}/actions/publish" > /dev/null
 
-          DOI_URL=$(curl -sf \
-            -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}" \
-            | jq -r '.doi_url')
-
+          DOI_URL=$(api "${Z}/deposit/depositions/${NEW_ID}" | jq -r '.doi_url')
           echo ""
-          echo "✅ Published to Zenodo: $DOI_URL"
+          echo "✅ Published: ${DOI_URL}"
