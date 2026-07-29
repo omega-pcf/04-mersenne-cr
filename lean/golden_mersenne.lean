@@ -1239,7 +1239,8 @@ private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 :
     exact hinj heq
   exact ⟨by rw [hFp, ZMod.natCast_self]; ring, hFpm1⟩
 
-private theorem not_irreducible_iff_exists_root_of_degree_two {K : Type*} [Field K] (f : K[X]) (hdeg : f.natDegree = 2) :
+private theorem not_irreducible_iff_exists_root_of_degree_two
+    {K : Type*} [Field K] (f : K[X]) (hdeg : f.natDegree = 2) :
     ¬ Irreducible f ↔ ∃ x : K, IsRoot f x := by
   have hd2 : 2 ≤ f.natDegree := by omega
   have hd3 : f.natDegree ≤ 3 := by omega
@@ -1267,7 +1268,7 @@ theorem fibonacci_splitting_general (p : ℕ) (hp : p.Prime)
     rw [not_irreducible_iff_exists_root_of_degree_two
         (X ^ 2 - X - 1 : (ZMod p)[X]) hdeg] at hirr
     obtain ⟨α, hα⟩ := hirr
-    simp [IsRoot] at hα
+    simp only [IsRoot.def, eval_sub, eval_pow, eval_X, eval_one] at hα
     have hα_sq : α ^ 2 = α + 1 := by linear_combination hα
     exact fib_split_case hp hp2 hp5 α hα_sq
 
@@ -1286,7 +1287,8 @@ theorem mersenne_fibonacci_type
     (F1PCFUnified.mersenne p : ZMod 20) ∈ ({3, 7, 11} : Finset (ZMod 20)) ∧
     -- B2: tipo Fibonacci
     ((Nat.fib (F1PCFUnified.mersenne p) : ZMod (F1PCFUnified.mersenne p)) = 1 ∨
-     (Nat.fib (F1PCFUnified.mersenne p) : ZMod (F1PCFUnified.mersenne p)) = F1PCFUnified.mersenne p - 1) :=
+     (Nat.fib (F1PCFUnified.mersenne p) : ZMod (F1PCFUnified.mersenne p))
+       = F1PCFUnified.mersenne p - 1) :=
   ⟨mersenne_concentration_general p hp,
    fibonacci_splitting_general (F1PCFUnified.mersenne p) hMp hMp2 hMp5⟩
 
