@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.8](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.7...v0.3.8) (2026-07-29)
+
+### Bug Fixes
+
+* **ci:** create deposition automatically — no manual setup needed ([d2d2c4d](https://github.com/omega-pcf/04-mersenne-cr/commit/d2d2c4d923e497398d03c61ac96bc7d0cb3dd4f0))
+
 ## [0.3.7](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.6...v0.3.7) (2026-07-29)
 
 ## [0.3.6](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.5...v0.3.6) (2026-07-29)
