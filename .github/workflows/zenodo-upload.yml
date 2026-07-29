@@ -19,13 +19,15 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p /tmp/zenodo-upload
-          # Download release assets (PDF, checksums)
+          # Download ALL release assets (PDF, checksums, etc.)
           gh release download "${{ github.event.release.tag_name }}" \
             --repo "${{ github.repository }}" \
             --dir /tmp/zenodo-upload || true
-          # Download source zipball from GitHub API
-          gh api "repos/${{ github.repository }}/zipball/${{ github.event.release.tag_name }}" \
-            --output /tmp/zenodo-upload/source.zip
+          # Download source zipball
+          gh release download "${{ github.event.release.tag_name }}" \
+            --repo "${{ github.repository }}" \
+            --archive zip \
+            --dir /tmp/zenodo-upload
           echo "=== Files ===" && ls -la /tmp/zenodo-upload/
 
       - name: Upload to Zenodo
@@ -50,7 +52,6 @@ jobs:
             TITLE=$(jq -r '.title // "untitled"' .zenodo.json)
             CREATORS=$(jq -c '.creators // [{"name":"placeholder"}]' .zenodo.json)
 
-            # Upload via POST multipart (old API — proven to work)
             echo "placeholder" > /tmp/zenodo-upload/placeholder.txt
             curl -sf -X POST \
               -H "Authorization: Bearer ${ZENODO_TOKEN}" \
@@ -84,18 +85,9 @@ jobs:
             api -X DELETE "${Z}/deposit/depositions/${NEW_ID}/files/${FID}" > /dev/null 2>&1 || true
           done
 
-          # ── Upload source zip ──
+          # ── Upload all files via POST multipart ──
           echo "=== Uploading files ==="
-          echo "  source.zip"
-          curl -sf -X POST \
-            -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            -F "name=source.zip" \
-            -F "file=@/tmp/zenodo-upload/source.zip" \
-            "${Z}/deposit/depositions/${NEW_ID}/files"
-
-          # ── Upload PDF + checksums ──
-          find /tmp/zenodo-upload -maxdepth 1 -type f \
-            -not -name "source.zip" -not -name "placeholder.txt" | while read -r F; do
+          find /tmp/zenodo-upload -maxdepth 1 -type f -not -name "placeholder.txt" | while read -r F; do
             echo "  $(basename "$F")"
             curl -sf -X POST \
               -H "Authorization: Bearer ${ZENODO_TOKEN}" \
