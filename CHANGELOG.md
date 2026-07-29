@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.2.0...v0.2.1) (2026-07-29)
+
+### Bug Fixes
+
+* **citation:** set upload_type to software for Zenodo ([6aa9ac9](https://github.com/omega-pcf/04-mersenne-cr/commit/6aa9ac9dfd783bfb4a12a110d6ba34df48182f94))
+
 ## 0.2.0 (2026-07-29)
 
 ### Features
