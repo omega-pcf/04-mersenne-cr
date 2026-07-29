@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.11](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.10...v0.3.11) (2026-07-29)
+
+### Bug Fixes
+
+* **citation:** complete Acevedo Agudelo 2021 entry with journal metadata ([24cf02f](https://github.com/omega-pcf/04-mersenne-cr/commit/24cf02f76a9a1f42deb90039f66ae6b24ddcfa04))
+* **citation:** update Grisales Herrera entry with verified Zenodo metadata ([4f5cb60](https://github.com/omega-pcf/04-mersenne-cr/commit/4f5cb6071a6f714aac0d0deab8cbd1c53c63e7f2))
+
+### Documentation
+
+* add Zenodo All Versions DOI to first page ([0e93f50](https://github.com/omega-pcf/04-mersenne-cr/commit/0e93f5010e963c3e7122cfe5e6e27bead0554c1a))
+
+### Chores
+
+* rebuild metadata after citation updates ([9fa642e](https://github.com/omega-pcf/04-mersenne-cr/commit/9fa642e7e17f8353fddb5a3656d003dfb6744aff))
+
 ## [0.3.10](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.9...v0.3.10) (2026-07-29)
 
 ### Bug Fixes
