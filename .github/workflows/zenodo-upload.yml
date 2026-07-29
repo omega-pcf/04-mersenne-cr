@@ -34,19 +34,36 @@ jobs:
             --pattern "checksums.txt" \
             --dir /tmp/release-assets || true
 
+      - name: Debug — show files and secrets presence
+        run: |
+          echo "=== Release tag: ${{ github.event.release.tag_name }}"
+          echo "=== Files to upload:"
+          ls -la /tmp/release-assets/ 2>&1 || echo "(empty)"
+          echo "=== .zenodo.json present: $([ -f .zenodo.json ] && echo YES || echo NO)"
+          echo "=== ZENODO_TOKEN set: $([ -n '${{ secrets.ZENODO_TOKEN }}' ] && echo YES || echo NO)"
+          echo "=== ZENODO_DEPOSITION_ID set: $([ -n '${{ secrets.ZENODO_DEPOSITION_ID }}' ] && echo YES || echo NO)"
+          echo "=== ZENODO_DEPOSITION_ID value: ${{ secrets.ZENODO_DEPOSITION_ID }}"
+
       - name: Upload to Zenodo
         env:
           ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
           ZENODO_DEPOSITION_ID: ${{ secrets.ZENODO_DEPOSITION_ID }}
         run: |
-          set -euo pipefail
+          set -euxo pipefail
           ZENODO_URL="https://zenodo.org"
 
           echo "=== Creating new deposition version ==="
-          NEW_DEPOSITION=$(curl -sf -X POST \
+          echo "POST ${ZENODO_URL}/api/deposit/depositions/${ZENODO_DEPOSITION_ID}/actions/newversion"
+          RESPONSE=$(curl -v -X POST \
             -H "Authorization: Bearer ${ZENODO_TOKEN}" \
-            "${ZENODO_URL}/api/deposit/depositions/${ZENODO_DEPOSITION_ID}/actions/newversion" \
-            | jq -r '.links.latest_draft')
+            "${ZENODO_URL}/api/deposit/depositions/${ZENODO_DEPOSITION_ID}/actions/newversion" 2>&1)
+          echo "$RESPONSE"
+          NEW_DEPOSITION=$(echo "$RESPONSE" | jq -r '.links.latest_draft')
+
+          if [ "$NEW_DEPOSITION" = "null" ] || [ -z "$NEW_DEPOSITION" ]; then
+            echo "❌ Failed to create new version. Response above."
+            exit 1
+          fi
 
           DRAFT_ID=$(echo "$NEW_DEPOSITION" | grep -oP '\d+$')
           echo "Draft: $DRAFT_ID"
@@ -56,6 +73,7 @@ jobs:
             -H "Authorization: Bearer ${ZENODO_TOKEN}" \
             "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}" \
             | jq -r '.links.bucket')
+          echo "Bucket: $BUCKET_URL"
 
           echo "=== Clearing inherited files ==="
           EXISTING_FILES=$(curl -sf \
@@ -64,6 +82,7 @@ jobs:
             | jq -r '.files[].id')
 
           for FILE_ID in $EXISTING_FILES; do
+            echo "  Deleting $FILE_ID"
             curl -sf -X DELETE \
               -H "Authorization: Bearer ${ZENODO_TOKEN}" \
               "${ZENODO_URL}/api/deposit/depositions/${DRAFT_ID}/files/${FILE_ID}"
@@ -72,12 +91,14 @@ jobs:
           echo "=== Uploading source zip ==="
           SOURCE_ZIP=$(find /tmp/release-assets -name "*.zip" | head -1)
           if [ -n "$SOURCE_ZIP" ]; then
+            echo "  Uploading $(basename "$SOURCE_ZIP")..."
             curl -sf -X PUT \
               -H "Authorization: Bearer ${ZENODO_TOKEN}" \
               -H "Content-Type: application/octet-stream" \
               --data-binary "@${SOURCE_ZIP}" \
               "${BUCKET_URL}/$(basename "$SOURCE_ZIP")"
-            echo "  Uploaded $(basename "$SOURCE_ZIP")"
+          else
+            echo "  ⚠ No source zip found"
           fi
 
           echo "=== Uploading release assets ==="
@@ -95,6 +116,8 @@ jobs:
           METADATA=$(jq -n --slurpfile zenodo .zenodo.json '{
             metadata: $zenodo[0]
           }')
+
+          echo "$METADATA" | jq '.metadata | keys' 2>/dev/null || echo "$METADATA" | head -5
 
           curl -sf -X PUT \
             -H "Authorization: Bearer ${ZENODO_TOKEN}" \
