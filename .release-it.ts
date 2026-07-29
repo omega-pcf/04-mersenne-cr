@@ -22,6 +22,7 @@ export default {
   },
   hooks: {
     'after:bump': [
+      'pnpm run generate:figures',
       'pnpm exec tsx scripts/build.ts ${version}',
     ],
   },

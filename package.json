@@ -9,11 +9,12 @@
   "type": "module",
   "scripts": {
     "type-check": "tsc --noEmit",
+    "generate:figures": "bash scripts/figures/build.sh",
     "verify:lean": "cd lean && lake build",
     "verify": "pnpm run verify:lean",
     "validate": "pnpm run verify",
     "build": "pnpm exec tsx scripts/build.ts",
-    "build:full": "pnpm run build",
+    "build:full": "pnpm run generate:figures && pnpm run build",
     "release": "dotenv -e .env -- release-it",
     "release:dry-run": "pnpm run build:full && dotenv -e .env -- release-it --dry-run --no-git.requireCleanWorkingDir"
   },
