@@ -91,7 +91,7 @@ references:
     date-published: 2021-01-01
     year: 2021
     notes: arXiv:2104.04522
-    type: historical-work
+    type: article
   - authors:
       - family-names: Connes
         given-names: A.
@@ -197,7 +197,7 @@ references:
     date-published: 2026-01-01
     year: 2026
     notes: arXiv:2603.24823
-    type: historical-work
+    type: article
   - authors:
       - family-names: Manin
         given-names: Y. I.
