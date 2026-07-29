@@ -164,6 +164,33 @@ export class MetadataPipeline {
     const data = new Cite(items);
     const cffRefData = data.format('cff', { type: 'object' }) as any;
     
+    // Bug fix: citation-js treats the first CSL item as the CFF root,
+    // discarding it from references. Detect and re-add it.
+    const firstItem = items[0];
+    const existingRefs = cffRefData.references || [];
+    const firstRefId = firstItem?.id;
+    const firstAlreadyPresent = existingRefs.some((r: any) => r.name === firstRefId);
+    if (firstItem && !firstAlreadyPresent) {
+      // Convert first CSL item to CFF reference format
+      const authors = (firstItem.author || []).map((a: any) => {
+        if (a.literal) return { name: a.literal };
+        return { 'family-names': a.family, 'given-names': a.given };
+      });
+      const firstRef: any = {
+        type: 'article',
+        title: firstItem.title,
+        authors,
+        year: firstItem.issued?.['date-parts']?.[0]?.[0],
+      };
+      if (firstItem['container-title']) firstRef.journal = firstItem['container-title'];
+      if (firstItem.volume) firstRef.volume = String(firstItem.volume);
+      if (firstItem.issue) firstRef.issue = String(firstItem.issue);
+      if (firstItem.page) firstRef.pages = firstItem.page;
+      if (firstItem.DOI) firstRef.doi = firstItem.DOI;
+      if (firstItem.URL) firstRef.url = firstItem.URL;
+      existingRefs.unshift(firstRef);
+    }
+    
     // Normalize citation-js output to strict CFF 1.2.0
     cff.references = (cffRefData.references || []).map((ref: any) => {
       // 1. Fix date format (YYYY-MM-DD)
@@ -320,10 +347,22 @@ export class MetadataPipeline {
         // Map CFF resource types to Zenodo resource types
         let resourceType = 'publication';
         const type = ref.type?.toLowerCase();
-        if (type === 'software') resourceType = 'software';
-        else if (type === 'dataset') resourceType = 'dataset';
-        else if (type === 'image') resourceType = 'image';
-        else if (type === 'video') resourceType = 'video';
+        const typeMap: Record<string, string> = {
+          'software': 'software',
+          'dataset': 'dataset',
+          'image': 'image',
+          'video': 'video',
+          'article': 'publication-article',
+          'book': 'publication-book',
+          'book-section': 'publication-section',
+          'proceedings-article': 'publication-conferencepaper',
+          'conference-paper': 'publication-conferencepaper',
+          'report': 'publication-technicalreport',
+          'thesis': 'publication-thesis',
+          'manuscript': 'publication-preprint',
+          'preprint': 'publication-preprint',
+        };
+        resourceType = typeMap[type] || 'publication';
         
         zenodo.related_identifiers.push({
           identifier: ref.doi,

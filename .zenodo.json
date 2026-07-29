@@ -43,6 +43,7 @@
   "references": [
     "Acevedo Agudelo, Y. A. (2020). A complete classification of the Mersenne's primes and its implications for computing. Revista Politécnica. 16(32), 111. https://doi.org/10.33571/rpolitec.v16n32a10",
     "Acevedo Agudelo, Y. A. (2021). Prime numbers: an alternative study using ova-angular rotations.",
+    "Boyer, C. B. (1951). The foremost textbook of modern times. American Mathematical Monthly. 58(4), 223--226.",
     "Connes, A.; Consani, C. (2014). The arithmetic site. Comptes Rendus Mathématique. 352(12), 971.",
     "Dirichlet, P. G. L. (1837). Beweis des Satzes, dass jede unbegrenzte arithmetische Progression…. Abhandlungen der Königlich Preussischen Akademie der Wissenschaften zu Berlin., 45.",
     "dos Santos, G. C. (2019). Arquitetura vitruviana e retórica antiga. Archai. 28, e02804.",
@@ -72,7 +73,7 @@
     {
       "identifier": "10.33571/rpolitec.v16n32a10",
       "relation": "cites",
-      "resource_type": "publication"
+      "resource_type": "publication-article"
     }
   ]
 }

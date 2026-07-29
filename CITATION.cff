@@ -57,6 +57,16 @@ abstract: "We present a sustained study of a single object followed across
   sorry, taking as external axioms only the Gelfond–Schneider theorem and the 44
   large GIMPS primalities."
 references:
+  - type: article
+    title: The foremost textbook of modern times
+    authors:
+      - family-names: Boyer
+        given-names: C. B.
+    year: 1951
+    journal: American Mathematical Monthly
+    volume: "58"
+    issue: "4"
+    pages: 223--226
   - authors:
       - family-names: Acevedo Agudelo
         given-names: Y. A.
