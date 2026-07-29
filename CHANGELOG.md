@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.5](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.4...v0.3.5) (2026-07-29)
+
+### Bug Fixes
+
+* **ci:** use gh release download --archive zip for source zipball ([d5f93ca](https://github.com/omega-pcf/04-mersenne-cr/commit/d5f93cae1dd274187f2ceab86a4a1161297051dc))
+
 ## [0.3.4](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.3...v0.3.4) (2026-07-29)
 
 ### Bug Fixes
