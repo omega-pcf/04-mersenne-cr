@@ -440,29 +440,5 @@
     },
     "publisher": "Hermann",
     "publisher-place": "Paris"
-  },
-  {
-    "id": "Corr",
-    "type": "article",
-    "title": "Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents",
-    "author": [
-      {
-        "given": "Jorge Armando",
-        "family": "González García"
-      },
-      {
-        "given": "Víctor Manuel",
-        "family": "González García"
-      }
-    ],
-    "issued": {
-      "date-parts": [
-        [
-          2026
-        ]
-      ]
-    },
-    "note": "Companion paper (2026).",
-    "DOI": "10.5281/zenodo.21681395"
   }
 ]
