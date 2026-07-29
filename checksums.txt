@@ -1,1 +1,1 @@
-af8fa546f8abefb1676f45d67f89623411f352f44d00b5e63dc93267886e5f7e  build/document-v0.3.8.pdf
+8e400b2ef21dba092005742a688444a7ec53a9a72dc3243cafc03692ecdfaf5b  build/document-v0.3.9.pdf

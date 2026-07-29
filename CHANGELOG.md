@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.9](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.8...v0.3.9) (2026-07-29)
+
+### Bug Fixes
+
+* **ci:** add edit before newversion, show delete HTTP status ([885a6ba](https://github.com/omega-pcf/04-mersenne-cr/commit/885a6ba095e1280ed64357540233d8dac1374df5))
+
 ## [0.3.8](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.7...v0.3.8) (2026-07-29)
 
 ### Bug Fixes
