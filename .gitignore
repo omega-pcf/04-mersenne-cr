@@ -47,3 +47,4 @@ dmypy.json
 venv/
 ENV/
 env/
+lean/.lake/
