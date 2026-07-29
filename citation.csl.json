@@ -242,7 +242,7 @@
         "family": "Manin"
       }
     ],
-    "title": "Lectures on zeta functions and motives (according to Deninger and Kurokawa",
+    "title": "Lectures on zeta functions and motives (according to Deninger and Kurokawa)",
     "issued": {
       "date-parts": [
         [1995]
@@ -334,7 +334,7 @@
     "title": "Arquitetura vitruviana e retórica antiga",
     "issued": {
       "date-parts": [
-        [2020]
+        [2019]
       ]
     },
     "container-title": "Archai",
@@ -396,5 +396,26 @@
     },
     "publisher": "Hermann",
     "publisher-place": "Paris"
+  },
+  {
+    "id": "Corr",
+    "type": "article",
+    "title": "Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents",
+    "author": [
+      {
+        "given": "Jorge Armando",
+        "family": "González García"
+      },
+      {
+        "given": "Víctor Manuel",
+        "family": "González García"
+      }
+    ],
+    "issued": {
+      "date-parts": [
+        [2026]
+      ]
+    },
+    "note": "Companion paper (2026); DOI pending."
   }
 ]

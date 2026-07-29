@@ -182,7 +182,7 @@ references:
   - authors:
       - family-names: Manin
         given-names: Y. I.
-    title: Lectures on zeta functions and motives (according to Deninger and Kurokawa
+    title: Lectures on zeta functions and motives (according to Deninger and Kurokawa)
     date-published: 1995-01-01
     year: 1995
     journal: Astérisque
@@ -231,8 +231,8 @@ references:
       - family-names: dos Santos
         given-names: G. C.
     title: Arquitetura vitruviana e retórica antiga
-    date-published: 2020-01-01
-    year: 2020
+    date-published: 2019-01-01
+    year: 2019
     journal: Archai
     start: e02804
     type: article
@@ -267,3 +267,14 @@ references:
     publisher:
       name: Hermann
     type: book
+  - authors:
+      - family-names: González García
+        given-names: Jorge Armando
+      - family-names: González García
+        given-names: Víctor Manuel
+    title: Simultaneous identities of the golden ratio and Euler's identity,
+      formally verified in Lean 4 over the known Mersenne prime exponents
+    date-published: 2026-01-01
+    year: 2026
+    notes: Companion paper (2026); DOI pending.
+    type: article
