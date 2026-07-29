@@ -1,7 +1,7 @@
 {
   "title": "Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents",
   "description": "We present a sustained study of a single object followed across representations, where the content lives in the equivalences between them. We prove and formally verify in Lean 4 that the golden ratio φ=(1+√5)/2 satisfies simultaneously twelve identities across five canonical structures. The central clause is 3φ^{σ(p)}=2^p, specialisable to the 52 known Mersenne prime exponents. The verification is conducted against Mathlib4 with 0 sorry.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publication_date": "2026-07-29",
   "creators": [
     {
