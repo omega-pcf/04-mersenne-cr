@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.12](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.11...v0.3.12) (2026-07-29)
+
+### Bug Fixes
+
+* **tex:** restore short title 'and Euler's identity' in header ([f7c542e](https://github.com/omega-pcf/04-mersenne-cr/commit/f7c542effdda12bd789813d4fb8a7d7378d8fcff))
+
 ## [0.3.11](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.10...v0.3.11) (2026-07-29)
 
 ### Bug Fixes
