@@ -54,14 +54,22 @@
         "family": "Acevedo Agudelo"
       }
     ],
-    "title": "Prime numbers: an alternative study using ova-angular rotations",
+    "title": "Prime Numbers: An Alternative Study Using OVA-Angular Rotations",
     "issued": {
       "date-parts": [
         [
-          2021
+          2021,
+          10
         ]
       ]
     },
+    "container-title": "JP Journal of Algebra, Number Theory and Applications",
+    "volume": "52",
+    "issue": "1",
+    "page": "127--161",
+    "DOI": "10.17654/nt052010127",
+    "URL": "http://dx.doi.org/10.17654/NT052010127",
+    "publisher": "Pushpa Publishing House",
     "note": "arXiv:2104.04522"
   },
   {

@@ -87,11 +87,24 @@ references:
   - authors:
       - family-names: Acevedo Agudelo
         given-names: Y. A.
-    title: "Prime numbers: an alternative study using ova-angular rotations"
-    date-published: 2021-01-01
+    doi: 10.17654/nt052010127
+    identifiers:
+      - type: doi
+        value: 10.17654/nt052010127
+      - type: url
+        value: http://dx.doi.org/10.17654/NT052010127
+    title: "Prime Numbers: An Alternative Study Using OVA-Angular Rotations"
+    url: http://dx.doi.org/10.17654/NT052010127
+    date-published: 2021-10-01
     year: 2021
+    issue: "1"
+    journal: JP Journal of Algebra, Number Theory and Applications
     notes: arXiv:2104.04522
+    publisher:
+      name: Pushpa Publishing House
+    start: "127"
     type: article
+    volume: "52"
   - authors:
       - family-names: Connes
         given-names: A.
