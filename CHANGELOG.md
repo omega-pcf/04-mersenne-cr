@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.4](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.3...v0.3.4) (2026-07-29)
+
+### Bug Fixes
+
+* **ci:** fix zenodo upload — use POST multipart + download zipball from API ([f3fa9e5](https://github.com/omega-pcf/04-mersenne-cr/commit/f3fa9e50372761fe360c6b45c1b16c9595546484))
+
 ## [0.3.3](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.2...v0.3.3) (2026-07-29)
 
 ## [0.3.2](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.1...v0.3.2) (2026-07-29)
