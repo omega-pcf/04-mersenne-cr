@@ -10,7 +10,6 @@
 
     J. A. González, V. M. González García, I. M. Dressler Pérez,
     L. M. García Ordóñez
-    Comptes Rendus Mathématique (2026)
 
   ARQUITECTURA DEL ARCHIVO
   ────────────────────────
