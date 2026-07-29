@@ -1,14 +1,132 @@
-%% ========================================================================
-%% Mersenne CR — main.tex
-%% Assembled from sub-files; build via pnpm run build
-%% ========================================================================
-\input{src/preamble}
+\pdfoutput=1
+\documentclass[11pt,reqno]{amsart}
 
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{doi}
+\graphicspath{{images/}}
+\usepackage[backend=biber,style=numeric,sorting=none,doi=true,url=true,isbn=false]{biblatex}
 \addbibresource{src/bibliography.bib}
+\AtEveryBibitem{\iffieldundef{doi}{}{\clearfield{url}}}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=red,citecolor=blue}
+\usepackage[capitalize,nameinlink]{cleveref}
+
+\crefname{section}{\S}{\S\S}
+\Crefname{section}{\S}{\S\S}
+\crefname{subsection}{\S}{\S\S}
+\Crefname{subsection}{\S}{\S\S}
+\crefname{equation}{Eq.}{Eqs.}
+\Crefname{equation}{Eq.}{Eqs.}
+\crefname{Theorem}{Theorem}{Theorems}
+\Crefname{Theorem}{Theorem}{Theorems}
+\crefname{Lemma}{Lemma}{Lemmas}
+\Crefname{Lemma}{Lemma}{Lemmas}
+\crefname{Corollary}{Corollary}{Corollaries}
+\Crefname{Corollary}{Corollary}{Corollaries}
+\crefname{Definition}{Definition}{Definitions}
+\Crefname{Definition}{Definition}{Definitions}
+\crefname{Remark}{Remark}{Remarks}
+\Crefname{Remark}{Remark}{Remarks}
+\crefname{Proposition}{Proposition}{Propositions}
+\Crefname{Proposition}{Proposition}{Propositions}
+\crefname{Conjecture}{Conjecture}{Conjectures}
+\Crefname{Conjecture}{Conjecture}{Conjectures}
+\crefname{Observation}{Observation}{Observations}
+\Crefname{Observation}{Observation}{Observations}
+
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{Theorem}[theorem]{Theorem}
+\newtheorem*{Theorem*}{Theorem}
+
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{Corollary}[theorem]{Corollary}
+
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{Lemma}[theorem]{Lemma}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{Proposition}[theorem]{Proposition}
+
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{Conjecture}[theorem]{Conjecture}
+
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{Observation}[theorem]{Observation}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{Definition}[theorem]{Definition}
+
+\newtheorem{note}[theorem]{Note}
+\newtheorem{Note}[theorem]{Note}
+
+\newtheorem{example}[theorem]{Example}
+\newtheorem{Example}[theorem]{Example}
+
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{Remark}[theorem]{Remark}
+
+%%% ====================================================================
+%%% CUSTOM COMMANDS
+%%% ====================================================================
+\newcommand{\golden}{\varphi}
+\newcommand{\Mp}{M_{p}}
+\newcommand{\Ztwenty}{(\mathbb{Z}/20\mathbb{Z})^{\times}}
+\newcommand{\lean}[1]{\nolinkurl{#1}}
 
 \begin{document}
 
-\input{src/document-body}   % \begin{document} .. \maketitle
+\title[Simultaneous identities of the golden ratio]
+      {Simultaneous identities of the golden ratio and Euler's identity,\\
+       formally verified in Lean~4 over the known\\
+       Mersenne prime exponents}
+
+\date{\textbf{Received:} July 28, 2026; \textbf{Last modified:} \today}
+
+\subjclass[2020]{Primary 11A41; Secondary 11B39, 11R18, 68V20}
+
+\keywords{Golden ratio, Mersenne primes, cyclotomic fields, modular
+concentration, Gelfond--Schneider theorem, formal verification, Lean 4}
+
+\begin{abstract}
+We present a sustained study of a single object followed across
+representations, where the content lives in the equivalences between them,
+not in any representation in isolation.  We prove and formally verify in
+Lean~4 that the golden ratio
+$\golden=(1+\sqrt5)/2$ satisfies simultaneously twelve identities,
+inclusions, and identifications across five canonical structures: the
+complex rotor of Euler's identity, the real trigonometric and
+real-multiplicative lines, the arithmetic of Mersenne numbers
+modulo~20, and the Galois group $\Ztwenty$ of
+$\mathbb{Q}(\zeta_{20})/\mathbb{Q}$. The central clause is the identity
+$3\golden^{\sigma(p)}=2^{p}$, with $\sigma(p)=p\lambda-\log_\golden 3$
+and $\lambda=\log_\golden 2$ transcendental by Gelfond--Schneider.
+Specialised to the 52 known Mersenne prime exponents (GIMPS,
+1952--2024), it holds exactly for each, and every pair of Mersenne
+numbers, in their binary form $2^{p}=M_{p}+1$, stands in an exact golden
+ratio. The factor~3 coincides with
+$M_{2}$, with the number of admissible residue classes of
+$\Mp\bmod 20$, and with the numerator of $M_{2}/|\Ztwenty|=3/8$. The
+verification is conducted against Mathlib4 with $0$~\texttt{sorry}, taking as external
+axioms only the Gelfond--Schneider theorem and the 44 large GIMPS
+primalities.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
 
 \input{src/chapters/01-introduction}
 \input{src/chapters/02-universal-identity}
@@ -18,7 +136,10 @@
 \input{src/chapters/06-discussion}
 \input{src/chapters/07-formal-verification}
 \input{src/chapters/08-closing-remark}
+
 \input{src/chapters/09-ai-statement}
+\input{src/chapters/disclosure}
+\input{src/chapters/acknowledgments}
 
 \printbibliography
 
