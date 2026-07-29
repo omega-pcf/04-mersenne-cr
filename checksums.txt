@@ -1,1 +1,1 @@
-001990bb373aafee9054e7b96fab893f39f07a1a6df64871bec5c2cac8356274  build/document-v0.2.2.pdf
+bbb19e5e4aecab3b0ee98b0d56df23eab1e02a1adeca7698e69ae77322eef07d  build/document-v0.3.0.pdf

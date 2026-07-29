@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.2.2...v0.3.0) (2026-07-29)
+
+### Features
+
+* **ci:** add Zenodo upload workflow via REST API ([f92cad8](https://github.com/omega-pcf/04-mersenne-cr/commit/f92cad888d6915e8d7efb6df408bc72dc1212bcb))
+
+### Bug Fixes
+
+* **citation:** replace invalid resource_type 'publication-technicalreport' with 'publication' ([583ab2b](https://github.com/omega-pcf/04-mersenne-cr/commit/583ab2be73e83728cf3fae27afc3a93d3f332e54))
+
 ## [0.2.2](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.2.1...v0.2.2) (2026-07-29)
 
 ### Bug Fixes
