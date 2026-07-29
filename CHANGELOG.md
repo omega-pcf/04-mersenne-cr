@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.6](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.5...v0.3.6) (2026-07-29)
+
+### Bug Fixes
+
+* update running title to include Euler's identity ([266bc2f](https://github.com/omega-pcf/04-mersenne-cr/commit/266bc2f5b65ceb761838304b192c3fe3cd7a042c))
+
+### Documentation
+
+* add README matching sibling repo style ([a0758d4](https://github.com/omega-pcf/04-mersenne-cr/commit/a0758d40f90a83cfab951949ab39e0fb230a40b2))
+* document Zenodo file upload issue and related GitHub issue ([5c8fe7e](https://github.com/omega-pcf/04-mersenne-cr/commit/5c8fe7e0cb7a8e6dc56f070bc53349a0cdb1b652))
+
 ## [0.3.5](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.4...v0.3.5) (2026-07-29)
 
 ### Bug Fixes
