@@ -51,7 +51,7 @@
     "Foucault, M. (1966). Les mots et les choses. Gallimard.",
     "Gelfond, A. O. (1934). Sur le septième problème de Hilbert. Bulletin de l'Académie des Sciences de l'URSS. 7, 623.",
     "Gödel, K. (1931). Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I. Monatshefte für Mathematik und Physik. 38, 173.",
-    "Grisales Herrera, J. (2023). Golden Prime Symmetry.",
+    "Grisales Herrera, Javier (2025). Golden Prime Symmetry Theory. University of Tolima, Colombia. https://doi.org/10.5281/zenodo.17100303",
     "Karatarakis, M.; Wiedijk, F. (2026). A formalization of the Gelfond–Schneider theorem.",
     "Kline, M. (1972). Mathematical Thought from Ancient to Modern Times. Oxford University Press.",
     "Lehmer, D. H. (1930). An extended theory of Lucas' functions. Annals of Mathematics (2). 31(3), 419. https://doi.org/10.2307/1968235",
@@ -89,6 +89,11 @@
       "identifier": "10.1016/j.crma.2014.07.009",
       "relation": "cites",
       "resource_type": "publication-article"
+    },
+    {
+      "identifier": "10.5281/zenodo.17100303",
+      "relation": "cites",
+      "resource_type": "publication"
     },
     {
       "identifier": "10.2307/1968235",

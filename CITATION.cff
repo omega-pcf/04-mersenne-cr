@@ -169,14 +169,20 @@ references:
     volume: "38"
   - authors:
       - family-names: Grisales Herrera
-        given-names: J.
-    title: Golden Prime Symmetry
-    date-published: 2023-11-01
-    year: 2023
-    notes: B.Sc. thesis
-    institution:
-      name: Universidad del Tolima
-    type: thesis
+        given-names: Javier
+    doi: 10.5281/zenodo.17100303
+    identifiers:
+      - type: doi
+        value: 10.5281/zenodo.17100303
+      - type: url
+        value: https://doi.org/10.5281/zenodo.17100303
+    title: Golden Prime Symmetry Theory
+    url: https://doi.org/10.5281/zenodo.17100303
+    date-published: 2025-09-01
+    year: 2025
+    publisher:
+      name: University of Tolima, Colombia
+    type: report
   - authors:
       - family-names: Kline
         given-names: M.
