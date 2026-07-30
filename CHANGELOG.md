@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.13](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.12...v0.3.13) (2026-07-30)
+
+### Bug Fixes
+
+* **build:** remove --user flag, add TEXMF isolation, biber version check ([d4e202e](https://github.com/omega-pcf/04-mersenne-cr/commit/d4e202e2265a588eb34b6625d25979f393649c31))
+* **build:** resolve Docker bind-mount write vanishing with spawnSync + shell script ([5fdbe1c](https://github.com/omega-pcf/04-mersenne-cr/commit/5fdbe1c722879f4660f193efc23537bc8022f5bb))
+* **build:** single-container LaTeX pipeline to mitigate bind-mount race ([0c29975](https://github.com/omega-pcf/04-mersenne-cr/commit/0c299750908ee4165f8a4fc0eb793b9cdc99c643))
+* **build:** use latexmk instead of manual pdflatex/biber — industry standard ([1b12a9c](https://github.com/omega-pcf/04-mersenne-cr/commit/1b12a9ce62cca99bd288284d7c93b4975c01227a))
+* **tex:** reflow title line breaks and fix \allowbreak inside \lean{} commands ([b0b2f54](https://github.com/omega-pcf/04-mersenne-cr/commit/b0b2f54c77101a34f9e4c47f8ea079188f19405a))
+* **tex:** reflow title line breaks and fix \allowbreak inside \lean{} commands ([3636cd8](https://github.com/omega-pcf/04-mersenne-cr/commit/3636cd86dbe076ab0308e3411e70402526e6761b))
+* **tex:** reflow title line breaks for consistent formatting ([5f67726](https://github.com/omega-pcf/04-mersenne-cr/commit/5f67726b8f343387b7b0b3834c41748389624fd2))
+
 ## [0.3.12](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.11...v0.3.12) (2026-07-29)
 
 ### Bug Fixes

@@ -1,1 +1,1 @@
-91323c7c22e67a83194bed1d2761d6738f953c7e18b45bdc65c3cff9a6fdf876  build/document-v0.3.12.pdf
+d11c8d2c8bc43504acf396f98fb8d17b4a71a823c7bc6b1c22ed046a3285409a  build/document-v0.3.13.pdf
