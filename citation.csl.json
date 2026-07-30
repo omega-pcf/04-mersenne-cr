@@ -155,8 +155,9 @@
       }
     ],
     "title": "The Great Internet Mersenne Prime Search (GIMPS)",
-    "URL": "https://www.mersenne.org/primes/",
-    "note": "G. Woltman, S. Kurowski et al."
+    "container-title": "PrimeNet",
+    "issued": { "date-parts": [[1996, 1]] },
+    "URL": "https://www.mersenne.org/primes/"
   },
   {
     "id": "godel-1931",
