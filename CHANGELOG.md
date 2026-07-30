@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.14](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.13...v0.3.14) (2026-07-30)
+
+### Documentation
+
+* add standardized build pipeline docs ([fee815e](https://github.com/omega-pcf/04-mersenne-cr/commit/fee815e12e61e1ce1b8983de68d7ef34c68273ee))
+* remove obsolete Docker investigation notes ([d6509c7](https://github.com/omega-pcf/04-mersenne-cr/commit/d6509c7626057b8883c42e7b27458c49dd643f34))
+
 ## [0.3.13](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.12...v0.3.13) (2026-07-30)
 
 ### Bug Fixes
