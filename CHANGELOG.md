@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.15](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.14...v0.3.15) (2026-07-30)
+
+### Bug Fixes
+
+* **tex:** prevent stretched spacing around introduction figure ([367de3f](https://github.com/omega-pcf/04-mersenne-cr/commit/367de3fff5f6039f8f8062d054145c677f415008))
+
+### Documentation
+
+* acknowledge MiniMax, Z.ai, and Xiaomi Research in formal verification ([ce1c3fc](https://github.com/omega-pcf/04-mersenne-cr/commit/ce1c3fcb546c934a3e18bd82605135fed91a8341))
+
 ## [0.3.14](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.13...v0.3.14) (2026-07-30)
 
 ### Documentation
