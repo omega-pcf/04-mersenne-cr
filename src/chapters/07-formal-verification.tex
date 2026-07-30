@@ -78,7 +78,7 @@ Clause & Statement & Lean identifier & Status \\
 --- & Binet identity in $\mathbb{Z}[\golden]$ &
   \lean{fib\_pow\_aux} & $0$ \texttt{sorry} \\
 --- & Base cases $p\in\{2,3,5\}$ &
-  \lean{mersenne\_fibonacci\_tabulated} & \texttt{native}\allowbreak\texttt{\_decide} \\\\
+  \lean{mersenne\_fibonacci\_tabulated} & \texttt{native\allowbreak\_decide} \\
 --- & Split/inert partition mod $5$ &
   \lean{chi5\_values} & $0$ \texttt{sorry} \\
 --- & Lucas congruence $F_{q}\equiv(q/5)$ (\Cref{thm:fib-main}) &
@@ -94,24 +94,24 @@ Clause & Statement & Lean identifier & Status \\
 --- & Rank characterises inert (\Cref{prop:rank-inert}) &
   \lean{mersenne\_rank\_iff\_inert} & $0$ \texttt{sorry} \\
 --- & Joint presentation from $p\bmod 4$ (\Cref{cor:joint}) &
-  \lean{mersenne\_presentation}\allowbreak\lean{\_from}\allowbreak\lean{\_p\_mod4} & $0$ \\texttt{sorry} \\\\
+  \lean{mersenne\_presentation\allowbreak\_from\allowbreak\_p\_mod4} & $0$ \texttt{sorry} \\
 \midrule
 \multicolumn{4}{@{}l}{\emph{Identity characterization (\Cref{ssec:characterization})}} \\
 \midrule
 --- & Consistency \& uniqueness (\Cref{thm:characterization}) &
-  \lean{golden\_identity}\allowbreak\lean{\_characterization} & $0$ \\texttt{sorry} \\\\
+  \lean{golden\_identity\allowbreak\_characterization} & $0$ \texttt{sorry} \\
 --- & Overdetermined consistency (\Cref{rem:characterization}) &
-  \lean{golden\_identity}\allowbreak\lean{\_is}\allowbreak\lean{\_consistent}\allowbreak\lean{\_overdetermined} & $0$ \\texttt{sorry} \\\\
+  \lean{golden\_identity\allowbreak\_is\allowbreak\_consistent\allowbreak\_overdetermined} & $0$ \texttt{sorry} \\
 \midrule
 \multicolumn{4}{@{}l}{\emph{External inputs (axioms)}} \\
 \midrule
 --- & Primality of $\Mp$, $p\leq 31$ &
   \lean{mersenne\_prime\_\{2..31\}} (8 thms) &
-  \texttt{native}\allowbreak\texttt{\_decide} \\\\
+  \texttt{native\allowbreak\_decide} \\
 --- & Primality of $\Mp$, $p\geq 61$ & 44 GIMPS \texttt{axiom}s &
   external \\
 --- & Gelfond--Schneider (Hilbert's 7th) &
-  \lean{transcendental}\allowbreak\lean{\_cpow}\allowbreak\lean{\_of}\allowbreak\lean{\_isAlgebraic}\allowbreak\lean{\_of}\allowbreak\lean{\_irrational} & external \\\\
+  \lean{transcendental\allowbreak\_cpow\allowbreak\_of\allowbreak\_isAlgebraic\allowbreak\_of\allowbreak\_irrational} & external \\
 \bottomrule
 \end{tabular}
 \caption{Lean~4 identifiers and verification status (part~II): the
