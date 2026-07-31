@@ -4,7 +4,7 @@ title: Simultaneous identities of the golden ratio and Euler's identity,
   formally verified in Lean 4 over the known Mersenne prime exponents
 type: software
 version: 0.3.15
-date-released: 2026-07-30
+date-released: 2026-07-31
 authors:
   - family-names: González García
     given-names: Jorge Armando
@@ -154,7 +154,9 @@ references:
         value: https://www.mersenne.org/primes/
     title: The Great Internet Mersenne Prime Search (GIMPS)
     url: https://www.mersenne.org/primes/
-    notes: G. Woltman, S. Kurowski et al.
+    date-published: 1996-01-01
+    year: 1996
+    journal: PrimeNet
     type: website
   - authors:
       - family-names: Gödel
