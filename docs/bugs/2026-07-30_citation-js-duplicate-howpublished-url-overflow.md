@@ -1,8 +1,8 @@
 # Bug: `citation-js` synthesizes `note` and `howpublished` for `type: "webpage"`, producing duplicate URLs and overflowing the margin
 
 **Date**: 2026-07-30
-**Status**: Investigated, partially mitigated, full fix pending
-**Affects**: `04-mersenne-cr` (and likely all `omega-pcf/*` repos using the shared `citation.csl.json → bibliography.bib → biber → PDF` build pipeline)
+**Status**: Fixed (2026-07-30) — see §10 below
+**Affects**: All `omega-pcf/*` repos using the shared `citation.csl.json → bibliography.bib → biber → PDF` build pipeline
 **Severity**: Medium — visible cosmetic defect in the bibliography of the published manuscript (`build/document-v0.3.15.pdf`, references page, entry `[14]` GIMPS).
 
 ## 1. Observed behaviour
@@ -281,3 +281,44 @@ Topological confinement (§1.3) requires that $p$ be read-only at runtime: the m
 The Certainty Principle (§4.1) $\varepsilon_0 \cdot M_{\mathrm{PCF}} = \pi$ applies in the operational layer: the cost of correcting this bug at the CSL fixed point is bounded by $\pi$ (a single fixed-point edit); the cost of correcting it downstream is unbounded because each downstream patch adds multiplicative fibers. The recommended next step is therefore to apply §6's regex fix inside `citation.ts`, which keeps the lift well-defined and respects the HLP.
 
 The $\phi$-coupled toroidal mapping (§2.2) on $T^2_{\mathrm{PCF}}$ — which dictates that "fix pipeline, not files" trajectories wrap without self-intersection — is the operational reason why patching downstream (`main.tex` hyperref, biblatex `\AtEveryBibitem`, etc.) accumulates interference and why the upstream CSL is the unique fixed point.
+
+## 10. Resolution (2026-07-30)
+
+The §6 regex proposal was **superseded** by a cleaner fix at the same injection point (`citation.ts` → `syncBibtex`).
+
+### 10.1 Actual root cause
+
+The `howpublished` duplication was a symptom of a deeper mismatch: `citation.ts` used `data.format('bibtex')` (BibTeX classic output) while the document preamble uses `\usepackage[backend=biber]{biblatex}` (BibLaTeX). The plugin (`@citation-js/plugin-bibtex`) offers two distinct output formats:
+
+- **`bibtex`**: legacy BibTeX — emits `@misc`, `@techreport`, `journal`, `year`, `address`, and synthesizes `howpublished={url}` for webpage entries (confirmed in `bibtex.js` lines 297–313, 365–373).
+- **`biblatex`**: native BibLaTeX — emits `@online`, `@report`, `journaltitle`, `date`, `location`, and does **not** synthesize `howpublished` when `URL` is present (the `biblatex.js` rule at lines 656–672 has `when.source.url: false`).
+
+### 10.2 Applied fix
+
+One-line change in `scripts/tasks/citation.ts`:
+
+```diff
+- let bib = data.format('bibtex');
++ let bib = data.format('biblatex');
+```
+
+This eliminates the `howpublished` duplication at its source, produces native biblatex fields/types matching the biber backend, and resolves the URL overflow (the `@online` driver uses `\url{...}` which `xurl` can break, unlike `\verb` used by `@misc`).
+
+### 10.3 Verification
+
+Entry `[14]` now renders as:
+
+```
+[14] G. Woltman and S. Kurowski. The Great Internet Mersenne Prime Search (GIMPS). Jan.
+     1996. url: https://www.mersenne.org/primes/.
+```
+
+Single URL, no `howpublished`, no truncation. The `howpublished` field count across the entire `.bib` is now zero.
+
+### 10.4 Propagation
+
+The same fix was applied to all four `omega-pcf` repos on 2026-07-30: `01-hilbert-polya`, `02-odd-zeta`, `03-crystalline-worldsheet`, `04-mersenne-cr`.
+
+### 10.5 Related fix
+
+During verification, a separate build-flakiness bug was discovered and fixed (stale UTF-16 `.out` files preventing biber from running). See [`2026-07-30_build-flakiness-stale-artifacts.md`](./2026-07-30_build-flakiness-stale-artifacts.md).
