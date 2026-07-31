@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.16](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.15...v0.3.16) (2026-07-31)
+
+### Bug Fixes
+
+* **bib:** clean GIMPS CSL entry and enable xurl for breakable URLs ([33edfa9](https://github.com/omega-pcf/04-mersenne-cr/commit/33edfa9ae36d9f169933e07a51231cb8aae4e72b))
+* **build:** use biblatex format, clean stale artifacts, surface latex errors ([fe87825](https://github.com/omega-pcf/04-mersenne-cr/commit/fe878255723c59d4a9de4f66c11ffe103d000fc4))
+
+### Documentation
+
+* investigate citation-js howpublished synthesis and URL overflow in [14] GIMPS ([90af646](https://github.com/omega-pcf/04-mersenne-cr/commit/90af646dc9ecc9bd72b04c0db5d1423ace1cd5b9))
+
+### Chores
+
+* regenerate metadata and PDF after biblatex format fix ([12eb30d](https://github.com/omega-pcf/04-mersenne-cr/commit/12eb30dd85d8241ee07948f94dd062dd8e3412f6))
+* update .gitignore, remove .cursorignore, add CC-BY 4.0 LICENSE ([cdb3f46](https://github.com/omega-pcf/04-mersenne-cr/commit/cdb3f46a83e0624a1b80a5a4f5de95e6a316bdb8))
+
 ## [0.3.15](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.14...v0.3.15) (2026-07-30)
 
 ### Bug Fixes
