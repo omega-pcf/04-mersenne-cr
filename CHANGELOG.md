@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.17](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.16...v0.3.17) (2026-07-31)
+
+### Bug Fixes
+
+* **07-formal-verification:** unescape mersenne_prime and repair Status cells ([a4fc094](https://github.com/omega-pcf/04-mersenne-cr/commit/a4fc0947ea9156193a7f18ea960a1bc0f3f49935))
+
+### Documentation
+
+* document biblatex format fix and build flakiness resolution ([b87d967](https://github.com/omega-pcf/04-mersenne-cr/commit/b87d967b14c5a6b68a6658c7cbf83ac39b58a894))
+
 ## [0.3.16](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.15...v0.3.16) (2026-07-31)
 
 ### Bug Fixes
