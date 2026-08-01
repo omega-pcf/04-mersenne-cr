@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.18](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.17...v0.3.18) (2026-08-01)
+
+### Styles
+
+* refine citation name and section pagination ([91fca93](https://github.com/omega-pcf/04-mersenne-cr/commit/91fca936161ccc24b48183bd46e7798eaabca843))
+
+### Chores
+
+* remove obsolete bug docs ([d278103](https://github.com/omega-pcf/04-mersenne-cr/commit/d278103df61a3cf1d679f920258634b46198359b))
+
 ## [0.3.17](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.16...v0.3.17) (2026-07-31)
 
 ### Bug Fixes
