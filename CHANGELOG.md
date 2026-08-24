@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.19](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.18...v0.3.19) (2026-08-24)
+
+### Bug Fixes
+
+* **metadata:** sync CITATION.cff title from package.json on build ([391540d](https://github.com/omega-pcf/04-mersenne-cr/commit/391540d36986165bd733417733e77a4a1ef0557a))
+* **metadata:** update DOI to all-versions (10.5281/zenodo.21731878) ([fa971ab](https://github.com/omega-pcf/04-mersenne-cr/commit/fa971ab339c6076d497ea802b49e1cebcffd7a1e))
+
 ## [0.3.18](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.17...v0.3.18) (2026-08-01)
 
 ### Styles
