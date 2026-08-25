@@ -2,7 +2,7 @@
 ═══════════════════════════════════════════════════════════════════════════════
   golden_mersenne.lean
   ───────────────────────────────────────────────────────────────────────────
-  Verificación formal Lean 4 del paper
+  Formal Lean 4 verification of the paper
 
     "Simultaneous identities of the golden ratio and Euler's identity,
      formally verified in Lean 4 over the known Mersenne prime
@@ -11,43 +11,43 @@
     J. A. González, V. M. González García, I. M. Dressler Pérez,
     L. M. García Ordóñez
 
-  ARQUITECTURA DEL ARCHIVO
+  FILE ARCHITECTURE
   ────────────────────────
-  §1   Capa 1: Puente algebraico        φ^λ = 2, φ^{log 3/log φ} = 3
-  §2   Identidad pentagonal-ciclotómica φ = 2cos(π/5) = ζ₁₀+ζ₁₀⁻¹
-  §3   Capa 2: Correspondencia exacta   3·φ^σ(p) = 2^p (52 exponentes GIMPS)
-  §4   Ratio áureo directo              2^q/2^p = φ^((q-p)·λ)
-  §5   Concentración modular Mersenne   M_p mod 20 ∈ {3,7,11}
-  §6   Triple identificación del 3      3 = M₂ = |{3,7,11}|
-  §7   Teorema conector Euler-Mersenne-Galois (12 cláusulas)
-  §8   Axiomas GIMPS                    8 primalidades nativo + 44 axiom
-  §9   Transcendencia de λ_log          vía Gelfond-Schneider (axioma)
-  —    La identidad, caracterizada      consistencia + unicidad
-  §10  Escisión Fibonacci               F_p ≡ ±1; tipo desde el exponente
-  §11  Puente binario ↔ retículo áureo  M_p = p unos; 2^p = un bit
-  —    Eslabón de reciprocidad          presentación conjunta pinneada
+  §1   Layer 1: Algebraic bridge        φ^λ = 2, φ^{log 3/log φ} = 3
+  §2   Pentagonal–cyclotomic identity  φ = 2cos(π/5) = ζ₁₀+ζ₁₀⁻¹
+  §3   Layer 2: Exact correspondence    3·φ^σ(p) = 2^p (52 GIMPS exponents)
+  §4   Direct golden ratio              2^q/2^p = φ^((q-p)·λ)
+  §5   Mersenne modular concentration   M_p mod 20 ∈ {3,7,11}
+  §6   Triple identification of 3       3 = M₂ = |{3,7,11}|
+  §7   Euler–Mersenne–Galois connector theorem (12 clauses)
+  §8   GIMPS axioms                     8 native primality checks + 44 axioms
+  §9   Transcendence of λ_log           via Gelfond–Schneider (axiom)
+  —    The identity, characterized      consistency + uniqueness
+  §10  Fibonacci splitting               F_p ≡ ±1; type from the exponent
+  §11  Binary bridge ↔ golden lattice   M_p = p ones; 2^p = a single bit
+  —    Reciprocity link                  pinned joint presentation
 
-  ESTADO DE VERIFICACIÓN
+  VERIFICATION STATUS
   ──────────────────────
-  Sorry en código:        0
-  Axiomas del archivo:   45   44 primalidades GIMPS (Lucas-Lehmer, §8.2)
+  Sorry in code:         0
+  File axioms:           45   44 GIMPS primality proofs (Lucas–Lehmer, §8.2)
                               + Gelfond-Schneider (§9,
                                 transcendental_cpow_of_isAlgebraic_of_irrational).
-  phi_sq:                     TEOREMA probado (φ²=φ+1), no axioma.
-  lambda_log_transcendental:  TEOREMA derivado de GS (irracionalidad probada
-                              vía Lucas/ψ).
-  Primalidades native:    8   (M_p prime para p ∈ {2,3,5,7,13,17,19,31})
+  phi_sq:                     PROVED THEOREM (φ²=φ+1), not an axiom.
+  lambda_log_transcendental:  THEOREM derived from GS (irrationality proved
+                              via Lucas/ψ).
+  Native primality checks: 8   (M_p prime for p ∈ {2,3,5,7,13,17,19,31})
 
-  DEPENDENCIAS EXTERNAS
+  EXTERNAL DEPENDENCIES
   ─────────────────────
-  Ninguna más allá de Mathlib.  El archivo es autocontenido: importa sólo
-  Mathlib y define en su propio namespace F1PCFUnified los hechos base
-  del corpus (φ, φ_pos, φ_gt_one, φ_ne_zero, phi_sq, mersenne,
+  None beyond Mathlib.  The file is self-contained: it imports only
+  Mathlib and defines within its own namespace F1PCFUnified the base facts
+  of the corpus (φ, φ_pos, φ_gt_one, φ_ne_zero, phi_sq, mersenne,
   lambda_log, mersenne_bridge, ZtwentyStar, ZtwentyStar_card).
 
-  Este archivo cubre la totalidad de los enunciados citados por la nota,
-  incluida la escisión Fibonacci (§10) y sus consecuencias, de modo que
-  no requiere el corpus mersenne_unified.lean.
+  This file covers all statements cited in the note, including the
+  Fibonacci splitting (§10) and its corollaries, and therefore does not
+  require the mersenne_unified.lean corpus.
 ═══════════════════════════════════════════════════════════════════════════════
 -/
 
@@ -117,21 +117,21 @@ noncomputable section
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §1   CAPA 1 — PUENTE ALGEBRAICO                                       ║
--- ║       φ^λ = 2 (mersenne_bridge_via_lambda)                             ║
--- ║       φ^{log 3/log φ} = 3 (phi_pow_log3)                               ║
+-- ║  §1   LAYER 1 — ALGEBRAIC BRIDGE                                      ║
+-- ║       φ^λ = 2 (mersenne_bridge_via_lambda)                            ║
+-- ║       φ^{log 3/log φ} = 3 (phi_pow_log3)                              ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
 private theorem log_φ_pos : 0 < Real.log φ := Real.log_pos φ_gt_one
 private theorem log_φ_ne_zero : Real.log φ ≠ 0 := log_φ_pos.ne'
 
-/-- Mersenne bridge en forma `φ^lambda_log = 2`.
-    Equivalente al `mersenne_bridge` del corpus F1, pero usando la constante. -/
+/-- Mersenne bridge in the form `φ^lambda_log = 2`.
+    Equivalent to `mersenne_bridge` in the F1 corpus, but using the constant. -/
 theorem mersenne_bridge_via_lambda : φ ^ lambda_log = 2 := by
   unfold lambda_log; exact mersenne_bridge
 
-/-- Compañero del Mersenne bridge para la base 3: φ^{log 3 / log φ} = 3.
-    Esencial para la Capa 2 (correspondencia logarítmica). -/
+/-- Ternary companion of the Mersenne bridge: φ^{log 3 / log φ} = 3.
+    Essential for Layer 2 (logarithmic correspondence). -/
 theorem phi_pow_log3 : φ ^ (Real.log 3 / Real.log φ) = 3 := by
   rw [Real.rpow_def_of_pos φ_pos]
   have hmul : Real.log φ * (Real.log 3 / Real.log φ) = Real.log 3 :=
@@ -140,10 +140,10 @@ theorem phi_pow_log3 : φ ^ (Real.log 3 / Real.log φ) = 3 := by
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §2   IDENTIDAD PENTAGONAL-CICLOTÓMICA                                 ║
--- ║       φ = 2·cos(π/5) (phi_eq_two_cos_pi_fifth)                         ║
--- ║       φ = ζ₁₀ + ζ₁₀⁻¹ en ℂ (phi_eq_zeta10_sum)                         ║
--- ║       ζ₁₀^10 = 1 (zeta10_pow_ten_eq_one)                               ║
+-- ║  §2   IDENTIDAD PENTAGONAL-CICLOTÓMICA                                ║
+-- ║       φ = 2·cos(π/5) (phi_eq_two_cos_pi_fifth)                        ║
+-- ║       φ = ζ₁₀ + ζ₁₀⁻¹ en ℂ (phi_eq_zeta10_sum)                        ║
+-- ║       ζ₁₀^10 = 1 (zeta10_pow_ten_eq_one)                              ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
 /-- Chebyshev polynomial of degree 5: cos(5θ) = 16cos⁵θ − 20cos³θ + 5cosθ. -/
@@ -163,13 +163,13 @@ private theorem cos_five_mul_pentagon (θ : ℝ) :
   rw [show (5 : ℝ) * θ = 3 * θ + 2 * θ from by ring, Real.cos_add, c2, c3, s2, s3]
   linear_combination Real.cos θ * (8 * Real.sin θ ^ 2 - 8 * Real.cos θ ^ 2 + 2) * hs
 
-/-- cos(π/5) > 0 (puesto que π/5 ∈ (0, π/2)). -/
+/-- cos(π/5) > 0 (since π/5 ∈ (0, π/2)). -/
 private theorem cos_pi_five_pos_pentagon : 0 < Real.cos (Real.pi / 5) := by
   apply Real.cos_pos_of_mem_Ioo; constructor <;> linarith [Real.pi_pos]
 
-/-- cos(π/5) satisface la cuadrática 4x² − 2x − 1 = 0.
-    Derivable de la identidad T₅(cos(π/5)) = cos(π) = −1
-    factorizando (x+1)(4x²−2x−1)² = 0. -/
+/-- cos(π/5) satisfies the quadratic 4x² − 2x − 1 = 0.
+    Derived from the identity T₅(cos(π/5)) = cos(π) = −1
+    by factoring (x+1)(4x²−2x−1)² = 0. -/
 private theorem cos_pi_five_quadratic_pentagon :
     4 * Real.cos (Real.pi / 5) ^ 2 - 2 * Real.cos (Real.pi / 5) - 1 = 0 := by
   have hq : 16 * Real.cos (Real.pi/5)^5 - 20 * Real.cos (Real.pi/5)^3
@@ -186,15 +186,15 @@ private theorem cos_pi_five_quadratic_pentagon :
     · exact h
   nlinarith [hquad_sq]
 
-/-- Helper: φ/2 satisface la misma cuadrática 4x² − 2x − 1 = 0. -/
+/-- Helper: φ/2 satisfies the same quadratic 4x² − 2x − 1 = 0. -/
 private theorem phi_half_quadratic_pentagon :
     4 * (φ / 2) ^ 2 - 2 * (φ / 2) - 1 = 0 := by
   have h := phi_sq
   field_simp
   nlinarith [h]
 
-/-- Unicidad de la raíz positiva de 4x² − 2x − 1 = 0.
-    El polinomio tiene raíces (1 ± √5)/4; sólo (1 + √5)/4 = φ/2 es positiva. -/
+/-- Uniqueness of the positive root of 4x² − 2x − 1 = 0.
+    The polynomial has roots (1 ± √5)/4; only (1 + √5)/4 = φ/2 is positive. -/
 private theorem quadratic_unique_pos_pentagon (x y : ℝ) (hx : 0 < x) (hy : 0 < y)
     (hxe : 4 * x ^ 2 - 2 * x - 1 = 0) (hye : 4 * y ^ 2 - 2 * y - 1 = 0) :
     x = y := by
@@ -205,7 +205,7 @@ private theorem quadratic_unique_pos_pentagon (x y : ℝ) (hx : 0 < x) (hy : 0 <
     have hx_half : x < 1/2 := by linarith
     nlinarith [show 4 * x ^ 2 < 1 from by nlinarith]
 
-/-- cos(π/5) = φ/2.  Consecuencia de la unicidad de la raíz positiva. -/
+/-- cos(π/5) = φ/2.  Consequence of uniqueness of the positive root. -/
 private theorem cos_pi_div_five_eq_phi_half :
     Real.cos (Real.pi / 5) = φ / 2 :=
   quadratic_unique_pos_pentagon _ _ cos_pi_five_pos_pentagon
@@ -213,28 +213,28 @@ private theorem cos_pi_div_five_eq_phi_half :
     cos_pi_five_quadratic_pentagon
     phi_half_quadratic_pentagon
 
-/-- **IDENTIDAD PENTAGONAL: φ = 2·cos(π/5)**.
+/-- **PENTAGONAL IDENTITY: φ = 2·cos(π/5)**.
 
-    Conecta el generador algebraico φ (definido por φ² = φ + 1)
-    con la geometría del pentágono regular: φ es la longitud de la
-    diagonal de un pentágono regular de lado 1, y 2·cos(π/5) es esta
-    misma longitud expresada por su ángulo central.
+    Connects the algebraic generator φ (defined by φ² = φ + 1)
+    with the geometry of the regular pentagon: φ is the diagonal
+    length of a regular pentagon with unit side, and 2·cos(π/5) is
+    this same length expressed via its central angle.
 
-    Esta identidad es el anclaje geométrico de "simetría pentagonal
-    ciclotómica" en el contenido aritmético-áureo del programa Mersenne–φ:
-    φ vive en el subcuerpo real maximal ℚ(√5) = ℚ(ζ₅ + ζ₅⁻¹) del
-    cuerpo ciclotómico ℚ(ζ₅), conectando la clasificación
-    (ℤ/20ℤ)* (Galois del 20-ciclotómico) con la geometría pentagonal. -/
+    This identity is the geometric anchor of "pentagonal–cyclotomic
+    symmetry" in the arithmetico-golden content of the Mersenne–φ program:
+    φ lies in the real maximal subfield ℚ(√5) = ℚ(ζ₅ + ζ₅⁻¹) of the
+    cyclotomic field ℚ(ζ₅), connecting the classification
+    (ℤ/20ℤ)* (Galois group of the 20-cyclotomic) with pentagonal geometry. -/
 theorem phi_eq_two_cos_pi_fifth : φ = 2 * Real.cos (Real.pi / 5) := by
   rw [cos_pi_div_five_eq_phi_half]; ring
 
-/-- **CONEXIÓN CICLOTÓMICA: φ como 2·cos(π/5) complexificado**.
+/-- **CYCLOTOMIC CONNECTION: φ as complexified 2·cos(π/5)**.
 
-    φ vive en el subcuerpo real maximal del ciclotómico ℚ(ζ₂₀):
+    φ lies in the real maximal subfield of the cyclotomic ℚ(ζ₂₀):
     φ ∈ ℚ(√5) = ℚ(ζ₅ + ζ₅⁻¹) ⊂ ℚ(ζ₁₀) ⊂ ℚ(ζ₂₀).
 
-    Esta versión complexificada de la identidad pentagonal es el puente
-    a la geometría ciclotómica donde vive la clasificación (ℤ/20ℤ)*. -/
+    This complexified version of the pentagonal identity bridges
+    to the cyclotomic geometry where the classification (ℤ/20ℤ)* lives. -/
 theorem phi_via_cyclotomic_10 :
     (φ : ℂ) = 2 * Complex.cos ((Real.pi / 5 : ℝ) : ℂ) := by
   have hp : φ = 2 * Real.cos (Real.pi / 5) := phi_eq_two_cos_pi_fifth
@@ -242,13 +242,13 @@ theorem phi_via_cyclotomic_10 :
   push_cast at hp ⊢
   exact hp
 
-/-- **φ como suma de raíces 10-ésimas de la unidad**: φ = ζ₁₀ + ζ₁₀⁻¹,
-    donde ζ₁₀ = exp(πi/5).
+/-- **φ as a sum of 10th roots of unity**: φ = ζ₁₀ + ζ₁₀⁻¹,
+    where ζ₁₀ = exp(πi/5).
 
-    Esta es la realización geométrica explícita: φ es la suma de las dos
-    raíces 10-ésimas primitivas complejas conjugadas {exp(±πi/5)}.
+    This is the explicit geometric realization: φ is the sum of the two
+    conjugate primitive 10th roots of unity {exp(±πi/5)}.
 
-    Combinada con phi_via_cyclotomic_10 y la identidad de Euler:
+    Combined with phi_via_cyclotomic_10 and Euler's identity:
     2·cos(z) = exp(zI) + exp(-zI). -/
 theorem phi_eq_zeta10_sum :
     (φ : ℂ) = Complex.exp (((Real.pi / 5 : ℝ) : ℂ) * Complex.I) +
@@ -264,10 +264,10 @@ theorem phi_eq_zeta10_sum :
   rw [euler_cos]
   exact phi_via_cyclotomic_10
 
-/-- **Verificación: ζ₁₀ = exp(πi/5) es raíz 10-ésima de la unidad**.
+/-- **Verification: ζ₁₀ = exp(πi/5) is a 10th root of unity**.
 
-    Confirma que el ζ₁₀ usado en phi_eq_zeta10_sum cumple ζ₁₀^10 = 1,
-    es decir es genuinamente una 10-raíz de la unidad. -/
+    Confirms that the ζ₁₀ used in phi_eq_zeta10_sum satisfies ζ₁₀^10 = 1,
+    i.e., it is genuinely a 10th root of unity. -/
 theorem zeta10_pow_ten_eq_one :
     Complex.exp (((Real.pi / 5 : ℝ) : ℂ) * Complex.I) ^ 10 = 1 := by
   rw [← Complex.exp_nat_mul]
@@ -284,21 +284,21 @@ theorem zeta10_pow_ten_eq_one :
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §3   CAPA 2 — CORRESPONDENCIA LOGARÍTMICA EXACTA                      ║
--- ║       σ(p) = p·λ − log_φ 3                                              ║
--- ║       3·φ^σ(p) = 2^p (golden_tower_bridge)                             ║
--- ║       Unicidad de σ(p) (sigma_mersenne_unique)                         ║
--- ║       52 exponentes GIMPS (mersenne_phi_correspondence_52)             ║
+-- ║  §3   CAPA 2 — CORRESPONDENCIA LOGARÍTMICA EXACTA                     ║
+-- ║       σ(p) = p·λ − log_φ 3                                            ║
+-- ║       3·φ^σ(p) = 2^p (golden_tower_bridge)                            ║
+-- ║       Unicidad de σ(p) (sigma_mersenne_unique)                        ║
+-- ║       52 exponentes GIMPS (mersenne_phi_correspondence_52)            ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
-/-- σ(p) = p·λ − log_φ(3): nivel de la torre dorada asociado al exponente p. -/
+/-- σ(p) = p·λ − log_φ(3): golden tower level associated to the exponent p. -/
 def sigma_mersenne (p : ℝ) : ℝ :=
   p * lambda_log - Real.log 3 / Real.log φ
 
-/-- **Teorema de la torre dorada (algebraico, general)**.
-    Para todo p : ℝ, el nivel σ(p) satisface exactamente 3 · φ^σ(p) = 2^p.
+/-- **Golden tower theorem (algebraic, general)**.
+    For all p : ℝ, the level σ(p) satisfies exactly 3 · φ^σ(p) = 2^p.
 
-    Prueba:  3 · φ^{p·λ − log_φ 3}
+    Proof:  3 · φ^{p·λ − log_φ 3}
            = 3 · φ^{p·λ} / φ^{log_φ 3}      [rpow_sub]
            = 3 · (φ^λ)^p / φ^{log_φ 3}      [rpow_mul]
            = 3 · 2^p / 3                     [mersenne_bridge_via_lambda + phi_pow_log3]
@@ -312,7 +312,7 @@ theorem golden_tower_bridge (p : ℝ) :
   rw [mersenne_bridge_via_lambda, phi_pow_log3]
   ring
 
-/-- Inversión explícita: σ(p) = log_φ(2^p / 3). -/
+/-- Explicit inversion: σ(p) = log_φ(2^p / 3). -/
 theorem sigma_mersenne_eq_logb (p : ℝ) :
     sigma_mersenne p = Real.logb φ ((2 : ℝ) ^ p / 3) := by
   simp only [Real.logb, sigma_mersenne, lambda_log]
@@ -321,7 +321,7 @@ theorem sigma_mersenne_eq_logb (p : ℝ) :
       Real.log_rpow (by norm_num : (0:ℝ) < 2)]
   ring
 
-/-- Unicidad: el único σ : ℝ con 3·φ^σ = 2^p es σ = sigma_mersenne p. -/
+/-- Uniqueness: the only σ : ℝ with 3·φ^σ = 2^p is σ = sigma_mersenne p. -/
 theorem sigma_mersenne_unique (p σ : ℝ)
     (h : (3 : ℝ) * φ ^ σ = (2 : ℝ) ^ p) :
     σ = sigma_mersenne p := by
@@ -333,10 +333,10 @@ theorem sigma_mersenne_unique (p σ : ℝ)
   rw [Real.log_rpow φ_pos, Real.log_rpow φ_pos] at heq
   exact mul_right_cancel₀ log_φ_ne_zero heq
 
-/-- Lista de los 52 exponentes de primos de Mersenne conocidos.
-    Fuente: GIMPS (Great Internet Mersenne Prime Search), 2024.
-    Cada p en esta lista es primo y M_p = 2^p − 1 también es primo.
-    El último es p = 136279841, descubierto en octubre de 2024. -/
+/-- List of the 52 known Mersenne prime exponents.
+    Source: GIMPS (Great Internet Mersenne Prime Search), 2024.
+    Each p in this list is prime and M_p = 2^p − 1 is also prime.
+    The last is p = 136279841, discovered in October 2024. -/
 def known_mersenne_exponents : List ℕ :=
   [2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279,
    2203, 2281, 3217, 4253, 4423, 9689, 9941, 11213, 19937, 21701,
@@ -357,15 +357,15 @@ theorem known_mersenne_exponents_prime :
 theorem known_mersenne_exponents_sorted :
     known_mersenne_exponents.Pairwise (· < ·) := by native_decide
 
-/-- **Teorema central de la Capa 2**: la correspondencia logarítmica es exacta
-    para cada uno de los 52 exponentes conocidos. No es aproximación numérica:
-    es identidad algebraica que todos los exponentes de Mersenne satisfacen. -/
+/-- **Central theorem of Layer 2**: the logarithmic correspondence is exact
+    for each of the 52 known exponents. It is not a numerical approximation:
+    it is an algebraic identity satisfied by all Mersenne exponents. -/
 theorem mersenne_phi_correspondence_52 :
     ∀ p ∈ known_mersenne_exponents,
       (3 : ℝ) * φ ^ sigma_mersenne (p : ℝ) = (2 : ℝ) ^ (p : ℝ) :=
   fun p _ => golden_tower_bridge (p : ℝ)
 
-/-- Los 52 niveles σ(p) están estrictamente ordenados: σ(p_i) < σ(p_j) si i < j. -/
+/-- The 52 levels σ(p) are strictly ordered: σ(p_i) < σ(p_j) whenever i < j. -/
 theorem sigma_strictly_increasing :
     ∀ i j : Fin known_mersenne_exponents.length,
       i < j →
@@ -384,20 +384,20 @@ theorem sigma_strictly_increasing :
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §4   RATIO ÁUREO DIRECTO ENTRE POTENCIAS DE 2                         ║
--- ║       2^q/2^p = φ^((q-p)·λ) (mersenne_ratio_golden)                    ║
--- ║       Especialización GIMPS (mersenne_ratio_at_known_pairs)            ║
+-- ║  §4   RATIO ÁUREO DIRECTO ENTRE POTENCIAS DE 2                        ║
+-- ║       2^q/2^p = φ^((q-p)·λ) (mersenne_ratio_golden)                   ║
+-- ║       Especialización GIMPS (mersenne_ratio_at_known_pairs)           ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
-/-- **Ratio áureo directo entre potencias de 2**.
-    Para todo par (p, q) ∈ ℝ², el ratio 2^q / 2^p es exactamente φ^((q−p)·λ).
+/-- **Direct golden ratio between powers of 2**.
+    For every pair (p, q) ∈ ℝ², the ratio 2^q / 2^p is exactly φ^((q−p)·λ).
 
-    Esta es la afirmación estructural de que la órbita multiplicativa {2^p : p ∈ ℝ}
-    se inscribe en la red áurea φ^(ℝ·λ_log) con coordenadas dadas por p·λ_log.
+    This is the structural statement that the multiplicative orbit {2^p : p ∈ ℝ}
+    embeds in the golden lattice φ^(ℝ·λ_log) with coordinates given by p·λ_log.
 
-    Aplicada a pares de exponentes Mersenne primos, expresa que cada par
-    (M_{p_i}+1, M_{p_j}+1) = (2^{p_i}, 2^{p_j}) tiene ratio áureo exacto
-    determinado por la diferencia de los exponentes. -/
+    Applied to pairs of prime Mersenne exponents, it expresses that each pair
+    (M_{p_i}+1, M_{p_j}+1) = (2^{p_i}, 2^{p_j}) has exact golden ratio
+    determined by the difference of the exponents. -/
 theorem mersenne_ratio_golden (p q : ℝ) :
     (2 : ℝ) ^ q / (2 : ℝ) ^ p = φ ^ ((q - p) * lambda_log) := by
   rw [← mersenne_bridge_via_lambda]
@@ -407,9 +407,9 @@ theorem mersenne_ratio_golden (p q : ℝ) :
   congr 1
   ring
 
-/-- Especialización del ratio áureo a los pares de exponentes Mersenne primos
-    conocidos (52 elementos de la lista GIMPS).
-    Cada par (p_i, p_j) produce el ratio 2^{p_j} / 2^{p_i} = φ^((p_j−p_i)·λ). -/
+/-- Specialization of the golden ratio to pairs of known prime Mersenne
+    exponents (52 elements of the GIMPS list).
+    Each pair (p_i, p_j) yields the ratio 2^{p_j} / 2^{p_i} = φ^((p_j−p_i)·λ). -/
 theorem mersenne_ratio_at_known_pairs
     (i j : Fin known_mersenne_exponents.length) :
     (2 : ℝ) ^ (known_mersenne_exponents.get j : ℝ) /
@@ -420,40 +420,40 @@ theorem mersenne_ratio_at_known_pairs
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §5   CONCENTRACIÓN MODULAR DE MERSENNE                                ║
--- ║       Para todo primo p: M_p mod 20 ∈ {3,7,11}                         ║
--- ║       (mersenne_concentration_general)                                 ║
+-- ║  §5   CONCENTRACIÓN MODULAR DE MERSENNE                               ║
+-- ║       Para todo primo p: M_p mod 20 ∈ {3,7,11}                        ║
+-- ║       (mersenne_concentration_general)                                ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
-/-! ### §5.1  B1 — Concentración de Mersenne (todos los primos) -/
+/-! ### §5.1  B1 — Mersenne concentration (all primes) -/
 
-/-- Lema computacional: 16² = 16 en Z₂₀ (16 es idempotente módulo 20). -/
+/-- Computational lemma: 16² = 16 in Z₂₀ (16 is idempotent modulo 20). -/
 private lemma sixteen_sq_zmod20 : (16 : ZMod 20) * 16 = 16 := by decide
 
-/-- 16^k = 16 en Z₂₀ para todo k ≥ 1. -/
+/-- 16^k = 16 in Z₂₀ for all k ≥ 1. -/
 private lemma sixteen_pow_succ (n : ℕ) : (16 : ZMod 20) ^ (n + 1) = 16 := by
   induction n with
   | zero => decide
   | succ k ih => rw [pow_succ, ih]; decide
 
-/-- 2^4 = 16 en Z₂₀. -/
+/-- 2^4 = 16 in Z₂₀. -/
 private lemma two_pow_four_zmod20 : (2 : ZMod 20) ^ 4 = 16 := by decide
 
-/-- Lema clave: para todo primo p, (2:Z₂₀)^p ∈ {4, 8, 12}.
-    Estructura de la prueba: análisis por p mod 4, usando que para p primo
-    impar (≥ 5), p mod 4 ∈ {1, 3}. -/
+/-- Key lemma: for every prime p, (2:Z₂₀)^p ∈ {4, 8, 12}.
+    Proof structure: case analysis on p mod 4, using that for odd
+    primes p ≥ 5, p mod 4 ∈ {1, 3}. -/
 private lemma pow2_zmod20_prime (p : ℕ) (hp : p.Prime) :
     (2 : ZMod 20) ^ p ∈ ({4, 8, 12} : Finset (ZMod 20)) := by
   rcases Nat.lt_or_ge p 4 with hlt | hge
-  · -- p ∈ {0, 1, 2, 3}; sólo 2 y 3 son primos
+  · -- p ∈ {0, 1, 2, 3}; only 2 and 3 are prime
     interval_cases p
     · exact absurd hp (by decide)
     · exact absurd hp (by decide)
     · decide
     · decide
-  · -- p ≥ 4. Como p es primo y ≥ 4, p es impar
+  · -- p ≥ 4. Since p is prime and ≥ 4, p is odd
     have hq_pos : 1 ≤ p / 4 := Nat.one_le_div_iff (by norm_num) |>.mpr hge
-    -- p % 4 ≠ 0 (si no, 4 ∣ p ⇒ 2 ∣ p ⇒ p = 2, absurdo)
+    -- p % 4 ≠ 0 (otherwise 4 ∣ p ⇒ 2 ∣ p ⇒ p = 2, absurd)
     have hr_ne0 : p % 4 ≠ 0 := by
       intro h
       have h4 : 4 ∣ p := Nat.dvd_of_mod_eq_zero h
@@ -461,7 +461,7 @@ private lemma pow2_zmod20_prime (p : ℕ) (hp : p.Prime) :
       rcases hp.eq_one_or_self_of_dvd 2 h2 with h1 | h1
       · norm_num at h1
       · rw [← h1] at hge; norm_num at hge
-    -- p % 4 ≠ 2 (si no, 2 ∣ p y como p ≥ 4, p ≠ 2)
+    -- p % 4 ≠ 2 (otherwise 2 ∣ p and since p ≥ 4, p ≠ 2)
     have hr_ne2 : p % 4 ≠ 2 := by
       intro h
       have hp2 : p % 2 = 0 := by omega
@@ -469,17 +469,17 @@ private lemma pow2_zmod20_prime (p : ℕ) (hp : p.Prime) :
       rcases hp.eq_one_or_self_of_dvd 2 h2 with h1 | h1
       · norm_num at h1
       · rw [← h1] at hge; norm_num at hge
-    -- 16^(p/4) = 16  (porque p/4 ≥ 1)
+    -- 16^(p/4) = 16  (since p/4 ≥ 1)
     obtain ⟨n, hn⟩ : ∃ n, p / 4 = n + 1 := ⟨p / 4 - 1, by omega⟩
     have h16 : (16 : ZMod 20) ^ (p / 4) = 16 := by
       rw [hn]; exact sixteen_pow_succ n
-    -- Descomposición 2^p = (2^4)^(p/4) · 2^(p%4) = 16^(p/4) · 2^(p%4)
+    -- Decomposition 2^p = (2^4)^(p/4) · 2^(p%4) = 16^(p/4) · 2^(p%4)
     have hdec : (2 : ZMod 20) ^ p =
                 (16 : ZMod 20) ^ (p / 4) * (2 : ZMod 20) ^ (p % 4) := by
       conv_lhs => rw [← Nat.div_add_mod p 4]
       rw [pow_add, pow_mul, two_pow_four_zmod20]
     rw [hdec, h16]
-    -- Análisis por p % 4 ∈ {1, 3}
+    -- Case analysis on p % 4 ∈ {1, 3}
     have hr_lt : p % 4 < 4 := Nat.mod_lt p (by norm_num)
     interval_cases (p % 4)
     · exact absurd rfl hr_ne0
@@ -489,9 +489,9 @@ private lemma pow2_zmod20_prime (p : ℕ) (hp : p.Prime) :
     · -- p % 4 = 3: 16 · 8 = 128 ≡ 8  (mod 20)
       decide
 
-/-- **B1 — Concentración de Mersenne (todo primo)**.
-    Para todo p primo, M_p = 2^p − 1 ≡ {3, 7, 11} (mod 20).
-    Subconjunto estricto de las 8 clases Golden Prime de Z₂₀*. -/
+/-- **B1 — Mersenne concentration (all primes)**.
+    For every prime p, M_p = 2^p − 1 ≡ {3, 7, 11} (mod 20).
+    A strict subset of the 8 Golden Prime classes of Z₂₀*. -/
 theorem mersenne_concentration_general (p : ℕ) (hp : p.Prime) :
     (F1PCFUnified.mersenne p : ZMod 20) ∈ ({3, 7, 11} : Finset (ZMod 20)) := by
   -- (F1PCFUnified.mersenne p : Z₂₀) = (2:Z₂₀)^p − 1
@@ -501,7 +501,7 @@ theorem mersenne_concentration_general (p : ℕ) (hp : p.Prime) :
     push_cast; ring
   rw [hcast]
   have hpow := pow2_zmod20_prime p hp
-  -- Verificación finita: {4, 8, 12} − 1 = {3, 7, 11}
+  -- Finite check: {4, 8, 12} − 1 = {3, 7, 11}
   have hfin : ∀ x : ZMod 20,
       x ∈ ({4, 8, 12} : Finset (ZMod 20)) →
       x - 1 ∈ ({3, 7, 11} : Finset (ZMod 20)) := by decide
@@ -509,31 +509,31 @@ theorem mersenne_concentration_general (p : ℕ) (hp : p.Prime) :
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §6   TRIPLE IDENTIFICACIÓN DEL 3                                       ║
--- ║       3 = M₂ = |{3,7,11}| (three_eq_M2_eq_admissible_card)             ║
+-- ║  §6   TRIPLE IDENTIFICATION OF 3                                      ║
+-- ║       3 = M₂ = |{3,7,11}| (three_eq_M2_eq_admissible_card)            ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
 
-/-- **El factor 3 de la identidad central es la cardinalidad del conjunto de
-    clases admisibles, igual a M₂**.
+/-- **The factor 3 in the central identity is the cardinality of the
+    admissible class set, equal to M₂**.
 
-    Esta es la afirmación estructural de que el "3" en
-    `3 · φ^σ(p) = 2^p` (golden_tower_bridge) no es arbitrario: coincide con
+    This is the structural statement that the "3" in
+    `3 · φ^σ(p) = 2^p` (golden_tower_bridge) is not arbitrary: it coincides with
 
-    (i) `M₂ = 2² − 1 = 3`, el primer primo de Mersenne,
+    (i) `M₂ = 2² − 1 = 3`, the first Mersenne prime,
 
-    (ii) la cardinalidad |{3, 7, 11}| del conjunto de clases admisibles
-         de M_p módulo 20 (mersenne_concentration_general).
+    (ii) the cardinality |{3, 7, 11}| of the admissible class set
+         of M_p modulo 20 (mersenne_concentration_general).
 
-    Esta coincidencia (3 = M₂ = card de clases admisibles) explica
-    por qué la base ternaria es la mediación natural entre los Mersenne
-    primos y la base áurea φ. -/
+    This coincidence (3 = M₂ = card of admissible classes) explains
+    why ternary base is the natural mediating structure between
+    Mersenne primes and the golden base φ. -/
 theorem admissible_classes_card_eq_M2 :
     ({3, 7, 11} : Finset (ZMod 20)).card = F1PCFUnified.mersenne 2 := by
   decide
 
-/-- Versión más explícita: el `3` literal coincide con todas las tres
-    interpretaciones simultáneamente. -/
+/-- More explicit version: the literal `3` coincides with all three
+    interpretations simultaneously. -/
 theorem three_eq_M2_eq_admissible_card :
     (3 : ℕ) = F1PCFUnified.mersenne 2 ∧
     (3 : ℕ) = ({3, 7, 11} : Finset (ZMod 20)).card := by
@@ -543,20 +543,20 @@ theorem three_eq_M2_eq_admissible_card :
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §7   TEOREMA CONECTOR EULER–MERSENNE–GALOIS                           ║
--- ║       Síntesis formal de la conexión entre la identidad de Euler       ║
--- ║       y la identidad universal del paper a través de φ.                ║
--- ║                                                                        ║
--- ║       Articula las cuatro inscripciones de φ:                          ║
--- ║         (i)   φ en el rotor de Euler (ζ₁₀+ζ₁₀⁻¹ en ℂ)                  ║
--- ║         (ii)  φ en el pentágono (2·cos(π/5) en ℝ)                      ║
--- ║         (iii) φ en el doblamiento binario (φ^λ = 2)                    ║
--- ║         (iv)  φ en la concentración modular ({3,7,11} ⊂ Z₂₀*)          ║
--- ║                                                                        ║
--- ║       Más la afirmación de razón estructural Mersenne/Galois:          ║
--- ║       |{3,7,11}|·|Z₂₀*| = M₂·|Z₂₀*|, equivalente a M₂/|Z₂₀*| = 3/8.     ║
--- ║                                                                        ║
--- ║       Más la discretización del rotor en raíces décimas de la unidad.  ║
+-- ║  §7   EULER–MERSENNE–GALOIS CONNECTOR THEOREM                         ║
+-- ║       Formal synthesis of the connection between Euler's identity     ║
+-- ║       and the universal identity of the paper through φ.              ║
+-- ║                                                                       ║
+-- ║       Articulates the four inscriptions of φ:                         ║
+-- ║         (i)   φ in the Euler rotor (ζ₁₀+ζ₁₀⁻¹ in ℂ)                   ║
+-- ║         (ii)  φ in the pentagon (2·cos(π/5) in ℝ)                     ║
+-- ║         (iii) φ in binary doubling (φ^λ = 2)                          ║
+-- ║         (iv)  φ in modular concentration ({3,7,11} ⊂ Z₂₀*)            ║
+-- ║                                                                       ║
+-- ║       Plus the structural Mersenne/Galois ratio statement:            ║
+-- ║       |{3,7,11}|·|Z₂₀*| = M₂·|Z₂₀*|, equivalent to M₂/|Z₂₀*| = 3/8.   ║
+-- ║                                                                       ║
+-- ║       Plus discretization of the rotor into 10th roots of unity.      ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
 /-- Euler's identity in rotor form: `e^{iπ} = −1`.  The rotor `e^{iθ}` at
@@ -590,48 +590,48 @@ theorem euler_rotor : Complex.exp (↑Real.pi * Complex.I) = -1 :=
     F_1 substrate).  The present theorem records the corresponding
     structural coincidence for φ. -/
 theorem phi_euler_mersenne_connector :
-    -- (i) PULSO CIRCULAR: φ es suma de dos vértices conjugados del decágono
-    --     en S¹ ⊂ ℂ (inscripción de φ en el rotor de Euler)
+    -- (i) CIRCULAR PULSE: φ is the sum of two conjugate decagon vertices
+    --     on S¹ ⊂ ℂ (inscription of φ in the Euler rotor)
     (φ : ℂ) = Complex.exp (((Real.pi / 5 : ℝ) : ℂ) * Complex.I) +
               Complex.exp (-(((Real.pi / 5 : ℝ) : ℂ) * Complex.I)) ∧
-    -- (ii) CIERRE DEL ROTOR: ζ₁₀ cierra el giro de Euler a los 10 pasos
-    --      (el período 2π se discretiza en el decágono)
+    -- (ii) ROTOR CLOSURE: ζ₁₀ closes the Euler rotation in 10 steps
+    --      (the 2π period is discretized in the decagon)
     Complex.exp (((Real.pi / 5 : ℝ) : ℂ) * Complex.I) ^ 10 = 1 ∧
-    -- (iii) PULSO PENTAGONAL: φ = 2·cos(π/5) en ℝ
-    --       (inscripción de φ en la geometría del pentágono regular)
+    -- (iii) PENTAGONAL PULSE: φ = 2·cos(π/5) in ℝ
+    --       (inscription of φ in the geometry of the regular pentagon)
     (φ : ℝ) = 2 * Real.cos (Real.pi / 5) ∧
-    -- (iv) PULSO BINARIO: φ^λ = 2 cierra el período áureo al doblamiento
-    --      (período trascendental λ_log de la línea multiplicativa real)
+    -- (iv) BINARY PULSE: φ^λ = 2 closes the golden period at doubling
+    --      (transcendental period λ_log of the real multiplicative line)
     (φ : ℝ) ^ lambda_log = 2 ∧
-    -- (v) IDENTIDAD UNIVERSAL: composición binario × ternario × pentagonal
-    --     3·φ^σ(p) = 2^p para todo p ∈ ℝ
+    -- (v) UNIVERSAL IDENTITY: binary × ternary × pentagonal composition
+    --     3·φ^σ(p) = 2^p for all p ∈ ℝ
     (∀ p : ℝ, (3 : ℝ) * (φ : ℝ) ^ sigma_mersenne p = (2 : ℝ) ^ p) ∧
-    -- (vi) CONCENTRACIÓN DE MERSENNE: M_p mod 20 ∈ {3,7,11}
-    --      para todo p primo
+    -- (vi) MERSENNE CONCENTRATION: M_p mod 20 ∈ {3,7,11}
+    --      for every prime p
     (∀ p : ℕ, p.Prime →
       (F1PCFUnified.mersenne p : ZMod 20) ∈ ({3, 7, 11} : Finset (ZMod 20))) ∧
-    -- (vii) TRIPLE IDENTIFICACIÓN: 3 = M₂ = |{3,7,11}|
-    --       (el factor ternario coincide con primer Mersenne y cardinalidad)
+    -- (vii) TRIPLE IDENTIFICATION: 3 = M₂ = |{3,7,11}|
+    --       (the ternary factor coincides with first Mersenne and cardinality)
     ((3 : ℕ) = F1PCFUnified.mersenne 2 ∧
      (3 : ℕ) = ({3, 7, 11} : Finset (ZMod 20)).card) ∧
-    -- (viii) COERCIÓN ℝ ↪ ℂ: φ_ℝ y φ_ℂ son el mismo objeto
-    --        (el φ de la identidad universal y el φ del rotor de Euler
-    --         coinciden bajo la inclusión canónica ℝ ↪ ℂ)
+    -- (viii) COERCION ℝ ↪ ℂ: φ_ℝ and φ_ℂ are the same object
+    --        (the φ of the universal identity and the φ of the Euler rotor
+    --         coincide under the canonical embedding ℝ ↪ ℂ)
     ((φ : ℝ) : ℂ) = (φ : ℂ) ∧
-    -- (ix) ORDEN DEL GRUPO DE GALOIS: |Z₂₀*| = 8
-    --      (los ocho automorfismos del decágono regular extendido a ℚ(ζ₂₀))
+    -- (ix) GALOIS GROUP ORDER: |Z₂₀*| = 8
+    --      (the eight automorphisms of the regular decagon extended to ℚ(ζ₂₀))
     ZtwentyStar.card = 8 ∧
-    -- (x) INCLUSIÓN ESTRUCTURAL: las tres clases admisibles son sub-objeto
-    --     del grupo de Galois del decágono (no residuos arbitrarios)
+    -- (x) STRUCTURAL INCLUSION: the three admissible classes are a sub-object
+    --     of the decagon Galois group (not arbitrary residues)
     ({3, 7, 11} : Finset (ZMod 20)) ⊆ ZtwentyStar ∧
-    -- (xi) RAZÓN ESTRUCTURAL MERSENNE/GALOIS:
+    -- (xi) STRUCTURAL MERSENNE/GALOIS RATIO:
     --      |{3,7,11}|·8 = M₂·|Z₂₀*|
-    --      (los primos de Mersenne ocupan la fracción M₂/|Z₂₀*| = 3/8
-    --       de las clases del grupo de Galois del decágono)
+    --      (Mersenne primes occupy the fraction M₂/|Z₂₀*| = 3/8
+    --       of the decagon Galois group classes)
     ({3, 7, 11} : Finset (ZMod 20)).card * 8 =
       F1PCFUnified.mersenne 2 * ZtwentyStar.card ∧
-    -- (xii) DISCRETIZACIÓN DEL ROTOR: las potencias de ζ₁₀ son raíces décimas
-    --       de la unidad —los diez vértices del decágono regular en S¹—
+    -- (xii) ROTOR DISCRETIZATION: powers of ζ₁₀ are 10th roots
+    --       of unity —the ten vertices of the regular decagon on S¹—
     (∀ k : ℕ,
       (Complex.exp (((Real.pi / 5 : ℝ) : ℂ) * Complex.I) ^ k) ^ 10 = 1) := by
   refine ⟨phi_eq_zeta10_sum,
@@ -646,12 +646,12 @@ theorem phi_euler_mersenne_connector :
           ?_,
           ?_,
           ?_⟩
-  -- (x) {3, 7, 11} ⊆ Z₂₀*: verificación finita
+  -- (x) {3, 7, 11} ⊆ Z₂₀*: finite check
   · decide
-  -- (xi) 3·8 = M₂·8: por M₂ = 3 y |Z₂₀*| = 8
+  -- (xi) 3·8 = M₂·8: since M₂ = 3 and |Z₂₀*| = 8
   · decide
-  -- (xii) (ζ₁₀^k)^10 = 1 para todo k : ℕ
-  -- Prueba: (ζ₁₀^k)^10 = ζ₁₀^(k·10) = ζ₁₀^(10·k) = (ζ₁₀^10)^k = 1^k = 1
+  -- (xii) (ζ₁₀^k)^10 = 1 for all k : ℕ
+  -- Proof: (ζ₁₀^k)^10 = ζ₁₀^(k·10) = ζ₁₀^(10·k) = (ζ₁₀^10)^k = 1^k = 1
   · intro k
     rw [← pow_mul, mul_comm k 10, pow_mul, zeta10_pow_ten_eq_one, one_pow]
 
@@ -660,26 +660,26 @@ end
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §8   AXIOMAS GIMPS — Primalidad de M_p                                ║
--- ║                                                                        ║
--- ║       Para p ≤ 31: 8 primalidades verificables en Lean por             ║
--- ║                    native_decide (computables localmente).             ║
--- ║       Para p ≥ 61: 44 primalidades verificadas externamente por        ║
--- ║                    GIMPS mediante test Lucas-Lehmer (no computables    ║
--- ║                    en Lean por tamaño; M_82589933 tiene ~25M dígitos). ║
--- ║                                                                        ║
--- ║       El paper afirma desde el abstract: "the entire framework is      ║
--- ║       formalised in Lean 4 ... with 0 sorry; only the 44 GIMPS         ║
--- ║       primalities for p ≥ 61 are taken as inputs".  Esta sección       ║
--- ║       cumple esa afirmación.                                            ║
+-- ║  §8   GIMPS AXIOMS — Primality of M_p                                 ║
+-- ║                                                                       ║
+-- ║       For p ≤ 31: 8 primality proofs verifiable in Lean by            ║
+-- ║                    native_decide (locally computable).                ║
+-- ║       For p ≥ 61: 44 primality proofs externally verified by          ║
+-- ║                    GIMPS via the Lucas–Lehmer test (not computable    ║
+-- ║                    in Lean due to size; M_82589933 has ~25M digits).  ║
+-- ║                                                                       ║
+-- ║       The paper states in the abstract: "the entire framework is      ║
+-- ║       formalised in Lean 4 ... with 0 sorry; only the 44 GIMPS        ║
+-- ║       primalities for p ≥ 61 are taken as inputs".  This section      ║
+-- ║       fulfills that claim.                                            ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
 namespace GIMPS
 
-/-! ### §8.1  Primalidad computable: M_p para p ∈ {2, 3, 5, 7, 13, 17, 19, 31}
+/-! ### §8.1  Computable primality: M_p for p ∈ {2, 3, 5, 7, 13, 17, 19, 31}
 
-    Estas 8 primalidades se verifican dentro de Lean por evaluación
-    directa (native_decide).  No requieren input externo. -/
+    These 8 primality proofs are verified within Lean by direct
+    evaluation (native_decide).  They require no external input. -/
 
 theorem mersenne_prime_2  : Nat.Prime (2 ^  2 - 1) := by native_decide
 theorem mersenne_prime_3  : Nat.Prime (2 ^  3 - 1) := by native_decide
@@ -690,12 +690,12 @@ theorem mersenne_prime_17 : Nat.Prime (2 ^ 17 - 1) := by native_decide
 theorem mersenne_prime_19 : Nat.Prime (2 ^ 19 - 1) := by native_decide
 theorem mersenne_prime_31 : Nat.Prime (2 ^ 31 - 1) := by native_decide
 
-/-! ### §8.2  Axiomas GIMPS: M_p primo para p ∈ {61, 89, ..., 136279841}
+/-! ### §8.2  GIMPS axioms: M_p prime for p ∈ {61, 89, ..., 136279841}
 
-    Las 44 primalidades verificadas externamente por el proyecto GIMPS
-    mediante el test Lucas-Lehmer.  Entran como axiom porque su
-    verificación en Lean es computacionalmente prohibitiva:
-    M_136279841 tiene aproximadamente 41.024.320 dígitos decimales. -/
+    The 44 primality proofs externally verified by the GIMPS project
+    via the Lucas–Lehmer test.  Entered as axioms because their
+    verification in Lean is computationally prohibitive:
+    M_136279841 has approximately 41,024,320 decimal digits. -/
 
 axiom mersenne_prime_61        : Nat.Prime (2 ^ 61        - 1)
 axiom mersenne_prime_89        : Nat.Prime (2 ^ 89        - 1)
@@ -746,10 +746,10 @@ end GIMPS
 
 
 /-═══════════════════════════════════════════════════════════════════════════
-  RESUMEN DE CONTENIDO FORMAL (golden_mersenne.lean)
+  FORMAL CONTENT SUMMARY (golden_mersenne.lean)
   ───────────────────────────────────────────────────────────────────────────
 
-  CORRESPONDENCIA CON EL PAPER (etiqueta → identificador Lean)
+  PAPER CORRESPONDENCE (label → Lean identifier)
     thm:universal            →  golden_tower_bridge
     thm:unique               →  sigma_mersenne_unique
     lem:binary               →  mersenne_bridge_via_lambda
@@ -776,32 +776,32 @@ end GIMPS
     prop:rank-inert          →  mersenne_rank_iff_inert
     cor:joint                →  mersenne_presentation_from_p_mod4
 
-  ESTADÍSTICAS
-    Líneas:                        1599
-    Declaraciones:                   ~86
-    Sorry en código:                   0
-    Axiomas del archivo:              45   (44 GIMPS + Gelfond-Schneider)
-    phi_sq:                                 teorema probado (no axioma)
+  STATISTICS
+    Lines:                          1599
+    Declarations:                    ~86
+    Sorry in code:                     0
+    File axioms:                      45   (44 GIMPS + Gelfond–Schneider)
+    phi_sq:                                 proved theorem (not an axiom)
 
-  AUTOSUFICIENCIA
-    El archivo no depende de mersenne_unified.lean: la escisión Fibonacci
-    (§10) y el puente binario (§11) están incluidos aquí, junto con el
-    eslabón de reciprocidad que fija la presentación conjunta desde
+  SELF-CONTAINMENT
+    The file does not depend on mersenne_unified.lean: the Fibonacci splitting
+    (§10) and binary bridge (§11) are included here, along with the
+    reciprocity link that pins the joint presentation from
     p mod 4 (mersenne_presentation_from_p_mod4).
 ═══════════════════════════════════════════════════════════════════════════-/
 
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §9   TRANSCENDENCIA DE λ_log  (integrado de lambda_log_transcendental) ║
--- ║       λ_log = log 2 / log φ es trascendente sobre ℚ, vía Gelfond–      ║
--- ║       Schneider (axioma explícito, aún no en Mathlib mainline).         ║
--- ║       Reusa φ, φ_pos, φ_gt_one, φ_ne_zero, phi_sq, lambda_log,          ║
--- ║       mersenne_bridge_via_lambda y log_φ_pos ya definidos arriba.       ║
+-- ║  §9   TRANSCENDENCE OF λ_log  (from lambda_log_transcendental)        ║
+-- ║       λ_log = log 2 / log φ is transcendental over ℚ, via Gelfond–    ║
+-- ║       Schneider (explicit axiom, not yet in Mathlib mainline).        ║
+-- ║       Reuses φ, φ_pos, φ_gt_one, φ_ne_zero, phi_sq, lambda_log,       ║
+-- ║       mersenne_bridge_via_lambda and log_φ_pos defined above.         ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 noncomputable section
 
-/-- Conjugado áureo ψ = (1 − √5)/2, raíz conjugada de X² − X − 1. -/
+/-- Golden conjugate ψ = (1 − √5)/2, conjugate root of X² − X − 1. -/
 def ψ : ℝ := (1 - Real.sqrt 5) / 2
 
 theorem psi_sq : ψ ^ 2 = ψ + 1 := by
@@ -832,32 +832,33 @@ theorem psi_ne_zero : ψ ≠ 0 := by
   have := phi_mul_psi
   intro h; rw [h, mul_zero] at this; norm_num at this
 
-/-! ### Paso (A): φ es algebraico sobre ℚ (raíz de X² − X − 1). -/
+/-! ### Step (A): φ is algebraic over ℚ (root of X² − X − 1). -/
 
 theorem phi_isAlgebraic : IsAlgebraic ℚ φ := by
   refine ⟨Polynomial.X ^ 2 - Polynomial.X - Polynomial.C 1, ?_, ?_⟩
-  · -- el polinomio X² − X − 1 no es nulo (coeficiente de grado 2 es 1)
+  · -- the polynomial X² − X − 1 is nonzero (leading coefficient is 1)
     intro h
     have hc := congrArg (fun p => Polynomial.coeff p 2) h
     simp [Polynomial.coeff_X_pow, Polynomial.coeff_X, Polynomial.coeff_one] at hc
-  · -- φ es raíz: φ² − φ − 1 = 0  (de phi_sq)
+  · -- φ is a root: φ² − φ − 1 = 0  (from phi_sq)
     simp only [map_sub, map_pow, Polynomial.aeval_X, map_one]
     have h := phi_sq         -- φ^2 = φ + 1
     linarith [h]
 
-/-! ### Paso (B): λ_log es irracional  (∀ i j : ℤ, λ_log ≠ i/j).
+/-! ### Step (B): λ_log is irrational  (∀ i j : ℤ, λ_log ≠ i/j).
 
-    Estrategia:  si λ_log = a/b (a,b ≥ 1) entonces φ^a = 2^b (log inyectivo).
-    Con el conjugado ψ:  φ^a + ψ^a = L_a ∈ ℤ  (Lucas), y |ψ^a| < 1 con
-    ψ^a ≠ 0.  Entonces ψ^a = L_a − 2^b sería un entero de valor absoluto < 1
-    y no nulo — imposible.  Contradicción.
+    Strategy: if λ_log = a/b (a,b ≥ 1) then φ^a = 2^b (log injective).
+    With the conjugate ψ:  φ^a + ψ^a = L_a ∈ ℤ  (Lucas), and |ψ^a| < 1 with
+    ψ^a ≠ 0.  Then ψ^a = L_a − 2^b would be a nonzero integer with
+    absolute value < 1 — impossible.  Contradiction.
 -/
 
-/-- ★ Enteros de Lucas: φ^n + ψ^n es un entero.
-    Por recurrencia fuerte usando φ+ψ = 1 y φ·ψ = −1:
-      L_{n+2} = L_{n+1} + L_n, con L_0 = 2, L_1 = 1.
-    ⚠ Este es el lema que más puede requerir ajustar (inducción de dos pasos /
-      Nat.strong_induction). La afirmación y la recurrencia son correctas. -/
+/-- ★ Lucas integers: φ^n + ψ^n is an integer.
+    By strong induction using φ+ψ = 1 and φ·ψ = −1:
+      L_{n+2} = L_{n+1} + L_n, with L_0 = 2, L_1 = 1.
+    ⚠ This is the lemma most likely to require adjustment (two-step
+      induction / Nat.strong_induction). The statement and recurrence
+      are correct. -/
 theorem phi_pow_add_psi_pow_isInt (n : ℕ) :
     ∃ m : ℤ, φ ^ n + ψ ^ n = (m : ℝ) := by
   induction n using Nat.strong_induction_on with
@@ -877,9 +878,9 @@ theorem phi_pow_add_psi_pow_isInt (n : ℕ) :
       rw [hrec, phi_add_psi, phi_mul_psi, h1, h0]; push_cast; ring
 
 
-/-- Helper (naturales): para a, b ≥ 1, λ_log ≠ a/b.
-    Si λ_log = a/b entonces φ^a = 2^b (log inyectivo), luego por Lucas (★)
-    ψ^a = L_a − 2^b ∈ ℤ con 0 < |ψ^a| < 1 — imposible. -/
+/-- Helper (naturals): for a, b ≥ 1, λ_log ≠ a/b.
+    If λ_log = a/b then φ^a = 2^b (log injective), so by Lucas (★)
+    ψ^a = L_a − 2^b ∈ ℤ with 0 < |ψ^a| < 1 — impossible. -/
 private theorem lambda_log_ne_nat_div (a b : ℕ) (ha : 1 ≤ a) (hb : 1 ≤ b) :
     lambda_log ≠ (a : ℝ) / (b : ℝ) := by
   intro hab
@@ -889,19 +890,19 @@ private theorem lambda_log_ne_nat_div (a b : ℕ) (ha : 1 ≤ a) (hb : 1 ≤ b) 
   have hcross : Real.log 2 * (b : ℝ) = (a : ℝ) * Real.log φ := by
     have hab2 : Real.log 2 / Real.log φ = (a : ℝ) / (b : ℝ) := hab
     rwa [div_eq_div_iff hlogφ hb'] at hab2
-  -- 2^b = φ^a  (potencias naturales, como reales)
+  -- 2^b = φ^a  (natural powers, viewed as reals)
   have hpow : (2 : ℝ) ^ b = φ ^ a := by
     rw [← Real.rpow_natCast (2 : ℝ) b, ← Real.rpow_natCast φ a,
         Real.rpow_def_of_pos (by norm_num : (0:ℝ) < 2),
         Real.rpow_def_of_pos φ_pos]
     congr 1
     linear_combination hcross
-  -- Lucas: φ^a + ψ^a = L_a ∈ ℤ, luego ψ^a = L_a − 2^b ∈ ℤ
+  -- Lucas: φ^a + ψ^a = L_a ∈ ℤ, so ψ^a = L_a − 2^b ∈ ℤ
   obtain ⟨mm, hmm⟩ := phi_pow_add_psi_pow_isInt a
   have hψ_eq : ψ ^ a = ((mm - 2 ^ b : ℤ) : ℝ) := by
     have hmm' : (2 : ℝ) ^ b + ψ ^ a = (mm : ℝ) := by rw [hpow]; exact hmm
     push_cast; linarith [hmm']
-  -- pero 0 < |ψ^a| < 1
+  -- but 0 < |ψ^a| < 1
   have hne : ψ ^ a ≠ 0 := pow_ne_zero a psi_ne_zero
   have hlt1 : |ψ ^ a| < 1 := by
     rw [abs_pow]; exact pow_lt_one₀ (abs_nonneg ψ) psi_lt_one_abs (by omega)
@@ -912,9 +913,9 @@ private theorem lambda_log_ne_nat_div (a b : ℕ) (ha : 1 ≤ a) (hb : 1 ≤ b) 
   have h2' : (mm - 2 ^ b : ℤ) < 1 := by exact_mod_cast h2
   omega
 
-/-- λ_log es irracional en la forma que pide Gelfond–Schneider.
-    Reducción del caso entero (i, j) al helper sobre naturales vía valores
-    absolutos (λ_log > 0 fuerza mismo signo de i, j). -/
+/-- λ_log is irrational in the form required by Gelfond–Schneider.
+    Reduction of the integer case (i, j) to the natural-number helper via
+    absolute values (λ_log > 0 forces i, j to share the same sign). -/
 theorem lambda_log_irrational : ∀ i j : ℤ, lambda_log ≠ (i : ℝ) / (j : ℝ) := by
   intro i j hij
   have hll_pos : 0 < lambda_log :=
@@ -934,31 +935,31 @@ theorem lambda_log_irrational : ∀ i j : ℤ, lambda_log ≠ (i : ℝ) / (j : �
     exact lambda_log_ne_nat_div i.natAbs j.natAbs
       (Int.natAbs_pos.mpr hi) (Int.natAbs_pos.mpr hj) key
 
-/-! ### Paso (C): puente rpow (ℝ) → cpow (ℂ) para φ^λ_log. -/
+/-! ### Step (C): rpow (ℝ) → cpow (ℂ) bridge for φ^λ_log. -/
 
 theorem phi_cpow_lambda_eq_two : (φ : ℂ) ^ (lambda_log : ℂ) = 2 := by
   rw [← Complex.ofReal_cpow φ_pos.le]
-  -- (↑φ)^(↑λ) = ↑(φ^λ);  φ^λ = 2 por mersenne_bridge_via_lambda
+  -- (↑φ)^(↑λ) = ↑(φ^λ);  φ^λ = 2 by mersenne_bridge_via_lambda
   rw [show φ ^ lambda_log = (2:ℝ) from mersenne_bridge_via_lambda]
   norm_num
 
-/-! ### Paso (D): TEOREMA PRINCIPAL — λ_log es transcendental. -/
+/-! ### Step (D): MAIN THEOREM — λ_log is transcendental. -/
 
-/-- **Gelfond–Schneider** (forma cpow, Karatarakis–Wiedijk 2026, arXiv 2603.24823).
-    Aún NO está en Mathlib mainline (vive en un fork), por lo que se declara como
-    axioma explícito con su firma exacta.  Es el único input externo de este
-    archivo: todo lo demás está demostrado (0 sorry). -/
+/-- **Gelfond–Schneider** (cpow form, Karatarakis–Wiedijk 2026, arXiv 2603.24823).
+    Not yet in Mathlib mainline (lives in a fork), hence declared as an
+    explicit axiom with its exact signature.  It is the only external input
+    of this file: everything else is proved (0 sorry). -/
 axiom transcendental_cpow_of_isAlgebraic_of_irrational (α β : ℂ)
     (hα : IsAlgebraic ℚ α) (hβ : IsAlgebraic ℚ β)
     (htriv : α ≠ 0 ∧ α ≠ 1) (hirr : ∀ i j : ℤ, β ≠ (i : ℂ) / (j : ℂ)) :
     Transcendental ℚ (α ^ β)
 
 theorem lambda_log_transcendental : Transcendental ℚ lambda_log := by
-  -- por contradicción: si λ_log fuese algebraico, GS daría φ^λ_log
-  -- transcendental, contradiciendo φ^λ_log = 2 (algebraico).
+  -- by contradiction: if λ_log were algebraic, GS would yield φ^λ_log
+  -- transcendental, contradicting φ^λ_log = 2 (algebraic).
   rw [Transcendental]
   intro halg    -- halg : IsAlgebraic ℚ lambda_log
-  -- pasar la algebraicidad de ℝ a ℂ vía la inclusión ℚ → ℂ
+  -- transfer algebraicity from ℝ to ℂ via the inclusion ℚ → ℂ
   have hβℂ : IsAlgebraic ℚ (lambda_log : ℂ) := by
     have h : IsAlgebraic ℚ (algebraMap ℝ ℂ lambda_log) := halg.algebraMap
     simpa using h
@@ -966,8 +967,8 @@ theorem lambda_log_transcendental : Transcendental ℚ lambda_log := by
     have h : IsAlgebraic ℚ (algebraMap ℝ ℂ φ) := phi_isAlgebraic.algebraMap
     simpa using h
   have hirrℂ : ∀ i j : ℤ, (lambda_log : ℂ) ≠ (i : ℂ) / (j : ℂ) := by
-    -- de lambda_log_irrational (ℝ) a ℂ: λ_log es real, y (↑i/↑j : ℂ) real ⟹
-    -- igualaría a un racional real, contradiciendo la irracionalidad real.
+    -- from lambda_log_irrational (ℝ) to ℂ: λ_log is real, and (↑i/↑j : ℂ) real ⟹
+    -- it would equal a real rational, contradicting real irrationality.
     intro i j hc
     apply lambda_log_irrational i j
     have := congrArg Complex.re hc
@@ -978,11 +979,11 @@ theorem lambda_log_transcendental : Transcendental ℚ lambda_log := by
     · intro hc
       have hφ1 : φ = 1 := by exact_mod_cast hc
       linarith [φ_gt_one]
-  -- aplicar Gelfond–Schneider
+  -- apply Gelfond–Schneider
   have hgs : Transcendental ℚ ((φ : ℂ) ^ (lambda_log : ℂ)) :=
     transcendental_cpow_of_isAlgebraic_of_irrational
       (φ : ℂ) (lambda_log : ℂ) hφℂ hβℂ htriv hirrℂ
-  -- pero (φ:ℂ)^(λ:ℂ) = 2, que es algebraico
+  -- but (φ:ℂ)^(λ:ℂ) = 2, which is algebraic
   rw [phi_cpow_lambda_eq_two] at hgs
   have h2alg : IsAlgebraic ℚ (2 : ℂ) := by
     have h := isAlgebraic_algebraMap (R := ℚ) (A := ℂ) 2
@@ -994,23 +995,24 @@ end
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  LA IDENTIDAD, CARACTERIZADA                                           ║
--- ║  (teorema de consistencia y unicidad de un sistema sobredeterminado)   ║
--- ║                                                                        ║
--- ║  No es un axioma ni una definición disfrazada: es el punto único donde ║
--- ║  encajan determinaciones fijadas por separado, cada una por un teorema ║
--- ║  externo a la ecuación. La ecuación 3·φ^σ = 2^p es, como igualdad, la  ║
--- ║  evaluación de una definición (σ := p·λ − log_φ 3); el CONTENIDO es la ║
--- ║  compatibilidad mutua de esas determinaciones, que el kernel certifica ║
--- ║  al aceptar la conjunción sin sorry.                                    ║
+-- ║  THE IDENTITY, CHARACTERIZED                                          ║
+-- ║  (consistency and uniqueness theorem for an overdetermined system)    ║
+-- ║                                                                       ║
+-- ║  It is not an axiom nor a disguised definition: it is the unique      ║
+-- ║  point where determinations fixed separately, each by a theorem       ║
+-- ║  external to the equation, come together.  The equation 3·φ^σ = 2^p   ║
+-- ║  is, as an equality, the evaluation of a definition                   ║
+-- ║  (σ := p·λ − log_φ 3); the CONTENT is the mutual compatibility of     ║
+-- ║  those determinations, which the kernel certifies by accepting the    ║
+-- ║  conjunction without sorry.                                           ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
 noncomputable section
 
 open F1PCFUnified
 
-/-- **La identidad áurea, caracterizada** como consistencia + unicidad de un
-    sistema sobredeterminado. -/
+/-- **The golden identity, characterized** as consistency + uniqueness of an
+    overdetermined system. -/
 theorem golden_identity_characterization :
     (∀ p : ℝ, (3 : ℝ) * φ ^ sigma_mersenne p = (2 : ℝ) ^ p) ∧
     (∀ p σ : ℝ, (3 : ℝ) * φ ^ σ = (2 : ℝ) ^ p → σ = sigma_mersenne p) ∧
@@ -1025,9 +1027,9 @@ theorem golden_identity_characterization :
    three_eq_M2_eq_admissible_card,
    mersenne_concentration_general⟩
 
-/-- Lectura de la caracterización: la ecuación central (i) no se prueba a sí
-    misma; se prueba que existe, es única, y coincide con determinaciones
-    externas (iii)–(iv). -/
+/-- Reading of the characterization: the central equation (i) does not prove
+    itself; it is shown to exist, to be unique, and to coincide with
+    external determinations (iii)–(iv). -/
 theorem golden_identity_is_consistent_overdetermined :
     ∃! σ : ℝ → ℝ,
       (∀ p : ℝ, (3 : ℝ) * φ ^ σ p = (2 : ℝ) ^ p) := by
@@ -1038,17 +1040,17 @@ theorem golden_identity_is_consistent_overdetermined :
 
 end
 
--- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §10  ESCISIÓN FIBONACCI (portado de mersenne_unified.lean §5.2)       ║
--- ║        + §4.4 del paper: el tipo desde el exponente                    ║
--- ║   mersenne → F1PCFUnified.mersenne ; reusa mersenne_concentration_gen. ║
--- ╚═══════════════════════════════════════════════════════════════════════╝
+-- ╔═════════════════════════════════════════════════════════════════════════╗
+-- ║  §10  FIBONACCI SPLITTING (ported from mersenne_unified.lean §5.2)      ║
+-- ║        + §4.4 of the paper: type from the exponent                      ║
+-- ║   mersenne → F1PCFUnified.mersenne ; reuses mersenne_concentration_gen. ║
+-- ╚═════════════════════════════════════════════════════════════════════════╝
 
 noncomputable section
 
-/-! ### §5.2  B2 — Escisión Fibonacci general (vía AdjoinRoot/Frobenius) -/
+/-! ### §5.2  B2 — General Fibonacci splitting (via AdjoinRoot/Frobenius) -/
 
-/-- Identidad de Binet en cualquier anillo conmutativo con α² = α + 1:
+/-- Binet identity in any commutative ring with α² = α + 1:
     α^(n+1) = F_{n+1}·α + F_n. -/
 private theorem fib_pow_aux {R : Type*} [CommRing R] (α : R) (hα : α ^ 2 = α + 1) :
     ∀ n : ℕ, α ^ (n + 1) = (Nat.fib (n + 1) : R) * α + (Nat.fib n : R) := by
@@ -1085,10 +1087,10 @@ private theorem five_ne_zero_zmod {p : ℕ} (hp : p.Prime) (hp5 : p ≠ 5) :
     omega
   · exact hp5 h5
 
-/-- Caso split: si X² − X − 1 tiene raíz α ∈ Z_p, entonces F_p ≡ 1 (mod p).
-    Estrategia: Fermat (α^p = α por ZMod.pow_card en cuerpo F_p) + identidad
-    de Binet. La identidad clave (2α−1)² = 5 ≠ 0 (válida para p ≠ 5) permite
-    cancelar el factor (2α−1) en la diferencia entre los dos casos α y 1−α. -/
+/-- Split case: if X² − X − 1 has a root α ∈ Z_p, then F_p ≡ 1 (mod p).
+    Strategy: Fermat (α^p = α via ZMod.pow_card in F_p) + Binet identity.
+    The key identity (2α−1)² = 5 ≠ 0 (valid for p ≠ 5) allows cancellation
+    of the factor (2α−1) in the difference between the two cases α and 1−α. -/
 private theorem fib_split_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (hp5 : p ≠ 5)
     (α : ZMod p) (hα : α ^ 2 = α + 1) :
     (Nat.fib p : ZMod p) = 1 := by
@@ -1104,7 +1106,7 @@ private theorem fib_split_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (hp5 : 
     rw [← hfβ]; exact ZMod.pow_card (1 - α)
   have hdiff : ((Nat.fib p : ZMod p) - 1) * (2 * α - 1) = 0 := by
     linear_combination heqα - heqβ
-  -- (2α − 1)² = 5 en Z_p, y 5 ≠ 0 cuando p ≠ 5
+  -- (2α − 1)² = 5 in Z_p, and 5 ≠ 0 when p ≠ 5
   have h2α1_sq : (2 * α - 1) ^ 2 = (5 : ZMod p) := by linear_combination 4 * hα
   have h2α1_ne : 2 * α - 1 ≠ 0 := by
     intro h
@@ -1115,15 +1117,15 @@ private theorem fib_split_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (hp5 : 
   · exact sub_eq_zero.mp hfp
   · exact absurd h2 h2α1_ne
 
-/-- Caso inert: si X² − X − 1 es irreducible en Z_p[X], entonces F_p ≡ −1 (mod p).
-    Estrategia (5 pasos):
-      (1) En K = Z_p[α]/(α²−α−1) = GF(p²): (α^p)² = α^p + 1  por freshman's dream.
-      (2) X² − X − 1 no tiene raíz en Z_p (por irreducibilidad explícita).
-      (3) α^p ≠ α  porque ∏_{a:Z_p}(α − a) = α^p − α = 0 en K dominio,
-          implicaría α = algMap c con c² = c + 1 en Z_p (contradiciendo (2)).
-      (4) α^p = 1 − α  (la otra raíz: (α^p − α)(α^p − (1−α)) = 0 y α^p ≠ α).
-      (5) F_p ≡ −1 mod p  (si F_p + 1 ≠ 0, entonces α = algMap c con c²=c+1,
-          contradiciendo (2)). -/
+/-- Inert case: if X² − X − 1 is irreducible in Z_p[X], then F_p ≡ −1 (mod p).
+    Strategy (5 steps):
+      (1) In K = Z_p[α]/(α²−α−1) = GF(p²): (α^p)² = α^p + 1  by freshman's dream.
+      (2) X² − X − 1 has no root in Z_p (by explicit irreducibility).
+      (3) α^p ≠ α  because ∏_{a:Z_p}(α − a) = α^p − α = 0 in the domain K,
+          implying α = algMap c with c² = c + 1 in Z_p (contradicting (2)).
+      (4) α^p = 1 − α  (the other root: (α^p − α)(α^p − (1−α)) = 0 and α^p ≠ α).
+      (5) F_p ≡ −1 mod p  (if F_p + 1 ≠ 0, then α = algMap c with c²=c+1,
+          contradicting (2)). -/
 private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 : p ≠ 5)
     (hirr : Irreducible (X ^ 2 - X - 1 : (ZMod p)[X])) :
     (Nat.fib p : ZMod p) = p - 1 ∧ (Nat.fib (p - 1) : ZMod p) = 1 := by
@@ -1138,14 +1140,14 @@ private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 :
       AdjoinRoot.eval₂_root _
     simp only [map_sub, map_pow, map_one, Polynomial.aeval_X] at h
     linear_combination h
-  -- Paso 1: (α^p)² = α^p + 1 (freshman's dream)
+  -- Step 1: (α^p)² = α^p + 1 (freshman's dream)
   have hαp_root : (α ^ p) ^ 2 = α ^ p + 1 := by
     calc (α ^ p) ^ 2
         = (α ^ 2) ^ p := by ring
       _ = (α + 1) ^ p := by rw [hα_sq]
       _ = α ^ p + 1 ^ p := add_pow_char ..
       _ = α ^ p + 1 := by ring
-  -- Paso 2: X² − X − 1 no tiene raíces en Z_p
+  -- Step 2: X² − X − 1 has no roots in Z_p
   have hirr_no_root : ∀ c : ZMod p, c ^ 2 ≠ c + 1 := by
     intro c hc
     have hkey : c - c ^ 2 = -1 := by linear_combination -hc
@@ -1167,10 +1169,10 @@ private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 :
     · exact hnu (1 - c) h
   have hinj : Function.Injective (algebraMap (ZMod p) K) :=
     (algebraMap (ZMod p) K).injective
-  -- Paso 3: α^p ≠ α
+  -- Step 3: α^p ≠ α
   have hαp_ne : α ^ p ≠ α := by
     intro heq
-    -- Sobre 𝔽_p: X^p − X = ∏_{a∈𝔽_p}(X − a)  (Fermat: cada a es raíz simple).
+    -- Over 𝔽_p: X^p − X = ∏_{a∈𝔽_p}(X − a)  (Fermat: each a is a simple root).
     have hcard : Fintype.card (ZMod p) = p := ZMod.card p
     have hmonic : (X ^ p - X : (ZMod p)[X]).Monic := by
       refine monic_X_pow_sub ?_
@@ -1196,7 +1198,7 @@ private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 :
       rw [map_pow, map_add, map_one, ← hα_eq]
       exact hα_sq
     exact hirr_no_root c hc_sq
-  -- Paso 4: α^p = 1 − α
+  -- Step 4: α^p = 1 − α
   have hfrob : α ^ p = 1 - α := by
     have hprod : (α ^ p - α) * (α ^ p - (1 - α)) = 0 := by
       linear_combination hαp_root - hα_sq
@@ -1205,7 +1207,7 @@ private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 :
     · exact sub_eq_zero.mp h
   have hfib_K : (Nat.fib p : K) * α + (Nat.fib (p - 1) : K) = 1 - α :=
     (fib_pow_prime hp α hα_sq).symm ▸ hfrob
-  -- Paso 5: F_p ≡ −1 (mod p)
+  -- Step 5: F_p ≡ −1 (mod p)
   have hFp : (Nat.fib p : ZMod p) = -1 := by
     by_contra hne
     have hFp1_ne : (Nat.fib p : ZMod p) + 1 ≠ 0 := fun h => hne (by linear_combination h)
@@ -1226,7 +1228,7 @@ private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 :
       rw [map_pow, map_add, map_one, ← hα_c]
       exact hα_sq
     exact hirr_no_root c hc_sq
-  -- F_{p-1} ≡ 1 : de hfib_K (F_p·α + F_{p-1} = 1 − α) con F_p = −1, base {1,α}.
+  -- F_{p-1} ≡ 1 : from hfib_K (F_p·α + F_{p-1} = 1 − α) with F_p = −1, basis {1,α}.
   have hFpm1 : (Nat.fib (p - 1) : ZMod p) = 1 := by
     have hFpK : (Nat.fib p : K) = -1 := by
       have h := congrArg (algebraMap (ZMod p) K) hFp
@@ -1252,10 +1254,10 @@ private theorem not_irreducible_iff_exists_root_of_degree_two
   push Not
   simp [mem_roots hne, IsRoot]
 
-/-- **B2 — Escisión Fibonacci general**.
-    Para todo primo p ≠ 2, 5: F_p ≡ ±1 (mod p).
-    Caso split (X²−X−1 reducible mod p): F_p ≡ +1.
-    Caso inert (X²−X−1 irreducible mod p): F_p ≡ −1 ≡ p−1. -/
+/-- **B2 — General Fibonacci splitting**.
+    For every prime p ≠ 2, 5: F_p ≡ ±1 (mod p).
+    Split case (X²−X−1 reducible mod p): F_p ≡ +1.
+    Inert case (X²−X−1 irreducible mod p): F_p ≡ −1 ≡ p−1. -/
 theorem fibonacci_splitting_general (p : ℕ) (hp : p.Prime)
     (hp2 : p ≠ 2) (hp5 : p ≠ 5) :
     (Nat.fib p : ZMod p) = 1 ∨ (Nat.fib p : ZMod p) = p - 1 := by
@@ -1271,36 +1273,36 @@ theorem fibonacci_splitting_general (p : ℕ) (hp : p.Prime)
     have hα_sq : α ^ 2 = α + 1 := by linear_combination hα
     exact fib_split_case hp hp2 hp5 α hα_sq
 
-/-! ### §5.3  B3 — Síntesis: Mersenne vía Fibonacci -/
+/-! ### §5.3  B3 — Synthesis: Mersenne via Fibonacci -/
 
-/-- **B3 — Mersenne vía Fibonacci**: cuando M_p es primo, su clase mod 20 y
-    su tipo Fibonacci coinciden:
-      Clase 3 ó 7 (inert) → F_{M_p} ≡ −1 (mod M_p)
-      Clase 11    (split) → F_{M_p} ≡ +1 (mod M_p) -/
+/-- **B3 — Mersenne via Fibonacci**: when M_p is prime, its mod 20 class
+    and its Fibonacci type coincide:
+      Class 3 or 7 (inert) → F_{M_p} ≡ −1 (mod M_p)
+      Class 11     (split) → F_{M_p} ≡ +1 (mod M_p) -/
 theorem mersenne_fibonacci_type
     (p : ℕ) (hp : p.Prime)
     (hMp : (F1PCFUnified.mersenne p).Prime)
     (hMp2 : F1PCFUnified.mersenne p ≠ 2)
     (hMp5 : F1PCFUnified.mersenne p ≠ 5) :
-    -- B1: concentración
+    -- B1: concentration
     (F1PCFUnified.mersenne p : ZMod 20) ∈ ({3, 7, 11} : Finset (ZMod 20)) ∧
-    -- B2: tipo Fibonacci
+    -- B2: Fibonacci type
     ((Nat.fib (F1PCFUnified.mersenne p) : ZMod (F1PCFUnified.mersenne p)) = 1 ∨
      (Nat.fib (F1PCFUnified.mersenne p) : ZMod (F1PCFUnified.mersenne p))
        = F1PCFUnified.mersenne p - 1) :=
   ⟨mersenne_concentration_general p hp,
    fibonacci_splitting_general (F1PCFUnified.mersenne p) hMp hMp2 hMp5⟩
 
-/-- Verificación tabular para p ∈ {2, 3, 5} (M_p ∈ {3, 7, 31}). -/
+/-- Tabular verification for p ∈ {2, 3, 5} (M_p ∈ {3, 7, 31}). -/
 theorem mersenne_fibonacci_tabulated :
-    (Nat.fib 3  % 3  = 2) ∧    -- p=2, M_2=3,  clase 3 (inert)
-    (Nat.fib 7  % 7  = 6) ∧    -- p=3, M_3=7,  clase 7 (inert)
-    (Nat.fib 31 % 31 = 1) :=    -- p=5, M_5=31, clase 11 (split)
+    (Nat.fib 3  % 3  = 2) ∧    -- p=2, M_2=3,  class 3 (inert)
+    (Nat.fib 7  % 7  = 6) ∧    -- p=3, M_3=7,  class 7 (inert)
+    (Nat.fib 31 % 31 = 1) :=    -- p=5, M_5=31, class 11 (split)
   by native_decide
 
-/-- Partición split/inert de las ocho clases de Z₂₀* por el residuo mod 5:
+/-- Split/inert partition of the eight classes of Z₂₀* by residue mod 5:
     split (QR, ≡ ±1 mod 5) = {1,9,11,19}; inert (NR, ≡ ±2 mod 5) = {3,7,13,17}.
-    Versión autocontenida (sin el funtor de Galois G). -/
+    Self-contained version (without the Galois functor G). -/
 theorem chi5_values :
     (∀ q ∈ ({1,9,11,19} : Finset (ZMod 20)),
         ((q.val : ZMod 5) = 1 ∨ (q.val : ZMod 5) = 4)) ∧
@@ -1310,8 +1312,8 @@ theorem chi5_values :
 
 
 -- ════════════════════════════════════════════════════════════════════════
---  Corolario 1  (cor:split-from-p):  M_p mod 5 depende SOLO de p mod 4.
---  2^p mod 5 tiene período 4; de ahí el tipo (split/inert) queda fijado por p.
+--  Corollary 1  (cor:split-from-p):  M_p mod 5 depends ONLY on p mod 4.
+--  2^p mod 5 has period 4; hence the type (split/inert) is pinned by p.
 -- ════════════════════════════════════════════════════════════════════════
 
 theorem mersenne_mod5_from_p_mod4 (p : ℕ) :
@@ -1329,14 +1331,14 @@ theorem mersenne_mod5_from_p_mod4 (p : ℕ) :
   interval_cases (p % 4) <;> decide
 
 -- ════════════════════════════════════════════════════════════════════════
---  Corolario 2  (prop:rank-inert):  M_p ∣ F_{M_p+1}  ⟺  M_p inert.
---  Vía los valores del predecesor/sucesor de Fibonacci en cada caso:
---     split : F_{q-1} ≡ 0,  F_q ≡ 1,  luego F_{q+1} = F_q + F_{q-1} ≡ 1  (≠ 0)
---     inert : F_{q-1} ≡ 1,  F_q ≡ −1, luego F_{q+1} ≡ 0
+--  Corollary 2  (prop:rank-inert):  M_p ∣ F_{M_p+1}  ⟺  M_p inert.
+--  Via the Fibonacci predecessor/successor values in each case:
+--     split : F_{q-1} ≡ 0,  F_q ≡ 1,  so F_{q+1} = F_q + F_{q-1} ≡ 1  (≠ 0)
+--     inert : F_{q-1} ≡ 1,  F_q ≡ −1, so F_{q+1} ≡ 0
 -- ════════════════════════════════════════════════════════════════════════
 
-/-- Split: F_{p-1} ≡ 0.  De Binet α^p = F_p·α + F_{p-1} con α∈Z_p, Fermat
-    (α^p = α) y F_p ≡ 1 (fib_split_case). -/
+/-- Split: F_{p-1} ≡ 0.  From Binet α^p = F_p·α + F_{p-1} with α∈Z_p, Fermat
+    (α^p = α) and F_p ≡ 1 (fib_split_case). -/
 private theorem fib_pred_split {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) (hp5 : p ≠ 5)
     (α : ZMod p) (hα : α ^ 2 = α + 1) :
     (Nat.fib (p - 1) : ZMod p) = 0 := by
@@ -1348,13 +1350,13 @@ private theorem fib_pred_split {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) (hp5 : p
   rw [hferm, hfp, one_mul] at hbin
   linear_combination -hbin
 
-/-- Inert: F_{p+1} ≡ 0.  Mismo setup que fib_inert_case (K = GF(p²),
-    α^p = 1 − α); luego Binet en K da F_{p-1} = 1 y F_p = −1, de donde
+/-- Inert: F_{p+1} ≡ 0.  Same setup as fib_inert_case (K = GF(p²),
+    α^p = 1 − α); then Binet in K gives F_{p-1} = 1 and F_p = −1, whence
     F_{p+1} = F_p + F_{p-1} = 0. -/
 private theorem fib_succ_inert {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) (hp5 : p ≠ 5)
     (hirr : Irreducible (X ^ 2 - X - 1 : (ZMod p)[X])) :
     (Nat.fib (p + 1) : ZMod p) = 0 := by
-  -- Reusa fib_inert_case, que ahora devuelve F_p = p−1 y F_{p-1} = 1.
+  -- Reuses fib_inert_case, which now returns F_p = p−1 and F_{p-1} = 1.
   obtain ⟨hFp, hFpm1⟩ := fib_inert_case hp hp2 hp5 hirr
   have hp1 : 1 ≤ p := hp.pos
   have hFp' : (Nat.fib p : ZMod p) = -1 := by
@@ -1366,7 +1368,7 @@ private theorem fib_succ_inert {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) (hp5 : p
     rw [show (p - 1) + 1 = p from by omega]; ring
   rw [hrec, hFp', hFpm1]; ring
 
-/-- **prop:rank-inert**:  M_p ∣ F_{M_p+1}  ⟺  M_p es inert (F_{M_p} ≡ M_p − 1). -/
+/-- **prop:rank-inert**:  M_p ∣ F_{M_p+1}  ⟺  M_p is inert (F_{M_p} ≡ M_p − 1). -/
 theorem mersenne_rank_iff_inert (p : ℕ) (_hp : p.Prime)
     (hMp : (F1PCFUnified.mersenne p).Prime)
     (hMp2 : F1PCFUnified.mersenne p ≠ 2) (hMp5 : F1PCFUnified.mersenne p ≠ 5) :
@@ -1383,11 +1385,11 @@ theorem mersenne_rank_iff_inert (p : ℕ) (_hp : p.Prime)
     rw [hqm, Nat.fib_add_two]; push_cast
     rw [show (q - 1) + 1 = q from by omega]; ring
   by_cases hirr : Irreducible (X ^ 2 - X - 1 : (ZMod q)[X])
-  · -- INERT:  F_q ≡ −1  y  F_{q+1} ≡ 0  →  ambos lados verdaderos
+  · -- INERT:  F_q ≡ −1  and  F_{q+1} ≡ 0  →  both sides true
     have hFq : (Nat.fib q : ZMod q) = q - 1 := (fib_inert_case hMp hMp2 hMp5 hirr).1
     have hsucc : (Nat.fib (q + 1) : ZMod q) = 0 := fib_succ_inert hMp hMp2 hMp5 hirr
     exact ⟨fun _ => hFq, fun _ => hsucc⟩
-  · -- SPLIT:  F_q ≡ 1  y  F_{q+1} ≡ 1  →  ambos lados falsos
+  · -- SPLIT:  F_q ≡ 1  and  F_{q+1} ≡ 1  →  both sides false
     rw [not_irreducible_iff_exists_root_of_degree_two _ hqdeg] at hirr
     obtain ⟨α, hα⟩ := hirr
     simp only [IsRoot.def, eval_sub, eval_pow, eval_X, eval_one] at hα
@@ -1395,13 +1397,13 @@ theorem mersenne_rank_iff_inert (p : ℕ) (_hp : p.Prime)
     have hFq   : (Nat.fib q : ZMod q) = 1 := fib_split_case hMp hMp2 hMp5 α hαsq
     have hpred : (Nat.fib (q - 1) : ZMod q) = 0 := fib_pred_split hMp hMp2 hMp5 α hαsq
     have hsucc : (Nat.fib (q + 1) : ZMod q) = 1 := by rw [hrec, hFq, hpred]; ring
-    -- F_{q+1} = 1 ≠ 0  y  F_q = 1 ≠ q − 1 (pues q ≠ 2)
+    -- F_{q+1} = 1 ≠ 0  and  F_q = 1 ≠ q − 1 (since q ≠ 2)
     constructor
     · intro h; rw [hsucc] at h; exact absurd h one_ne_zero
     · intro h
       rw [hFq, ZMod.natCast_self] at h   -- h : 1 = 0 - 1  (i.e. 1 = −1)
       have h2 : (2 : ZMod q) = 0 := by linear_combination h
-      -- q ∣ 2  ⟹  q = 2, contradice hMp2
+      -- q ∣ 2  ⟹  q = 2, contradicting hMp2
       rw [show (2 : ZMod q) = ((2 : ℕ) : ZMod q) by push_cast; ring,
           ZMod.natCast_eq_zero_iff] at h2
       exact absurd ((Nat.prime_dvd_prime_iff_eq hMp Nat.prime_two).mp h2) hMp2
@@ -1410,20 +1412,20 @@ end
 
 
 -- ╔═══════════════════════════════════════════════════════════════════════╗
--- ║  §11  PUENTE BINARIO ↔ RETÍCULO ÁUREO                                  ║
--- ║  M_p = p unos; 2^p = M_p+1 = un solo bit; el paso áureo φ^λ=2 = shift. ║
+-- ║  §11  BINARY BRIDGE ↔ GOLDEN LATTICE                                  ║
+-- ║  M_p = p ones; 2^p = M_p+1 = a single bit; golden step φ^λ=2 = shift. ║
 -- ╚═══════════════════════════════════════════════════════════════════════╝
 
 noncomputable section
 open F1PCFUnified
 
-/-- El "+1" que lleva M_p a una potencia de 2: M_p + 1 = 2^p. -/
+/-- The "+1" that maps M_p to a power of 2: M_p + 1 = 2^p. -/
 theorem mersenne_succ_eq_two_pow (p : ℕ) :
     F1PCFUnified.mersenne p + 1 = 2 ^ p := by
   unfold F1PCFUnified.mersenne
   exact Nat.sub_add_cancel Nat.one_le_two_pow
 
-/-- En binario, M_p = 2^p − 1 es una tira de p unos. -/
+/-- In binary, M_p = 2^p − 1 is a run of p ones. -/
 theorem mersenne_digits_ones (p : ℕ) :
     Nat.digits 2 (F1PCFUnified.mersenne p) = List.replicate p 1 := by
   unfold F1PCFUnified.mersenne
@@ -1439,7 +1441,7 @@ theorem mersenne_digits_ones (p : ℕ) :
     rw [hmod, hdiv, ih]
     rfl
 
-/-- En binario, 2^p es un único bit (p ceros y un 1). -/
+/-- In binary, 2^p is a single bit (p zeros followed by a 1). -/
 theorem two_pow_digits_single_bit (p : ℕ) :
     Nat.digits 2 (2 ^ p) = List.replicate p 0 ++ [1] := by
   induction p with
@@ -1453,7 +1455,7 @@ theorem two_pow_digits_single_bit (p : ℕ) :
     rw [hmod, hdiv, ih]
     rfl
 
-/-- El paso multiplicativo áureo φ^λ = 2 es el corrimiento de un bit. -/
+/-- The multiplicative golden step φ^λ = 2 is a bit shift. -/
 theorem golden_step_is_bit_shift (p : ℝ) :
     φ ^ lambda_log * (2 : ℝ) ^ p = (2 : ℝ) ^ (p + 1) := by
   rw [mersenne_bridge_via_lambda]
@@ -1464,16 +1466,16 @@ end
 
 
 -- ══════════════════════════════════════════════════════════════════════════
---  ESLABÓN DE RECIPROCIDAD  →  presentación conjunta pinneada (D)
---  X²−X−1 tiene raíz mod q ⟺ 5 es cuadrado mod q ⟺ q ≡ ±1 (mod 5).
---  Combinado con mersenne_mod5_from_p_mod4 y fib_split/inert_case, pinnea el
---  signo por caso de p mod 4.  ⚠ Mejor esfuerzo sin compilador: verifica los
---  nombres de lemas marcados ⚠ (API de legendreSym/reciprocidad).
+--  RECIPROCITY LINK  →  pinned joint presentation (D)
+--  X²−X−1 has a root mod q ⟺ 5 is a square mod q ⟺ q ≡ ±1 (mod 5).
+--  Combined with mersenne_mod5_from_p_mod4 and fib_split/inert_case, this pins
+--  the sign by case of p mod 4.  ⚠ Best effort without compiler: verifies the
+--  marked lemma names ⚠ (legendreSym/reciprocity API).
 -- ══════════════════════════════════════════════════════════════════════════
 
 open Polynomial in
-/-- X²−X−1 tiene raíz en ZMod q ⟺ 5 es cuadrado en ZMod q (q primo impar).
-    (2α−1)² = 4α²−4α+1 = 5 cuando α²=α+1; recíproco con α=(β+1)/2. -/
+/-- X²−X−1 has a root in ZMod q ⟺ 5 is a square in ZMod q (q odd prime).
+    (2α−1)² = 4α²−4α+1 = 5 when α²=α+1; converse via α=(β+1)/2. -/
 private lemma root_x2mx1_iff_five_sq {q : ℕ} [Fact q.Prime] (hq2 : q ≠ 2) :
     (∃ α : ZMod q, α ^ 2 = α + 1) ↔ ∃ β : ZMod q, β ^ 2 = 5 := by
   have hqp : q.Prime := Fact.out
@@ -1490,22 +1492,22 @@ private lemma root_x2mx1_iff_five_sq {q : ℕ} [Fact q.Prime] (hq2 : q ≠ 2) :
     field_simp
     linear_combination hβ
 
-/-- Cuadrados no nulos mod 5 son exactamente {1, 4}  (cómputo finito). -/
+/-- Nonzero squares mod 5 are exactly {1, 4}  (finite computation). -/
 private lemma isSquare_zmod5 :
     ∀ y : ZMod 5, y ≠ 0 → (IsSquare y ↔ y = 1 ∨ y = 4) := by decide
 
-/-- De {3,7,11}⊂Z₂₀, sólo 11 se reduce a 1 mod 5  (cómputo finito). -/
+/-- Of {3,7,11}⊂Z₂₀, only 11 reduces to 1 mod 5  (finite computation). -/
 private lemma zmod20_class_of_mod5_eq_one :
     ∀ x : ZMod 20, x ∈ ({3, 7, 11} : Finset (ZMod 20)) →
       (ZMod.castHom (by norm_num : (5:ℕ) ∣ 20) (ZMod 5)) x = 1 → x = 11 := by decide
 
-/-- De {3,7,11}⊂Z₂₀, sólo 7 se reduce a 2 mod 5  (cómputo finito). -/
+/-- Of {3,7,11}⊂Z₂₀, only 7 reduces to 2 mod 5  (finite computation). -/
 private lemma zmod20_class_of_mod5_eq_two :
     ∀ x : ZMod 20, x ∈ ({3, 7, 11} : Finset (ZMod 20)) →
       (ZMod.castHom (by norm_num : (5:ℕ) ∣ 20) (ZMod 5)) x = 2 → x = 7 := by decide
 
-/-- 5 es cuadrado mod q ⟺ q ≡ 1 ∨ 4 (mod 5).  Reciprocidad cuadrática
-    (5 ≡ 1 mod 4 ⟹ (5|q)=(q|5)), y q QR mod 5 ⟺ q mod 5 ∈ {1,4}. -/
+/-- 5 is a square mod q ⟺ q ≡ 1 ∨ 4 (mod 5).  Quadratic reciprocity
+    (5 ≡ 1 mod 4 ⟹ (5|q)=(q|5)), and q is a QR mod 5 ⟺ q mod 5 ∈ {1,4}. -/
 private lemma five_sq_iff_mod5 {q : ℕ} (hq : q.Prime) (hq2 : q ≠ 2) (hq5 : q ≠ 5) :
     (∃ β : ZMod q, β ^ 2 = 5) ↔ ((q : ZMod 5) = 1 ∨ (q : ZMod 5) = 4) := by
   haveI : Fact q.Prime := ⟨hq⟩
@@ -1516,7 +1518,7 @@ private lemma five_sq_iff_mod5 {q : ℕ} (hq : q.Prime) (hq2 : q ≠ 2) (hq5 : q
     · rintro ⟨β, hβ⟩; exact ⟨β, by rw [← hβ]; ring⟩
     · rintro ⟨β, hβ⟩; exact ⟨β, by rw [hβ]; ring⟩
   rw [hIsSq]
-  -- reciprocidad cuadrática (5 % 4 = 1):
+  -- quadratic reciprocity (5 % 4 = 1):
   --   IsSquare (5 : ZMod q) ⟺ IsSquare (q : ZMod 5)
   have hrecip : IsSquare (5 : ZMod q) ↔ IsSquare (q : ZMod 5) := by
     have h := ZMod.exists_sq_eq_prime_iff_of_mod_four_eq_one
@@ -1524,34 +1526,34 @@ private lemma five_sq_iff_mod5 {q : ℕ} (hq : q.Prime) (hq2 : q ≠ 2) (hq5 : q
     rw [show ((5 : ℕ) : ZMod q) = (5 : ZMod q) by push_cast; ring] at h
     exact h.symm
   rw [hrecip]
-  -- IsSquare (q : ZMod 5) ⟺ (q:ZMod 5) ∈ {1,4}  (cuadrados no nulos mod 5)
+  -- IsSquare (q : ZMod 5) ⟺ (q:ZMod 5) ∈ {1,4}  (nonzero squares mod 5)
   have hq0 : ((q : ZMod 5)) ≠ 0 := by
     rw [Ne, ZMod.natCast_eq_zero_iff]
     exact fun hd => hq5 (((Nat.prime_dvd_prime_iff_eq (by norm_num) hq).mp hd).symm)
   exact isSquare_zmod5 _ hq0
 
-/-- Split (raíz existe) ⟺ p ≡ 1 (mod 4), para M_p primo (≠2,5). -/
+/-- Split (root exists) ⟺ p ≡ 1 (mod 4), for M_p prime (≠2,5). -/
 private lemma mersenne_split_iff_p_mod4 (p : ℕ) (hp : p.Prime)
     (hMp : (F1PCFUnified.mersenne p).Prime)
     (hMp2 : F1PCFUnified.mersenne p ≠ 2) (hMp5 : F1PCFUnified.mersenne p ≠ 5) :
     (∃ α : ZMod (F1PCFUnified.mersenne p), α ^ 2 = α + 1) ↔ p % 4 = 1 := by
   haveI : Fact (F1PCFUnified.mersenne p).Prime := ⟨hMp⟩
   rw [root_x2mx1_iff_five_sq hMp2, five_sq_iff_mod5 hMp hMp2 hMp5]
-  -- (M_p : ZMod 5) está fijado por p%4 (mersenne_mod5_from_p_mod4): 1/3/2 → {1}/{3}/{2}
+  -- (M_p : ZMod 5) is pinned by p%4 (mersenne_mod5_from_p_mod4): 1/3/2 → {1}/{3}/{2}
   rw [mersenne_mod5_from_p_mod4 p]
-  -- p%4=1 → 1 ∈ {1,4} (sí); p%4=2 → 3 (no); p%4=3 → 2 (no); p%4=0 → 0 (no, pero p primo>2 ⟹ impar)
+  -- p%4=1 → 1 ∈ {1,4} (yes); p%4=2 → 3 (no); p%4=3 → 2 (no); p%4=0 → 0 (no, but p prime>2 ⟹ odd)
   have hodd : p % 4 = 1 ∨ p % 4 = 3 ∨ p = 2 := by
     rcases hp.eq_two_or_odd with h | h
     · exact Or.inr (Or.inr h)
-    · omega   -- p impar ⟹ p%4 ∈ {1,3}
+    · omega   -- p odd ⟹ p%4 ∈ {1,3}
   rcases hodd with h | h | h
   · rw [if_pos h]; simp [h]
   · rw [if_neg (by omega : ¬ p % 4 = 1), if_neg (by omega : ¬ p % 4 = 2), if_pos h, h]
     decide
   · subst h; decide
 
-/-- **Presentación conjunta (D), pinneada.** p mod 4 fija la terna
-    (clase mod 20, tipo, signo de F_{M_p}): tres valores. -/
+/-- **Pinned joint presentation (D).** p mod 4 pins the triple
+    (mod 20 class, type, sign of F_{M_p}): three values. -/
 theorem mersenne_presentation_from_p_mod4 (p : ℕ) (hp : p.Prime)
     (hMp : (F1PCFUnified.mersenne p).Prime)
     (hMp2 : F1PCFUnified.mersenne p ≠ 2) (hMp5 : F1PCFUnified.mersenne p ≠ 5) :
@@ -1566,7 +1568,7 @@ theorem mersenne_presentation_from_p_mod4 (p : ℕ) (hp : p.Prime)
   haveI : Fact (F1PCFUnified.mersenne p).Prime := ⟨hMp⟩
   have hconc := mersenne_concentration_general p hp
   have hmod5 := mersenne_mod5_from_p_mod4 p
-  -- reducción ZMod 20 → ZMod 5 para pinnear la clase 11/7/3 desde mod5 y {3,7,11}
+  -- reduction ZMod 20 → ZMod 5 to pin the class 11/7/3 from mod5 and {3,7,11}
   refine ⟨?_, ?_, ?_⟩
   · intro h1
     have hsplit : ∃ α : ZMod (F1PCFUnified.mersenne p), α ^ 2 = α + 1 :=
@@ -1593,8 +1595,6 @@ theorem mersenne_presentation_from_p_mod4 (p : ℕ) (hp : p.Prime)
           if_pos h3]
     exact zmod20_class_of_mod5_eq_two _ hconc (by rw [map_natCast]; exact hm5)
   · intro h2
-    -- p = 2 ⟹ M_2 = 3, todo por cómputo directo
+    -- p = 2 ⟹ M_2 = 3, all by direct computation
     subst h2
     exact ⟨by decide, by decide⟩
-
-
