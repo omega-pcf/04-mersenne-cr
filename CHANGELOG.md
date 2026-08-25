@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.20](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.19...v0.3.20) (2026-08-25)
+
+### Documentation
+
+* translate Spanish comments and docstrings to English ([a5583fe](https://github.com/omega-pcf/04-mersenne-cr/commit/a5583fe14e2b041de24f3d005c6b11f9074c99ec))
+
 ## [0.3.19](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.18...v0.3.19) (2026-08-24)
 
 ### Bug Fixes
