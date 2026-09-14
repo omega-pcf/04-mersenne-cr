@@ -1078,7 +1078,7 @@ private theorem fib_pow_prime {p : ℕ} (hp : p.Prime) {R : Type*} [CommRing R]
 
 private theorem five_ne_zero_zmod {p : ℕ} (hp : p.Prime) (hp5 : p ≠ 5) :
     (5 : ZMod p) ≠ 0 := by
-  haveI : Fact p.Prime := ⟨hp⟩
+  have : Fact p.Prime := ⟨hp⟩
   change ((5 : ℕ) : ZMod p) ≠ 0
   rw [Ne, ZMod.natCast_eq_zero_iff]
   intro hdvd
@@ -1094,7 +1094,7 @@ private theorem five_ne_zero_zmod {p : ℕ} (hp : p.Prime) (hp5 : p ≠ 5) :
 private theorem fib_split_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (hp5 : p ≠ 5)
     (α : ZMod p) (hα : α ^ 2 = α + 1) :
     (Nat.fib p : ZMod p) = 1 := by
-  haveI : Fact p.Prime := ⟨hp⟩
+  have : Fact p.Prime := ⟨hp⟩
   have hβ  : (1 - α) ^ 2 = (1 - α) + 1 := by linear_combination hα
   have hfα : α ^ p = (Nat.fib p : ZMod p) * α + (Nat.fib (p-1) : ZMod p) :=
     fib_pow_prime hp α hα
@@ -1129,10 +1129,10 @@ private theorem fib_split_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (hp5 : 
 private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 : p ≠ 5)
     (hirr : Irreducible (X ^ 2 - X - 1 : (ZMod p)[X])) :
     (Nat.fib p : ZMod p) = p - 1 ∧ (Nat.fib (p - 1) : ZMod p) = 1 := by
-  haveI hFact : Fact p.Prime := ⟨hp⟩
+  have hFact : Fact p.Prime := ⟨hp⟩
   let K := AdjoinRoot (X ^ 2 - X - 1 : (ZMod p)[X])
-  haveI : Fact (Irreducible (X ^ 2 - X - 1 : (ZMod p)[X])) := ⟨hirr⟩
-  haveI hKChar : CharP K p :=
+  have : Fact (Irreducible (X ^ 2 - X - 1 : (ZMod p)[X])) := ⟨hirr⟩
+  have hKChar : CharP K p :=
     charP_of_injective_algebraMap (algebraMap (ZMod p) K).injective p
   let α : K := AdjoinRoot.root _
   have hα_sq : α ^ 2 = α + 1 := by
@@ -1261,7 +1261,7 @@ private theorem not_irreducible_iff_exists_root_of_degree_two
 theorem fibonacci_splitting_general (p : ℕ) (hp : p.Prime)
     (hp2 : p ≠ 2) (hp5 : p ≠ 5) :
     (Nat.fib p : ZMod p) = 1 ∨ (Nat.fib p : ZMod p) = p - 1 := by
-  haveI : Fact p.Prime := ⟨hp⟩
+  have : Fact p.Prime := ⟨hp⟩
   by_cases hirr : Irreducible (X ^ 2 - X - 1 : (ZMod p)[X])
   · right; exact (fib_inert_case hp hp2 hp5 hirr).1
   · left
@@ -1269,8 +1269,10 @@ theorem fibonacci_splitting_general (p : ℕ) (hp : p.Prime)
     rw [not_irreducible_iff_exists_root_of_degree_two
         (X ^ 2 - X - 1 : (ZMod p)[X]) hdeg] at hirr
     obtain ⟨α, hα⟩ := hirr
-    simp only [IsRoot.def, eval_sub, eval_pow, eval_X, eval_one] at hα
-    have hα_sq : α ^ 2 = α + 1 := by linear_combination hα
+    have he : Polynomial.eval α (X ^ 2 - X - 1 : (ZMod p)[X]) = 0 := hα
+    simp only [Polynomial.eval_sub, Polynomial.eval_pow, Polynomial.eval_X,
+               Polynomial.eval_one] at he
+    have hα_sq : α ^ 2 = α + 1 := by linear_combination he
     exact fib_split_case hp hp2 hp5 α hα_sq
 
 /-! ### §5.3  B3 — Synthesis: Mersenne via Fibonacci -/
@@ -1342,7 +1344,7 @@ theorem mersenne_mod5_from_p_mod4 (p : ℕ) :
 private theorem fib_pred_split {p : ℕ} (hp : p.Prime) (hp2 : p ≠ 2) (hp5 : p ≠ 5)
     (α : ZMod p) (hα : α ^ 2 = α + 1) :
     (Nat.fib (p - 1) : ZMod p) = 0 := by
-  haveI : Fact p.Prime := ⟨hp⟩
+  have : Fact p.Prime := ⟨hp⟩
   have hbin : α ^ p = (Nat.fib p : ZMod p) * α + (Nat.fib (p - 1) : ZMod p) :=
     fib_pow_prime hp α hα
   have hferm : α ^ p = α := ZMod.pow_card α
@@ -1376,7 +1378,7 @@ theorem mersenne_rank_iff_inert (p : ℕ) (_hp : p.Prime)
     (Nat.fib (F1PCFUnified.mersenne p) : ZMod (F1PCFUnified.mersenne p))
         = F1PCFUnified.mersenne p - 1 := by
   set q := F1PCFUnified.mersenne p with hq
-  haveI : Fact q.Prime := ⟨hMp⟩
+  have : Fact q.Prime := ⟨hMp⟩
   have hqdeg : (X ^ 2 - X - 1 : (ZMod q)[X]).natDegree = 2 := by compute_degree!
   have hq1le : 1 ≤ q := hMp.pos
   have hrec : (Nat.fib (q + 1) : ZMod q)
@@ -1510,8 +1512,8 @@ private lemma zmod20_class_of_mod5_eq_two :
     (5 ≡ 1 mod 4 ⟹ (5|q)=(q|5)), and q is a QR mod 5 ⟺ q mod 5 ∈ {1,4}. -/
 private lemma five_sq_iff_mod5 {q : ℕ} (hq : q.Prime) (hq2 : q ≠ 2) (hq5 : q ≠ 5) :
     (∃ β : ZMod q, β ^ 2 = 5) ↔ ((q : ZMod 5) = 1 ∨ (q : ZMod 5) = 4) := by
-  haveI : Fact q.Prime := ⟨hq⟩
-  haveI : Fact (5 : ℕ).Prime := ⟨by norm_num⟩
+  have : Fact q.Prime := ⟨hq⟩
+  have : Fact (5 : ℕ).Prime := ⟨by norm_num⟩
   -- (∃ β, β²=5) ⟺ IsSquare (5:ZMod q)
   have hIsSq : (∃ β : ZMod q, β ^ 2 = 5) ↔ IsSquare (5 : ZMod q) := by
     constructor
@@ -1537,7 +1539,7 @@ private lemma mersenne_split_iff_p_mod4 (p : ℕ) (hp : p.Prime)
     (hMp : (F1PCFUnified.mersenne p).Prime)
     (hMp2 : F1PCFUnified.mersenne p ≠ 2) (hMp5 : F1PCFUnified.mersenne p ≠ 5) :
     (∃ α : ZMod (F1PCFUnified.mersenne p), α ^ 2 = α + 1) ↔ p % 4 = 1 := by
-  haveI : Fact (F1PCFUnified.mersenne p).Prime := ⟨hMp⟩
+  have : Fact (F1PCFUnified.mersenne p).Prime := ⟨hMp⟩
   rw [root_x2mx1_iff_five_sq hMp2, five_sq_iff_mod5 hMp hMp2 hMp5]
   -- (M_p : ZMod 5) is pinned by p%4 (mersenne_mod5_from_p_mod4): 1/3/2 → {1}/{3}/{2}
   rw [mersenne_mod5_from_p_mod4 p]
@@ -1565,7 +1567,7 @@ theorem mersenne_presentation_from_p_mod4 (p : ℕ) (hp : p.Prime)
     (p = 2 → (F1PCFUnified.mersenne p : ZMod 20) = 3 ∧
        (Nat.fib (F1PCFUnified.mersenne p) : ZMod (F1PCFUnified.mersenne p))
          = F1PCFUnified.mersenne p - 1) := by
-  haveI : Fact (F1PCFUnified.mersenne p).Prime := ⟨hMp⟩
+  have : Fact (F1PCFUnified.mersenne p).Prime := ⟨hMp⟩
   have hconc := mersenne_concentration_general p hp
   have hmod5 := mersenne_mod5_from_p_mod4 p
   -- reduction ZMod 20 → ZMod 5 to pin the class 11/7/3 from mod5 and {3,7,11}
