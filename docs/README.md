@@ -15,7 +15,7 @@ docs/
 ├── style-guide.md     # Family style guide v2.2 (port of `05-kkgt/docs/style-guide.md`)
 ├── style/
 │   └── grammar.md     # Grammar and usage rules of human language (ES/EN/FR/IT examples)
-├── usage.md           # Build and release commands
+├── usage.md           # Build, release, commit and version conventions (semver + Zenodo)
 └── reports/           # Specific, repository-tied reports (dated, id'd)
     └── README.md      # Reports convention (template) + index of this repository's reports
 ```
@@ -38,17 +38,13 @@ docs/
 - **style/grammar.md**: The grammar and usage rules extracted from `style-guide.md` §1.5 —
   language-neutral, worked in Spanish, English, French and Italian, with the RAE-checked Spanish
   `se` verbs and their sources.
-- **usage.md**: Daily workflow, conventional commits, build and release commands.
+- **usage.md**: Daily workflow, conventional commits, the version standard (semver + Zenodo), build and release commands.
 - **reports/**: Specific reports — per-site inventories, decision logs, verdict tables and
   incidents. The convention (naming, ISO header, index format) and the index of this repository's
   reports are in `reports/README.md`; this repository has no report yet.
 
 ## Conventions
 
-All commits follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-<type>(<scope>): <description>
-```
-
-**Common types:** `feat`, `fix`, `docs`, `refactor`, `chore`.
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/);
+format, common types, examples and the English-subject rule:
+[usage.md](usage.md) §Commits.
