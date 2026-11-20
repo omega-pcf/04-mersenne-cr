@@ -1,6 +1,9 @@
 # Simultaneous Identities of the Golden Ratio and Euler's Identity, Formally Verified in Lean 4 over the Known Mersenne Prime Exponents
 
+<!-- selfcite:begin id="badge" -->
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21681394.svg)](https://doi.org/10.5281/zenodo.21681394)
+<!-- selfcite:end id="badge" -->
+
 [![Project Page](https://img.shields.io/badge/Project%20Page-omega--pcf.com-blue)](https://omega-pcf.com/mersenne-cr)
 
 ## Authors
@@ -18,6 +21,7 @@ We present a sustained study of a single object followed across representations,
 
 **Keywords:** Golden ratio, Mersenne primes, cyclotomic fields, modular concentration, Gelfond–Schneider theorem, formal verification, Lean 4.
 
+<!-- selfcite:begin id="citation" -->
 ## Citation
 
 González García, J. A., González García, V. M., Dressler Pérez, I. M., & García Ordóñez, L. M. (2026). *Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents*. Preprint. DOI: [10.5281/zenodo.21681394](https://doi.org/10.5281/zenodo.21681394).
@@ -32,6 +36,7 @@ González García, J. A., González García, V. M., Dressler Pérez, I. M., & Ga
   url     = {https://doi.org/10.5281/zenodo.21681394}
 }
 ```
+<!-- selfcite:end id="citation" -->
 
 ## Repository Structure
 
