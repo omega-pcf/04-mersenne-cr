@@ -14,7 +14,7 @@
     "figures": "pnpm run generate:figures",
     "generate:figures": "bash scripts/figures/build.sh",
     "verify:lean": "cd lean && lake build",
-    "verify": "pnpm run verify:lean",
+    "verify": "pnpm run verify:lean && pnpm run type-check",
     "selfcitations": "pnpm exec tsx scripts/tasks/selfcitations.ts",
     "selfcitations:check": "pnpm exec tsx scripts/tasks/selfcitations.ts --check",
     "validate": "pnpm run selfcitations:check && pnpm exec tsx scripts/tasks/parity.ts && pnpm run verify",

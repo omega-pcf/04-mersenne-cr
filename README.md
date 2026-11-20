@@ -75,13 +75,13 @@ González García, J. A., González García, V. M., Dressler Pérez, I. M., & Ga
 pnpm run verify
 ```
 
-This runs the Lean 4 proof verification via `lake build` in the `lean/` directory. The proof imports only Mathlib and takes as external axioms the Gelfond–Schneider theorem and the 44 large GIMPS primalities.
+This runs the Lean 4 proof verification via `lake build` in the `lean/` directory, then the TypeScript type check (`tsc --noEmit`). The proof imports only Mathlib and takes as external axioms the Gelfond–Schneider theorem and the 44 large GIMPS primalities.
 
 ```bash
 pnpm run verify:lean
 ```
 
-Same as `verify` — runs `cd lean && lake build`.
+`verify:lean` alone runs `cd lean && lake build`; `verify` composes it with `type-check`.
 
 ## Build and Compilation
 
