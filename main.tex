@@ -96,7 +96,16 @@
        over the known Mersenne prime exponents}
 \thanks{Zenodo All Versions DOI: \href{https://doi.org/10.5281/zenodo.21681394}{10.5281/zenodo.21681394}}
 
-\date{\textbf{Received:} July 28, 2026; \textbf{Last modified:} \today}
+\renewcommand{\datename}{\textbf{Received:}}
+% Received date, last-modified date and version, with the labels in bold.
+% amsart prints \date as the footnote at the foot of page 1 (\@adminfootnotes
+% -> \@setdate, which prefixes \datename), so the first label lives in
+% \datename and the line carries the other two: without this the class would
+% prefix its own "Date:" and the footnote would read "Date: Received: ...".
+% \today is reproducible: scripts/tasks/compile.ts compiles with
+% SOURCE_DATE_EPOCH set to the HEAD commit's timestamp (scripts/utils/git.ts).
+% The version token mirrors the "version" field of package.json.
+\date{July 28, 2026; \textbf{Last modified:} \today; \textbf{Version:} v0.3.20}
 
 \subjclass[2020]{Primary 11A41; Secondary 11B39, 11R18, 68V20}
 
