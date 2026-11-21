@@ -5,6 +5,9 @@ every `scripts/figures/*.tex` with **pdflatex inside the
 `kjarosh/latex:2024.4-full` Docker image** and writes the PDF into `images/`.
 This is the one figure pipeline of the family that does not use matplotlib.
 
+The chain table (generator → `images/` → verification) is
+[`architecture.md` §Sources of truth](architecture.md#sources-of-truth).
+
 ## What it guarantees
 
 1. **The text in the PDF is extractable.** TeX Live's Type 1 math fonts
