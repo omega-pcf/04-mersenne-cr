@@ -60,7 +60,7 @@ González García, J. A., González García, V. M., Dressler Pérez, I. M., & Ga
 
 ### Formal Verification (`lean/`)
 
-- **`lean/golden_mersenne.lean`**: Single self-contained Lean 4 proof file (1599 lines, 0 sorry). Built against Mathlib4 (Lean toolchain `v4.28.0`). Imports only Mathlib. Proves the twelve identities, the central clause 3φ^{σ(p)}=2^p, and the Fibonacci splitting.
+- **`lean/golden_mersenne.lean`**: Single self-contained Lean 4 proof file (<!-- counts:begin id="lean-lines" -->1602<!-- counts:end id="lean-lines" --> lines, <!-- counts:begin id="lean-sorry" -->0<!-- counts:end id="lean-sorry" --> sorry). Built against Mathlib4 (Lean toolchain `v4.28.0`). Imports only Mathlib. Proves the twelve identities, the central clause 3φ^{σ(p)}=2^p, and the Fibonacci splitting.
 - **`lean/lakefile.toml`**: Lake build configuration with Mathlib dependency.
 - **`lean/lean-toolchain`**: Lean toolchain version.
 
