@@ -1182,7 +1182,7 @@ private theorem fib_inert_case {p : ℕ} (hp : p.Prime) (_hp2 : p ≠ 2) (_hp5 :
       rwa [hcard] at h
     have hsplit : Splits (X ^ p - X : (ZMod p)[X]) := by
       rw [splits_iff_card_roots, hroots,
-          FiniteField.X_pow_card_sub_X_natDegree_eq (ZMod p) hp.one_lt]
+          Polynomial.natDegree_X_pow_sub_X (R := ZMod p) hp.one_lt]
       simp [hcard]
     have hXpX : (X ^ p - X : (ZMod p)[X]) = ∏ a : ZMod p, (X - C a) := by
       rw [hsplit.eq_prod_roots_of_monic hmonic, hroots, Finset.prod_eq_multiset_prod]
