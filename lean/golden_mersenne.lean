@@ -838,7 +838,7 @@ theorem phi_isAlgebraic : IsAlgebraic ℚ φ := by
   refine ⟨Polynomial.X ^ 2 - Polynomial.X - Polynomial.C 1, ?_, ?_⟩
   · -- the polynomial X² − X − 1 is nonzero (leading coefficient is 1)
     intro h
-    have hc := congrArg (fun p => Polynomial.coeff p 2) h
+    have hc := congrArg (fun p : Polynomial ℚ => p.coeff 2) h
     simp [Polynomial.coeff_X_pow, Polynomial.coeff_X, Polynomial.coeff_one] at hc
   · -- φ is a root: φ² − φ − 1 = 0  (from phi_sq)
     simp only [map_sub, map_pow, Polynomial.aeval_X, map_one]
