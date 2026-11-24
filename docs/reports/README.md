@@ -86,7 +86,9 @@ evidence and the method.>
 
 ## Related documents
 
-- `docs/citations.md` §8 — the generic rule this report instantiates.
+- `citations.md` §8 — the generic rule this report instantiates; in this
+  repository the target lives with the family contract in `05-kkgt`
+  (`citations.md` ends at §7 here).
 - `docs/witness-contract.md` — why the device exists.
 ```
 
