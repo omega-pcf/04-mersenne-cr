@@ -49,7 +49,7 @@ $\golden^{\lambda_{\log}} = 2$.
 
 \begin{proof}
 $\golden^{\lambda_{\log}}=\exp(\lambda_{\log}\log\golden)=\exp(\log 2)=2$.
-Lean: \lean{mersenne\_bridge\_via\_lambda}.
+Lean: \code{mersenne\_bridge\_via\_lambda}.
 \end{proof}
 
 \begin{Lemma}[Ternary turn]\label{lem:ternary}
@@ -57,7 +57,7 @@ $\golden^{\log_{\golden} 3} = 3$.
 \end{Lemma}
 
 \begin{proof}
-Identical with $3$ in place of~$2$.  Lean: \lean{phi\_pow\_log3}.
+Identical with $3$ in place of~$2$.  Lean: \code{phi\_pow\_log3}.
 \end{proof}
 
 \begin{proof}[Proof of \Cref{thm:universal}]
@@ -73,7 +73,7 @@ By definition $\sigma(p)=p\lambda_{\log}-\log_{\golden}3$, hence
   &&\text{(\Cref{lem:binary,lem:ternary})}\\
   &= 2^{p}. \qedhere
 \end{align*}
-Lean: \lean{golden\_tower\_bridge}.
+Lean: \code{golden\_tower\_bridge}.
 \end{proof}
 
 \begin{Theorem}[Uniqueness of the index]\label{thm:unique}
@@ -86,7 +86,7 @@ If $3\golden^{\sigma}=2^{p}$ and $3\golden^{\sigma(p)}=2^{p}$ then
 $\golden^{\sigma-\sigma(p)}=1$, hence
 $(\sigma-\sigma(p))\log\golden=0$, and since $\log\golden>0$ (as
 $\golden>1$), $\sigma=\sigma(p)$.  Lean:
-\lean{sigma\_mersenne\_unique}.
+\code{sigma\_mersenne\_unique}.
 \end{proof}
 
 \begin{Theorem}[Direct golden ratio between Mersenne]\label{thm:ratio-main}
@@ -110,8 +110,8 @@ By \Cref{lem:binary} and the identity $2^{q}/2^{p}=2^{q-p}$,
   = \golden^{(q-p)\lambda_{\log}}.
 \]
 Specialising to GIMPS pairs is immediate.  Lean:
-\lean{mersenne\_ratio\_golden} and
-\lean{mersenne\_ratio\_at\_known\_pairs}.
+\code{mersenne\_ratio\_golden} and
+\code{mersenne\_ratio\_at\_known\_pairs}.
 \end{proof}
 
 The substance of \Cref{thm:ratio-main} is that the entire orbit
@@ -123,14 +123,14 @@ arbitrary $\{r_{i}\}\subset\mathbb{R}_{>0}$ in place of $\{p_{i}\}$.
 \begin{Remark}[The golden lattice in binary]\label{rem:binary}
 The ratios of~\Cref{thm:ratio-main} have a transparent binary reading.  In
 base~$2$, the Mersenne number $\Mp=2^{p}-1$ is a string of $p$ ones
-(\lean{mersenne\_digits\_ones}), while $2^{p}=\Mp+1$ is a single bit---a $1$
-followed by $p$ zeros (\lean{two\_pow\_digits\_single\_bit})---the increment
+(\code{mersenne\_digits\_ones}), while $2^{p}=\Mp+1$ is a single bit---a $1$
+followed by $p$ zeros (\code{two\_pow\_digits\_single\_bit})---the increment
 being the carry cascade that turns $\underbrace{1\cdots1}_{p}$ into
-$1\underbrace{0\cdots0}_{p}$ (\lean{mersenne\_succ\_eq\_two\_pow}).  The
+$1\underbrace{0\cdots0}_{p}$ (\code{mersenne\_succ\_eq\_two\_pow}).  The
 golden lattice $\{2^{p}\}$ is therefore exactly the set of single-bit
 integers, indexed by bit position, and the multiplicative step
 $\golden^{\lambda_{\log}}=2$ is the binary left-shift
-(\lean{golden\_step\_is\_bit\_shift}).  The golden ratio
+(\code{golden\_step\_is\_bit\_shift}).  The golden ratio
 $2^{p_{j}}/2^{p_{i}}=\golden^{(p_{j}-p_{i})\lambda_{\log}}$ of
 \Cref{thm:ratio-main} is then the shift of the single bit from position
 $p_{i}$ to position $p_{j}$.
@@ -140,8 +140,8 @@ $p_{i}$ to position $p_{j}$.
 For each $p\in\{p_{1},\ldots,p_{52}\}$, the unique real~$\sigma$ with
 $3\golden^{\sigma}=2^{p}$ is $\sigma=\sigma(p_{i})$; moreover the indices
 satisfy $\sigma(p_{1})<\cdots<\sigma(p_{52})$.  Lean:
-\lean{mersenne\_phi\_correspondence\_52} and
-\lean{sigma\_strictly\_increasing}.
+\code{mersenne\_phi\_correspondence\_52} and
+\code{sigma\_strictly\_increasing}.
 \end{Corollary}
 
 \begin{Remark}[Transcendence of $\lambda_{\log}$]
@@ -152,14 +152,14 @@ $\mathbb{Q}$ and $\golden^{\lambda_{\log}}=2$ is algebraic of degree~$1$,
 the exponent $\lambda_{\log}$ is transcendental over~$\mathbb{Q}$.  The
 identity~\eqref{eq:golden-turn} thus realises an exact algebraic relation
 between two algebraic numbers mediated by a transcendental exponent.  This transcendence is formally derived in
-Lean~4 (\lean{lambda\_log\_transcendental}), with the Gelfond--Schneider
+Lean~4 (\code{lambda\_log\_transcendental}), with the Gelfond--Schneider
 theorem itself---recently formalised by Karatarakis and Wiedijk~\cite{karatarakis-wiedijk}---taken as the single external
 input.
 \end{Remark}
 
 \begin{Corollary}[Inverse formula]\label{cor:inverse}
 Equivalently, $\sigma(p)=\log_{\golden}(2^{p}/3)$ for every $p\in\mathbb{R}$.
-Lean: \lean{sigma\_mersenne\_eq\_logb}.
+Lean: \code{sigma\_mersenne\_eq\_logb}.
 \end{Corollary}
 
 \begin{Remark}[The index as a golden logarithm]\label{rem:index-logarithm}

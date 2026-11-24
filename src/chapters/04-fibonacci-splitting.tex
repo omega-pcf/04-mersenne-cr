@@ -33,7 +33,7 @@ $\mathbb{Q}(\sqrt5)$ is governed by the Legendre symbol $(q/5)$:
 $(q/5)=+1$ (split) iff $q\bmod 20\in\{1,9,11,19\}$, and $(q/5)=-1$
 (inert) iff $q\bmod 20\in\{3,7,13,17\}$.  Among the admissible Mersenne
 classes~$\{3,7,11\}$, exactly one---the class~$11$---is split.
-Lean: \lean{fib\_pow\_aux}, \lean{chi5\_values}.
+Lean: \code{fib\_pow\_aux}, \code{chi5\_values}.
 
 \subsection{The Fibonacci splitting congruence}
 \label{ssec:fib-congruence}
@@ -44,13 +44,13 @@ For every prime $q\neq2,5$,
   F_{q}\;\equiv\;(q/5)\pmod{q},
 \]
 with value $+1$ in the split case and $-1$ in the inert case.
-\emph{Lean:} \lean{fibonacci\_splitting\_general}.
+\emph{Lean:} \code{fibonacci\_splitting\_general}.
 \end{Theorem}
 
 \begin{Lemma}[Split case]\label{lem:fib-split}
 Let $q\neq2,5$ be prime with $(q/5)=+1$.  Then $X^{2}-X-1$ has a root
 $\alpha\in\mathbb{F}_{q}$, and $F_{q}\equiv 1\pmod{q}$.
-\emph{Lean:} \lean{fib\_split\_case}.
+\emph{Lean:} \code{fib\_split\_case}.
 \end{Lemma}
 
 \begin{proof}
@@ -76,7 +76,7 @@ Let $q\neq2,5$ be prime with $(q/5)=-1$.  Then $X^{2}-X-1$ is
 irreducible over~$\mathbb{F}_{q}$, the Frobenius $x\mapsto x^{q}$ of
 $\mathbb{F}_{q^{2}}=\mathbb{F}_{q}[X]/(X^{2}-X-1)$ exchanges the two
 roots $\alpha,\overline{\alpha}=1-\alpha$, and $F_{q}\equiv-1\pmod{q}$.
-\emph{Lean:} \lean{fib\_inert\_case}.
+\emph{Lean:} \code{fib\_inert\_case}.
 \end{Lemma}
 
 \begin{proof}
@@ -120,7 +120,7 @@ $\Mp\bmod20\in\{3,7,11\}$, and
   \Mp\bmod20\in\{3,7\}\Rightarrow F_{\Mp}\equiv-1\ (\text{inert}),
 \]
 all congruences modulo~$\Mp$.
-\emph{Lean:} \lean{mersenne\_fibonacci\_type}.
+\emph{Lean:} \code{mersenne\_fibonacci\_type}.
 \end{Theorem}
 
 \begin{proof}
@@ -167,7 +167,7 @@ $11$ & split & $+1$ & $32$ \\
 \caption{Splitting type in $\mathbb{Q}(\sqrt5)$ of each of the 52 known
 Mersenne primes, by residue class $\Mp\bmod20$.  Verified in Lean by
 \texttt{native\_decide} for $p\leq31$ and derived from
-\lean{mersenne\_concentration\_general} otherwise.}\label{tab:splitting}
+\code{mersenne\_concentration\_general} otherwise.}\label{tab:splitting}
 \end{table}
 
 \begin{sloppypar}\small
@@ -206,7 +206,7 @@ is determined by $p\bmod4$:
   \qquad
   p\equiv3\!\!\pmod4\ \text{or}\ p=2\ \Rightarrow\ \text{inert}.
 \]
-  \emph{Lean:} \lean{mersenne\_mod5\_from\_p\_mod4}.
+  \emph{Lean:} \code{mersenne\_mod5\_from\_p\_mod4}.
 \end{Corollary}
 
 \begin{proof}
@@ -232,7 +232,7 @@ For a Mersenne prime $\Mp\neq5$,
   \;\iff\;
   p\equiv3\!\!\pmod4\ \text{or}\ p=2.
 \]
-  \emph{Lean:} \lean{mersenne\_rank\_iff\_inert}.
+  \emph{Lean:} \code{mersenne\_rank\_iff\_inert}.
 \end{Corollary}
 
 \begin{proof}
@@ -274,7 +274,7 @@ $X^{2}-X-1$ has a root modulo $\Mp$ exactly when $5$ is a square there,
 i.e.\ when $\Mp\equiv\pm1\pmod5$, whence \Cref{lem:fib-split} or
 \Cref{lem:fib-inert} applies.
 \end{proof}
-\emph{Lean:} \lean{mersenne\_presentation\_from\_p\_mod4}.
+\emph{Lean:} \code{mersenne\_presentation\_from\_p\_mod4}.
 \end{Corollary}
 
 

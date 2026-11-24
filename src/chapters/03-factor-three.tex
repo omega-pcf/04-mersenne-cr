@@ -5,7 +5,7 @@
 For every prime~$p$, $\;\Mp\bmod 20 \in \{3,7,11\}$, a subset of
 cardinality~$3=M_{2}$ of the eight residue classes
 $\Ztwenty=\{1,3,7,9,11,13,17,19\}$.  Lean:
-\lean{mersenne\_concentration\_general}.
+\code{mersenne\_concentration\_general}.
 \end{Theorem}
 
 \begin{proof}
@@ -59,8 +59,8 @@ sequence, and $2^{2}-1=3$ by computation.  Second,
 $|\{3,7,11\}|=3$ by counting.  Third, that $\{3,7,11\}$ is exactly
 the set of residue classes containing $\Mp\bmod 20$ for some
 prime~$p$ is~\Cref{thm:concentration-main}.  Lean:
-\lean{three\_eq\_M2\_eq\_admissible\_card} and
-\lean{admissible\_classes\_card\_eq\_M2}.
+\code{three\_eq\_M2\_eq\_admissible\_card} and
+\code{admissible\_classes\_card\_eq\_M2}.
 \end{proof}
 
 The asymmetry between $2$ and $3$ in \Cref{thm:universal} is only
@@ -121,8 +121,8 @@ of~\eqref{eq:euler}.  The modular concentration of
 \Cref{thm:concentration-main} into~$3$ classes of~$\Ztwenty$, together
 with the identification $3=M_{2}$ of~\Cref{thm:three-main}, are the
 arithmetic shadows of this geometric inscription.  Formal identities:
-\lean{phi\_eq\_two\_cos\_pi\_fifth}, \lean{phi\_eq\_zeta10\_sum},
-\lean{zeta10\_pow\_ten\_eq\_one}.
+\code{phi\_eq\_two\_cos\_pi\_fifth}, \code{phi\_eq\_zeta10\_sum},
+\code{zeta10\_pow\_ten\_eq\_one}.
 \end{Remark}
 
 \begin{Theorem}[Simultaneous identities theorem for
@@ -134,28 +134,28 @@ canonical structures:
   \item[\textup{(i)}] \emph{Cyclotomic inscription in $\mathbb{C}$:}
     $\golden_\mathbb{C} = \zeta_{10}+\zeta_{10}^{-1}$, with
     $\zeta_{10}:=e^{i\pi/5}$ (\Cref{rem:pentagon}; Lean:
-    \lean{phi\_eq\_zeta10\_sum}).
+    \code{phi\_eq\_zeta10\_sum}).
   \item[\textup{(ii)}] \emph{Tenth-root closure:} $\zeta_{10}^{10}=1$
-    (Lean: \lean{zeta10\_pow\_ten\_eq\_one}).
+    (Lean: \code{zeta10\_pow\_ten\_eq\_one}).
   \item[\textup{(iii)}] \emph{Pentagonal trigonometric identity in
     $\mathbb{R}$:} $\golden = 2\cos(\pi/5)$ (\Cref{rem:pentagon}; Lean:
-    \lean{phi\_eq\_two\_cos\_pi\_fifth}).
+    \code{phi\_eq\_two\_cos\_pi\_fifth}).
   \item[\textup{(iv)}] \emph{Logarithmic binary bridge:}
     $\golden^{\lambda_{\log}} = 2$ (\Cref{lem:binary}; Lean:
-    \lean{mersenne\_bridge\_via\_lambda}).
+    \code{mersenne\_bridge\_via\_lambda}).
   \item[\textup{(v)}] \emph{Universal real-multiplicative identity:}
     for every $p\in\mathbb{R}$, $3\,\golden^{\sigma(p)} = 2^{p}$
-    (\Cref{thm:universal}; Lean: \lean{golden\_tower\_bridge}).
+    (\Cref{thm:universal}; Lean: \code{golden\_tower\_bridge}).
   \item[\textup{(vi)}] \emph{Modular concentration:} for every prime
     $p$, $\Mp\bmod 20\in\{3,7,11\}$ (\Cref{thm:concentration-main};
-    Lean: \lean{mersenne\_concentration\_general}).
+    Lean: \code{mersenne\_concentration\_general}).
   \item[\textup{(vii)}] \emph{Triple ternary identification:}
     $3 = M_{2} = |\{3,7,11\}|$ (\Cref{thm:three-main}; Lean:
-    \lean{three\_eq\_M2\_eq\_admissible\_card}).
+    \code{three\_eq\_M2\_eq\_admissible\_card}).
   \item[\textup{(viii)}] \emph{Real-complex cross identification:}
     $\iota(\golden)=\golden_\mathbb{C}$.
   \item[\textup{(ix)}] \emph{Galois order:}
-    $|\Ztwenty|=8$ (Lean: \lean{ZtwentyStar\_card}).
+    $|\Ztwenty|=8$ (Lean: \code{ZtwentyStar\_card}).
   \item[\textup{(x)}] \emph{Galois sub-object inclusion:}
     $\{3,7,11\}\subseteq\Ztwenty$.
   \item[\textup{(xi)}] \emph{Quantitative ratio:}
@@ -167,7 +167,7 @@ canonical structures:
   \item[\textup{(xii)}] \emph{Rotor discretisation:} for every
     $k\in\mathbb{N}$, $(\zeta_{10}^{k})^{10}=1$.
 \end{enumerate}
-Formal synthesis: \lean{phi\_euler\_mersenne\_connector}.
+Formal synthesis: \code{phi\_euler\_mersenne\_connector}.
 \end{Theorem}
 
 Clauses (viii), (x), (xi), (xii) have short proofs but each registers
@@ -210,7 +210,7 @@ of~(ix) acts.  The proof is
 $(\zeta_{10}^{k})^{10}=(\zeta_{10}^{10})^{k}=1^{k}=1$ by clause~(ii).
 
 All four are subsumed in the formal
-synthesis~\lean{phi\_euler\_mersenne\_connector}.
+synthesis~\code{phi\_euler\_mersenne\_connector}.
 
 \begin{Remark}[Reading of \Cref{thm:euler-connector}]\label{rem:euler-reading}
 No proper sub-collection of the twelve clauses constitutes the content
@@ -276,7 +276,7 @@ simultaneously:
   of residue classes the Mersenne primes occupy modulo~$20$
   (\Cref{thm:concentration-main}), independently of the equation.
 \end{enumerate}
-\emph{Lean:} \lean{golden\_identity\_characterization}.
+\emph{Lean:} \code{golden\_identity\_characterization}.
 \end{Theorem}
 
 \begin{Remark}[What the theorem certifies]\label{rem:characterization}
@@ -289,7 +289,7 @@ theorems that never mention the equation.  In this reading the identity is
 neither an axiom nor a bare definition, but the single point at which
 independently established facts about $\golden$ agree.  Formally, $\sigma$
 is the unique function with $3\,\golden^{\sigma(p)}=2^{p}$ for all~$p$
-(\lean{golden\_identity\_is\_consistent\_overdetermined}).
+(\code{golden\_identity\_is\_consistent\_overdetermined}).
 \end{Remark}
 
 
