@@ -52,7 +52,7 @@ without the target being copied here.
 | Repository-specific convention | Home |
 |---|---|
 | Witnesses (`\tier`, `\witness`, `\testref`): grammar, writing rules, alphabet, quantified inline criterion / own line, and the census of the cited tests | [`docs/citations.md` §8 (in `05-kkgt`)](https://github.com/omega-pcf/05-kkgt/blob/main/docs/citations.md) — the family contract; this repository renders no witness marks, so its own `citations.md` ends at §7 |
-| Rationale for the witnesses: why they exist and what they do not assert | [`docs/witness-contract.md` (in `05-kkgt`)](https://github.com/omega-pcf/05-kkgt/blob/main/docs/witness-contract.md) — no counterpart here: this repository renders no witness marks |
+| Rationale for the witnesses: why they exist and what they do not assert | [`docs/witness-contract.md`](witness-contract.md) — carried here as the family's document; this repository renders no witness marks |
 | Deterministic, byte-stable figure pipeline (`pnpm run generate:figures`) | [`docs/figures.md`](figures.md) |
 | Citation pipeline (`citation.csl.json` → `src/bibliography.bib`, `CITATION.cff`, `.zenodo.json`) | [`docs/citations.md`](citations.md) §1–§7 |
 | Build, release, and commit convention commands | [`docs/usage.md`](usage.md) |
@@ -798,7 +798,7 @@ If the document **cites what a script prints** (a figure, a ratio, an output lin
 ### 13.5 Naming of tests and witnesses
 
 - **Test ids**: `test_<qué_afirma>` in snake_case, tied to the claim they verify (not to the file they run).
-- **Internal witnesses** (`\tier`, `\witness`, `\testref`, and the census of the cited ids): their grammar, writing rules, and alphabet are each repo's convention and **are not copied here** — contract in [`docs/citations.md` §8 (in `05-kkgt`)](https://github.com/omega-pcf/05-kkgt/blob/main/docs/citations.md), rationale in [`docs/witness-contract.md` (in `05-kkgt`)](https://github.com/omega-pcf/05-kkgt/blob/main/docs/witness-contract.md) — neither target exists in this repository, which renders no witness marks and whose `citations.md` ends at §7. Only the principle is stated: the witness's name matches **character by character** with the `.lean` file or the suite that declares it; any deviation is a defect.
+- **Internal witnesses** (`\tier`, `\witness`, `\testref`, and the census of the cited ids): their grammar, writing rules, and alphabet are each repo's convention and **are not copied here** — contract in [`docs/citations.md` §8 (in `05-kkgt`)](https://github.com/omega-pcf/05-kkgt/blob/main/docs/citations.md), rationale in [`docs/witness-contract.md`](witness-contract.md) — the §8 target does not exist in this repository (`citations.md` ends at §7) and no witness mark is rendered here; the rationale document is carried locally as the family's copy. Only the principle is stated: the witness's name matches **character by character** with the `.lean` file or the suite that declares it; any deviation is a defect.
 
 ### 13.6 Code quality checklist
 

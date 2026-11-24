@@ -17,6 +17,7 @@ docs/
 ├── style/
 │   └── grammar.md     # Grammar and usage rules of human language (ES/EN/FR/IT examples)
 ├── usage.md           # Build, release, commit and version conventions (semver + Zenodo)
+├── witness-contract.md # Rationale of the witness marks (family document; no marks rendered here)
 └── reports/           # Specific, repository-tied reports (dated, id'd)
     └── README.md      # Reports convention (template) + index of this repository's reports
 ```
@@ -37,13 +38,17 @@ docs/
   editorial rules (§1–§12), including the rigorous IMRAD structure of §7; the software-quality
   doctrine D1–D7 (§13); the TeX/proofreading pipeline with its cited sources (§14). Generic across
   the family: this repository's own conventions are linked, never copied — `style/grammar.md` and
-  `reports/` are propagated here (local links), while the witness contract `citations.md` §8 and
-  `witness-contract.md` resolve to `05-kkgt` on GitHub, because this repository has no witness
-  system to apply them to.
+  `reports/` are propagated here (local links), while the witness contract `citations.md` §8
+  resolves to `05-kkgt` on GitHub, because this repository has no witness system to apply it to;
+  `witness-contract.md` is carried here as the family's rationale document, byte-identical with
+  its five copies.
 - **style/grammar.md**: The grammar and usage rules extracted from `style-guide.md` §1.5 —
   language-neutral, worked in Spanish, English, French and Italian, with the RAE-checked Spanish
   `se` verbs and their sources.
 - **usage.md**: Daily workflow, conventional commits, the version standard (semver + Zenodo), build and release commands.
+- **witness-contract.md**: The rationale of the witness marks — why they exist and what they do
+  not assert. Carried byte-identically as the family's document; this repository renders no
+  witness marks, so nothing in it is applied here.
 - **reports/**: Specific reports — per-site inventories, decision logs, verdict tables and
   incidents. The convention (naming, ISO header, index format) and the index of this repository's
   reports are in `reports/README.md`; this repository has no report yet.
