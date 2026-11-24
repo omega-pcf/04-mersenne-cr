@@ -1,10 +1,8 @@
 %% ============================================================================
 %% Proceedings of the AMS (PROC) version -- ALTERNATE PREAMBLE.
 %% Not loaded by main.tex (nothing \input{}s this file); main.tex carries its
-%% own preamble. The four macros below use \providecommand so that this file
-%% can never clash with main.tex if the two are ever combined: previously they
-%% were \newcommand and would have raised 'Command \lean already defined'
-%% (and \lean disagreed: \texttt here, \nolinkurl in main.tex).
+%% own preamble. The three macros below use \providecommand so that this file
+%% can never clash with main.tex if the two are ever combined.
 %% Number-theoretic emphasis; author identity for published version
 %% ============================================================================
 \documentclass[11pt]{amsart}
@@ -42,7 +40,6 @@
 \providecommand{\golden}{\varphi}
 \providecommand{\Mp}{M_{p}}
 \providecommand{\Ztwenty}{(\mathbb{Z}/20\mathbb{Z})^{\times}}
-\providecommand{\lean}[1]{\texttt{#1}}
 
 \sloppy
 \emergencystretch=3em
