@@ -8,6 +8,7 @@ and the family style guide as it applies here.
 ```
 docs/
 ├── README.md          # This file
+├── BRIEF-TEMPLATE.md  # The required shape of a wave brief (family file)
 ├── architecture.md    # Release system architecture
 ├── citations.md       # CSL single-source citation pipeline (§1–§7)
 ├── counts.md          # Generated counts ledger (pnpm run counts; never edited by hand)
@@ -18,6 +19,9 @@ docs/
 │   └── grammar.md     # Grammar and usage rules of human language (ES/EN/FR/IT examples)
 ├── usage.md           # Build, release, commit and version conventions (semver + Zenodo)
 ├── witness-contract.md # Rationale of the witness marks (family document; no marks rendered here)
+├── witness-standard.md  # The canonical rules of the marks (family file, byte-identical)
+├── witness-decisions.md # The family ledger: one row per question, open and ruled
+├── witness-inventory.md # This repository's census of marks, generated from a measurement
 └── reports/           # Specific, repository-tied reports (dated, id'd)
     └── README.md      # Reports convention (template) + index of this repository's reports
 ```
@@ -46,6 +50,11 @@ docs/
   language-neutral, worked in Spanish, English, French and Italian, with the RAE-checked Spanish
   `se` verbs and their sources.
 - **usage.md**: Daily workflow, conventional commits, the version standard (semver + Zenodo), build and release commands.
+- **witness-standard.md**: The canonical rules of the evidence marks — syntax, semantics,
+  gates and typography; the family's byte-identical, manifest-pinned page.
+  **witness-decisions.md** is the decision ledger, one row per question (a count is never a
+  row); **witness-inventory.md** is this repository's generated census of marks;
+  **BRIEF-TEMPLATE.md** is the required shape of a wave brief.
 - **witness-contract.md**: The rationale of the witness marks — why they exist and what they do
   not assert. Carried byte-identically as the family's document; this repository renders no
   witness marks, so nothing in it is applied here.
