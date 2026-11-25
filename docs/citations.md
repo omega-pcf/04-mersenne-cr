@@ -139,3 +139,16 @@ fails the build otherwise.
   identically to all five repositories.
 - Reference ordering: **alphabetical** (`sorting=nyt`) per AMS convention;
   rendered author names: **initials** (`giveninits=true`).
+---
+
+## 8. Witnesses (tiers)
+
+This section is an **index**, not a rule: the witness standard lives in
+[`docs/witness-contract.md`](witness-contract.md) §6 — grammar and the
+writing rules (§6.5), the quantified inline / own-line criterion
+(§6.10), the own-line rendering form (§6.12), the alphabet (§6.9) and
+the witness gates (§6.8) — and this repository states no rule of its
+own. The applied state of this repository lives in
+[`docs/reports/`](reports/README.md), the census of its marks in
+[`docs/witness-inventory.md`](witness-inventory.md), and one row per
+open question in [`docs/witness-decisions.md`](witness-decisions.md).
