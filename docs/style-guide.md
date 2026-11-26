@@ -51,7 +51,7 @@ without the target being copied here.
 
 | Repository-specific convention | Home |
 |---|---|
-| Witnesses (`\tier`, `\witness`, `\testref`): grammar, writing rules, alphabet, quantified inline criterion / own line, and the census of the cited tests | [`docs/witness-contract.md`](witness-contract.md) §6 (grammar §6.5, alphabet §6.9, criterion §6.10) — carried here as the family's document; this repository renders no witness marks |
+| Witnesses (`\witness`, `\testref`): grammar, writing rules, alphabet, quantified inline criterion / own line, and the census of the cited tests | [`docs/witness-contract.md`](witness-contract.md) §6 (grammar §6.5, alphabet §6.9, criterion §6.10) — carried here as the family's document; this repository renders no witness marks |
 | Rationale for the witnesses: why they exist and what they do not assert | [`docs/witness-contract.md`](witness-contract.md) — carried here as the family's document; this repository renders no witness marks |
 | Deterministic, byte-stable figure pipeline (`pnpm run generate:figures`) | [`docs/figures.md`](figures.md) |
 | Citation pipeline (`citation.csl.json` → `src/bibliography.bib`, `CITATION.cff`, `.zenodo.json`) | [`docs/citations.md`](citations.md) §1–§7 |
@@ -798,7 +798,7 @@ If the document **cites what a script prints** (a figure, a ratio, an output lin
 ### 13.5 Naming of tests and witnesses
 
 - **Test ids**: `test_<qué_afirma>` in snake_case, tied to the claim they verify (not to the file they run).
-- **Internal witnesses** (`\tier`, `\witness`, `\testref`, and the census of the cited ids): their grammar, writing rules, and alphabet are each repo's convention and **are not copied here** — standard and rationale in [`docs/witness-contract.md`](witness-contract.md) §6 — carried locally as the family's copy; no witness mark is rendered here. Only the principle is stated: the witness's name matches **character by character** with the `.lean` file or the suite that declares it; any deviation is a defect.
+- **Internal witnesses** (`\witness`, `\testref`, and the census of the cited ids): their grammar, writing rules, and alphabet are each repo's convention and **are not copied here** — standard and rationale in [`docs/witness-contract.md`](witness-contract.md) §6 — carried locally as the family's copy; no witness mark is rendered here. Only the principle is stated: the witness's name matches **character by character** with the `.lean` file or the suite that declares it; any deviation is a defect.
 
 ### 13.6 Code quality checklist
 
