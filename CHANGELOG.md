@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.4.0](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.20...v0.4.0) (2026-11-28)
+
+### Features
+
+* **build:** add the shared-file manifest gate ([0d2c022](https://github.com/omega-pcf/04-mersenne-cr/commit/0d2c022290902c2108ca5b43291667b7b0c4596d))
+* **build:** generate the counts the living documents state ([e1e8f19](https://github.com/omega-pcf/04-mersenne-cr/commit/e1e8f1957fec365ceef72f34ec302dc6a19fa8cc))
+* **build:** sync the count regions before the render and pin build.ts ([f093f9f](https://github.com/omega-pcf/04-mersenne-cr/commit/f093f9fc1255bfd5ae057dd044f9e28b2aaad3fa))
+* **citation:** port the selfcitations pipeline with the two-tier version token ([1350527](https://github.com/omega-pcf/04-mersenne-cr/commit/1350527bd92551ed17a76013b7e0827a63964d4d))
+* **scripts:** generate the witness census and gate it in validate ([722a04c](https://github.com/omega-pcf/04-mersenne-cr/commit/722a04c4e0fd36ded632fc1b970dfdbdb112771a))
+
+### Bug Fixes
+
+* **build:** commit the clean version token and inject the dev suffix at build time ([9ee0c63](https://github.com/omega-pcf/04-mersenne-cr/commit/9ee0c635069f425945f12f7994a5844237fe8d1b))
+* **build:** emit ReleaseConfig from the types generator ([bff4338](https://github.com/omega-pcf/04-mersenne-cr/commit/bff4338af4debf42ce7cf294c21a01c557017470))
+* **citation:** stamp dates in the project timezone ([707f3b4](https://github.com/omega-pcf/04-mersenne-cr/commit/707f3b41c657a61b0d8f3b1227a98016eff943ec))
+* **citation:** typeset the version token in monospace ([12dcc29](https://github.com/omega-pcf/04-mersenne-cr/commit/12dcc2930f0908bff41ba8d9473fc9f96e759732))
+* **citation:** unify the Grisales Herrera record to the Universidad del Tolima repository original ([a79cc8a](https://github.com/omega-pcf/04-mersenne-cr/commit/a79cc8ac5de8ff32dd2d32226aa60fdb5a916a5d))
+* **figures:** pass SOURCE_DATE_EPOCH into the docker pdflatex run ([44a5612](https://github.com/omega-pcf/04-mersenne-cr/commit/44a56129e8f920a9f28505c6dd5b102a96b92fac))
+* **frontmatter:** print the family date line with datename in bold and the version ([53844eb](https://github.com/omega-pcf/04-mersenne-cr/commit/53844eb3bafce59989899f62f5780c83536775e8))
+* **lean:** annotate the coefficient lambda in phi_isAlgebraic ([cbeef5f](https://github.com/omega-pcf/04-mersenne-cr/commit/cbeef5f50cc3a720a655c093e5722dfddefecab0))
+* **lean:** port golden_mersenne to Lean/Mathlib v4.33.1 — minimal backport ([0187d4d](https://github.com/omega-pcf/04-mersenne-cr/commit/0187d4d389f40972e7c265da44b914d853accdbd))
+* **lean:** use Polynomial.natDegree_X_pow_sub_X in the Kogut-Susskind split ([9bbefea](https://github.com/omega-pcf/04-mersenne-cr/commit/9bbefea57242178ab141cd6da6b1c42b55903b0a))
+* **metadata:** cite the Zenodo concept DOI 10.5281/zenodo.21681394 ([a0454a6](https://github.com/omega-pcf/04-mersenne-cr/commit/a0454a6405d3b238c373996d88d48cc55eac4234))
+* **paper:** read the argument of \code as an arbitrary string ([24cc737](https://github.com/omega-pcf/04-mersenne-cr/commit/24cc737df1dca74e8dda6692a241a3a4f05cd698))
+* **pipeline:** fail build on latexmk non-zero exit or empty biber .bbl (prevents silent success with stale PDF) ([931f2ed](https://github.com/omega-pcf/04-mersenne-cr/commit/931f2edcf181c6b06ed2d6121a6a6bf9af85d752))
+* **pipeline:** rename generated bibliography keys by position ([baa9d1c](https://github.com/omega-pcf/04-mersenne-cr/commit/baa9d1c3d60ab7fd6083da91dc9d53d7489afae2))
+* **preamble:** define the canonical code macro ([f79a65c](https://github.com/omega-pcf/04-mersenne-cr/commit/f79a65c95e4d16e70323afd3f8bf52641e723e52))
+* **preamble:** make the alternate preamble's macros providecommand ([dc3afa4](https://github.com/omega-pcf/04-mersenne-cr/commit/dc3afa42d22372b6a8405b810cad77b4470cb88f))
+
 ## [0.3.20](https://github.com/omega-pcf/04-mersenne-cr/compare/v0.3.19...v0.3.20) (2026-08-25)
 
 ### Documentation

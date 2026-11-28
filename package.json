@@ -1,6 +1,6 @@
 {
   "name": "@omega-pcf/04-mersenne-cr",
-  "version": "0.3.20",
+  "version": "0.4.0",
   "description": "Simultaneous identities of the golden ratio and Euler's identity, formally verified in Lean 4 over the known Mersenne prime exponents",
   "metadata": {
     "citationKey": "Gonzalez2026MersenneCR",
